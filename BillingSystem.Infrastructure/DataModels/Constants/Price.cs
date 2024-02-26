@@ -30,7 +30,7 @@ namespace BillingSystem.Infrastructure.DataModels.Constants
         /// Цени на интернет услуги
         /// </summary>
 
-        public  class InternetPrices
+        public class InternetPrices
         {
             public const decimal Internet200MbpsPrice = 19.99m;
             public const decimal Internet100MbpsPrice = 14.99m;

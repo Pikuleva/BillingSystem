@@ -2,6 +2,7 @@
 using BillingSystem.Infrastructure.DataModels.Enumeration;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.InternetServiceConst;
 
 namespace BillingSystem.Infrastructure.DataModels
@@ -25,7 +26,7 @@ namespace BillingSystem.Infrastructure.DataModels
         [Required]
         [MaxLength(NameMaxLength)]
         [Comment("Name of service. Include internet speed")]
-        public string Name { get; set; }=string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// MAC адрес на клиентското устройство до което се доставя услуга
@@ -58,9 +59,11 @@ namespace BillingSystem.Infrastructure.DataModels
 
         /// <summary>
         /// Цена на услугата
-        /// </summary>
+        /// </summary>  
+        [Required]
         [Comment("Price of the service")]
-        public Price.InternetPrices Prices { get; set; } = null!;
+        [Column(TypeName ="decimal(18,2)")]
+        public decimal Price { get; set; }
 
     }
 }

@@ -2,6 +2,7 @@
 using BillingSystem.Infrastructure.DataModels.Enumeration;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BillingSystem.Infrastructure.DataModels
 {
@@ -22,7 +23,7 @@ namespace BillingSystem.Infrastructure.DataModels
         /// Сериен номер на приемника
         /// </summary>
         [Required]
-        [Range(5000000,5999999)]
+        [Range(5000000, 5999999)]
         [Comment("Satellite device serial number")]
         public int SerialNumber { get; set; }
 
@@ -31,7 +32,7 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
         [Required]
         [Comment("Model of satelite device")]
-        public SatModel Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Дата до която услугата е заплатена и активна
@@ -40,14 +41,12 @@ namespace BillingSystem.Infrastructure.DataModels
         [Comment("Until which date the service is active")]
         public DateTime ActiveUntilDate { get; set; }
 
-        /// <summary>
-        /// Начислени пакети спрямо абонамента
-        /// </summary>
-        public ICollection<TVPackets> Packets { get; set; } = new List<TVPackets>();
 
         /// <summary>
-        /// Цена на услугата 
+        /// Начислен пакет спрямо абонамента
         /// </summary>
-        public List<Price.TVPrice> Price { get; set; } = new List<Price.TVPrice> { };
+        [Required]
+        [Comment("TV packet")]
+        public SatelliteTVProduct Packet { get; set; } = null!;
     }
 }

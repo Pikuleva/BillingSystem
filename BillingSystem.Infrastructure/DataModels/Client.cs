@@ -9,7 +9,7 @@ namespace BillingSystem.Infrastructure.DataModels
     /// Договор на клиента с включените услуги към него
     /// </summary>
     [Comment("Client contract")]
-    public class ClientContract
+    public class Client
     {
         /// <summary>
         /// Идентификатор към клиентски договор
@@ -134,30 +134,16 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
         [Comment("Ticket identificator")]
         public int TicketId { get; set; }
+
         /// <summary>
         /// Тикет за авария към договора
         /// </summary>
         [Comment("Ticket")]
         public Ticket? Ticket { get; set; }
+
         /// <summary>
-        /// Интернет услуги към договора
+        /// Услуги и заявки към договора
         /// </summary>
-        public ICollection<InternetService?> InternetServices { get; set; } = new List<InternetService?>();
-
-        /// <summary>
-        /// IPTV услуга към договора
-        /// </summary>  
-        public ICollection<IPTV?> IPTVs { get; set; } = new List<IPTV?>();
-
-        /// <summary>
-        /// Сателитна телевизия към договора
-        /// </summary>    
-        public ICollection<SatelliteTV?> SatelliteTvs { get; set; } = new List<SatelliteTV?>();
-
-        /// <summary>
-        /// Всички създадени тикети към договора
-        /// </summary>
-        public ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
-
+        public IList<ClientService> ClientServices { get; set; }= new List<ClientService>();
     }
 }

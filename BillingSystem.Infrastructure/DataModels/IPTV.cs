@@ -2,6 +2,7 @@
 using BillingSystem.Infrastructure.DataModels.Enumeration;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BillingSystem.Infrastructure.DataModels
 {
@@ -38,16 +39,14 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
         [Required]
         [Comment("Device model name")]
-        public IPTVModelName Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        /// Какви пакети са включени в абонамета
+        /// Начислен пакет спрямо абонамента
         /// </summary>
-        public ICollection<TVPackets> Packets { get; set; } = new List<TVPackets>();
+        [Required]
+        [Comment("TV packet")]
+        public IPTVProduct Packet { get; set; } = null!;
 
-        /// <summary>
-        /// Цена на услугата 
-        /// </summary>
-        public List<Price.TVPrice> Price { get; set; }= new List<Price.TVPrice>();
     }
 }
