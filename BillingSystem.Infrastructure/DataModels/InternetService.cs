@@ -50,6 +50,13 @@ namespace BillingSystem.Infrastructure.DataModels
         public bool IsActive { get; set; }
 
         /// <summary>
+        /// Дата до която услугата е заплатена и активна
+        /// </summary>
+        [Required]
+        [Comment("Until which date the service is active")]
+        public DateTime ActiveUntilDate { get; set; }
+
+        /// <summary>
         /// Цена на услугата
         /// </summary>
         [Comment("Price of the service")]

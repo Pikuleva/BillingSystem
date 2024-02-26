@@ -27,6 +27,13 @@ namespace BillingSystem.Infrastructure.DataModels
         public int SerialNumber { get; set; }
 
         /// <summary>
+        /// Дата до която услугата е заплатена и активна
+        /// </summary>
+        [Required]
+        [Comment("Until which date the service is active")]
+        public DateTime ActiveUntilDate { get; set; }
+
+        /// <summary>
         /// Модел на приемника
         /// </summary>
         [Required]

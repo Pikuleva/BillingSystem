@@ -34,6 +34,13 @@ namespace BillingSystem.Infrastructure.DataModels
         public SatModel Name { get; set; }
 
         /// <summary>
+        /// Дата до която услугата е заплатена и активна
+        /// </summary>
+        [Required]
+        [Comment("Until which date the service is active")]
+        public DateTime ActiveUntilDate { get; set; }
+
+        /// <summary>
         /// Начислени пакети спрямо абонамента
         /// </summary>
         public ICollection<TVPackets> Packets { get; set; } = new List<TVPackets>();

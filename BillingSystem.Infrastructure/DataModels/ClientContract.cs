@@ -94,19 +94,70 @@ namespace BillingSystem.Infrastructure.DataModels
         public string Email { get; set; } = string.Empty;
 
         /// <summary>
+        /// Идентификато на интернет услугата
+        /// </summary>
+        [Comment("Internet service identificator")]
+        public int InternetServiceId { get; set; }
+
+        /// <summary>
+        /// Интернет услуга
+        /// </summary>
+        [Comment("Internet service")]
+        public InternetService? InternetService { get; set; }
+
+        /// <summary>
+        /// Идентификато на интерактиван телевизия/приемник
+        /// </summary>
+        [Comment("Interactive television identificator")]
+        public int IPTVId { get; set; }
+
+        /// <summary>
+        /// Интерактивна телевизия
+        /// </summary>
+        [Comment("IPTV")]
+        public IPTV? IPTV { get; set; }
+
+        /// <summary>
+        /// Идентификато на сателитна телевизия
+        /// </summary>
+        [Comment("SatelliteTV identificator")]
+        public int SatelliteTvId { get; set; }
+
+        /// <summary>
+        /// Сателитна телевизия/приемник
+        /// </summary>
+        [Comment("SatelliteTV")]
+        public SatelliteTV? SatelliteTV { get; set; }
+
+        /// <summary>
+        /// Идентификатор на тикет към конкретния договор
+        /// </summary>
+        [Comment("Ticket identificator")]
+        public int TicketId { get; set; }
+        /// <summary>
+        /// Тикет за авария към договора
+        /// </summary>
+        [Comment("Ticket")]
+        public Ticket? Ticket { get; set; }
+        /// <summary>
         /// Интернет услуги към договора
         /// </summary>
-        public ICollection<InternetService?> InternetService { get; set; } = new List<InternetService?>();
+        public ICollection<InternetService?> InternetServices { get; set; } = new List<InternetService?>();
 
         /// <summary>
         /// IPTV услуга към договора
         /// </summary>  
-        public ICollection<IPTV?> IPTV { get; set; } = new List<IPTV?>();
+        public ICollection<IPTV?> IPTVs { get; set; } = new List<IPTV?>();
 
         /// <summary>
         /// Сателитна телевизия към договора
         /// </summary>    
-        public ICollection<SatelliteTV?> SateliteTv { get; set; } = new List<SatelliteTV?>();
+        public ICollection<SatelliteTV?> SatelliteTvs { get; set; } = new List<SatelliteTV?>();
+
+        /// <summary>
+        /// Всички създадени тикети към договора
+        /// </summary>
+        public ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
 
     }
 }
