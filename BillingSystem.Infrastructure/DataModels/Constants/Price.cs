@@ -5,19 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BillingSystem.Infrastructure.DataModels
+namespace BillingSystem.Infrastructure.DataModels.Constants
 {
     /// <summary>
     /// Цени на предлаганите услуги
     /// </summary>
-    public class Price
+    public  class Price
     {
         /// <summary>
         /// Цени на ТВ услуги
         /// </summary>
-        public class TVPrice
+        public  class TVPrice
         {
-           
+
             public const decimal TVBasePrice = 9.99m;
             public const decimal TVFilmsPrice = 4.99m;
             public const decimal TVSportPrice = 3.99m;
@@ -30,15 +30,15 @@ namespace BillingSystem.Infrastructure.DataModels
         /// Цени на интернет услуги
         /// </summary>
 
-        public class InternetPrices
+        public  class InternetPrices
         {
             public const decimal Internet200MbpsPrice = 19.99m;
             public const decimal Internet100MbpsPrice = 14.99m;
             public const decimal Internet50MbpsPrice = 10.99m;
             public const decimal Internet15MbpsPrice = 8.99m;
         }
-       
-       
+
+
     }
 }
 

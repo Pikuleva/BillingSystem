@@ -1,18 +1,21 @@
-﻿using BillingSystem.Infrastructure.DataModels.Enumeration;
+﻿using BillingSystem.Infrastructure.DataModels.Constants;
+using BillingSystem.Infrastructure.DataModels.Enumeration;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.IPTVConst;
 
 namespace BillingSystem.Infrastructure.DataModels
 {
     /// <summary>
     /// Интерактиван телевизия
     /// </summary>
+    [Comment("Interactive television")]
     public class IPTV
     {
         /// <summary>
         /// Идентификато на приемника
         /// </summary>
         [Key]
+        [Comment("Interactive television identificator")]
         public int Id { get; set; }
 
         /// <summary>
@@ -20,12 +23,14 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
         [Required]
         [Range(3000000,3999999)]
+        [Comment("Serial number of device")]
         public int SerialNumber { get; set; }
 
         /// <summary>
         /// Модел на приемника
         /// </summary>
         [Required]
+        [Comment("Device model name")]
         public IPTVModelName Name { get; set; }
 
         /// <summary>
@@ -36,6 +41,6 @@ namespace BillingSystem.Infrastructure.DataModels
         /// <summary>
         /// Цена на услугата 
         /// </summary>
-        public List<Price.TVPrice> Price { get; set; }
+        public List<Price.TVPrice> Price { get; set; }= new List<Price.TVPrice>();
     }
 }

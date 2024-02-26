@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BillingSystem.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class BillingSystemDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public BillingSystemDbContext(DbContextOptions<BillingSystemDbContext> options)
             : base(options)
         {
         }
