@@ -23,13 +23,14 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
         [Required]
         [MaxLength(NameMaxLength)]
+        [Comment("Name of the service")]
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Цена на услугата
         /// </summary>
         [Required]
-        [Column(TypeName ="decimal=18,2")]
+        [Comment("Price of television service")]
         public decimal Price { get; set; }
     }
 }

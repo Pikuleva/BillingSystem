@@ -41,7 +41,7 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
         [Required]
         [Comment("Internet package")]
-        public InternetProduct Product { get; set; }
+        public InternetProduct Product { get; set; } = null!;
 
         /// <summary>
         /// Услугата е активна/неактивна спрямо това, дали е заплатена
@@ -57,13 +57,6 @@ namespace BillingSystem.Infrastructure.DataModels
         [Comment("Until which date the service is active")]
         public DateTime ActiveUntilDate { get; set; }
 
-        /// <summary>
-        /// Цена на услугата
-        /// </summary>  
-        [Required]
-        [Comment("Price of the service")]
-        [Column(TypeName ="decimal(18,2)")]
-        public decimal Price { get; set; }
-
+        public IEnumerable<ClientService> ClientServices { get; set; } = new List<ClientService>();
     }
 }

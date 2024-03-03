@@ -66,5 +66,6 @@ namespace BillingSystem.Infrastructure.DataModels
         [Comment("Is complited ticket")]
         public bool IsComplited { get; set; }
 
+
     }
 }

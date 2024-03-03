@@ -48,5 +48,7 @@ namespace BillingSystem.Infrastructure.DataModels
         [Comment("TV packet")]
         public IPTVProduct Packet { get; set; } = null!;
 
+        public IEnumerable<ClientService> ClientServices { get; set; } = new List<ClientService>();
+
     }
 }

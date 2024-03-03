@@ -3,7 +3,7 @@
     /// <summary>
     /// Планове за интернет услуга спрямо желаната от клиента скорост
     /// </summary>
-    public enum InternetProduct
+    public enum InternetProductsWithPrice
     {
         Internet200Mbps=1,
         Internet100Mbps=2,

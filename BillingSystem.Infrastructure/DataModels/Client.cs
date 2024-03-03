@@ -144,6 +144,7 @@ namespace BillingSystem.Infrastructure.DataModels
         /// <summary>
         /// Услуги и заявки към договора
         /// </summary>
-        public IList<ClientService> ClientServices { get; set; }= new List<ClientService>();
+        public IEnumerable<ClientService> ClientServices { get; set; }= new List<ClientService>();
+        
     }
 }
