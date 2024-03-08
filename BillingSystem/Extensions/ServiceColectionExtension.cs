@@ -1,4 +1,6 @@
-﻿using BillingSystem.Data;
+﻿using BillingSystem.Core.Contracts;
+using BillingSystem.Core.Services;
+using BillingSystem.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +12,8 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicatoionServices(this IServiceCollection services)
         {
+            services.AddScoped<IClientService, ClientService>();
+
             return services;
         }
         public static IServiceCollection AddApplicatoionDbContext(this IServiceCollection services, IConfiguration config)
