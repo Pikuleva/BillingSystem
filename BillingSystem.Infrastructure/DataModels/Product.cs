@@ -1,21 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.InternetServiceConst;
+using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ServiceConst;
 
 namespace BillingSystem.Infrastructure.DataModels
 {
     /// <summary>
-    /// Пакет сателитна телевизия
+    /// Пакет интерактивна телевизия
     /// </summary>
-    [Comment("SatelliteTV packet")]
-    public class SatelliteTVProduct
+    [Comment("IPTV product")]
+    public class Product
     {
         /// <summary>
         /// Идентификатор на услугата
         /// </summary>
         [Key]
-        [Comment("IPTV identificator")]
+        [Comment("Identificator")]
         public int Id { get; set; }
 
         /// <summary>
@@ -23,14 +23,20 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
         [Required]
         [MaxLength(NameMaxLength)]
-        [Comment("Name of packet")]
+        [Comment("Name of the service")]
         public string Name { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Вид на услугата Интернет или Телевизия
+        /// </summary>
+        [Required]
+        [MaxLength(NameMaxLength)]
+        public string Type { get; set; } = string.Empty;
         /// <summary>
         /// Цена на услугата
         /// </summary>
         [Required]
-        [Comment("Price of television service")]
+        [Comment("Price of  service")]
         public decimal Price { get; set; }
     }
 }
