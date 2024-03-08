@@ -36,7 +36,7 @@
             public const string RegexCivilNumber = "^\\d{10}$";
 
         }
-        public static class InternetServiceConst
+        public static class ServiceConst
         {
             public const int MACLength = 17;
 

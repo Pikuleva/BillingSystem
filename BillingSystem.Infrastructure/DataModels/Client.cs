@@ -22,7 +22,7 @@ namespace BillingSystem.Infrastructure.DataModels
         /// Номер на клиентски договор
         /// </summary>
         [Required]
-        [Range(100000,199999)]
+        [Range(100000, 199999)]
         [Comment("Contract number")]
         public int ContractNumber { get; set; }
         /// <summary>
@@ -45,7 +45,7 @@ namespace BillingSystem.Infrastructure.DataModels
         [Required]
         [MaxLength(LastNameMaxLength)]
         [Comment("Client last name")]
-        public string LastName { get; set; }=string.Empty;
+        public string LastName { get; set; } = string.Empty;
 
         /// <summary>
         /// ЕГН на клиента
@@ -69,7 +69,7 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
         [MaxLength(StreetNameMaxLength)]
         [Comment("Street where customer uses the service")]
-        public string StreetName { get; set; }= string.Empty;
+        public string StreetName { get; set; } = string.Empty;
 
         /// <summary>
         /// Номер на улица
@@ -93,58 +93,10 @@ namespace BillingSystem.Infrastructure.DataModels
         [Comment("Client Email address")]
         public string Email { get; set; } = string.Empty;
 
-        /// <summary>
-        /// Идентификато на интернет услугата
-        /// </summary>
-        [Comment("Internet service identificator")]
-        public int InternetServiceId { get; set; }
-
-        /// <summary>
-        /// Интернет услуга
-        /// </summary>
-        [Comment("Internet service")]
-        public InternetService? InternetService { get; set; }
-
-        /// <summary>
-        /// Идентификато на интерактиван телевизия/приемник
-        /// </summary>
-        [Comment("Interactive television identificator")]
-        public int IPTVId { get; set; }
-
-        /// <summary>
-        /// Интерактивна телевизия
-        /// </summary>
-        [Comment("IPTV")]
-        public IPTV? IPTV { get; set; }
-
-        /// <summary>
-        /// Идентификато на сателитна телевизия
-        /// </summary>
-        [Comment("SatelliteTV identificator")]
-        public int SatelliteTvId { get; set; }
-
-        /// <summary>
-        /// Сателитна телевизия/приемник
-        /// </summary>
-        [Comment("SatelliteTV")]
-        public SatelliteTV? SatelliteTV { get; set; }
-
-        /// <summary>
-        /// Идентификатор на тикет към конкретния договор
-        /// </summary>
-        [Comment("Ticket identificator")]
-        public int TicketId { get; set; }
-
-        /// <summary>
-        /// Тикет за авария към договора
-        /// </summary>
-        [Comment("Ticket")]
-        public Ticket? Ticket { get; set; }
-
-        /// <summary>
-        /// Услуги и заявки към договора
-        /// </summary>
-        public IEnumerable<ClientService> ClientServices { get; set; }= new List<ClientService>();
-        
+  
+        public IEnumerable<Ticket> Tickets { get; set; } = new List<Ticket>();
+        public IEnumerable<IPTV> IPTVs { get; set; } = new List<IPTV>();
+        public IEnumerable<InternetService> InternetServices { get; set; } = new List<InternetService>();
+        public IEnumerable<SatelliteTV> SatteliteTVs { get; set; } = new List<SatelliteTV>();
     }
 }

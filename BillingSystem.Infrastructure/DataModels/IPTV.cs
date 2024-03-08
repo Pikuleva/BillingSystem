@@ -42,13 +42,19 @@ namespace BillingSystem.Infrastructure.DataModels
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
+        /// Идентификатор на ТВ услугата
+        /// </summary>
+        [Required]
+        [Comment("Television product Identificator")]
+        public int ProductId { get; set; }
+        /// <summary>
         /// Начислен пакет спрямо абонамента
         /// </summary>
         [Required]
         [Comment("TV packet")]
-        public IPTVProduct Packet { get; set; } = null!;
+        public Product Product { get; set; } = null!;
 
-        public IEnumerable<ClientService> ClientServices { get; set; } = new List<ClientService>();
+       
 
     }
 }

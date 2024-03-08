@@ -3,7 +3,7 @@ using BillingSystem.Infrastructure.DataModels.Enumeration;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.InternetServiceConst;
+using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ServiceConst;
 
 namespace BillingSystem.Infrastructure.DataModels
 {
@@ -37,11 +37,18 @@ namespace BillingSystem.Infrastructure.DataModels
         public string RouterMACAdress { get; set; } = string.Empty;
 
         /// <summary>
+        /// Идентификатор на интернет услугата
+        /// </summary>
+        [Required]
+        [Comment("Internet product Identificator")]
+        public int ProductId { get; set; }
+
+        /// <summary>
         /// Вида(скоростта) на интернет услугата
         /// </summary>
         [Required]
         [Comment("Internet package")]
-        public InternetProduct Product { get; set; } = null!;
+        public Product Product { get; set; } = null!;
 
         /// <summary>
         /// Услугата е активна/неактивна спрямо това, дали е заплатена
@@ -57,6 +64,6 @@ namespace BillingSystem.Infrastructure.DataModels
         [Comment("Until which date the service is active")]
         public DateTime ActiveUntilDate { get; set; }
 
-        public IEnumerable<ClientService> ClientServices { get; set; } = new List<ClientService>();
+       
     }
 }

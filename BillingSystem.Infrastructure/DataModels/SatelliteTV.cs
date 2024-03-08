@@ -47,9 +47,8 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
         [Required]
         [Comment("TV packet")]
-        public SatelliteTVProduct Packet { get; set; } = null!;
+        public Product Packet { get; set; } = null!;
 
-        public IEnumerable<ClientService> ClientServices { get; set; } = new List<ClientService>();
-
+       
     }
 }
