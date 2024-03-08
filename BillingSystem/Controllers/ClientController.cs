@@ -9,7 +9,7 @@ namespace BillingSystem.Controllers
     {
         public async Task<IActionResult> Services()
         {
-            var model = new ClientViewModel();
+            var model = new ClientFormModel();
             return View(model);
         }
     }
