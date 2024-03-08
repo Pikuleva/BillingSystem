@@ -17,28 +17,27 @@ namespace BillingSystem.Core.Services
         public async Task CreateAsync(ClientFormModel model)
         {
 
-            var modelId = await repository
-                .AllReadOnly<Client>()
-                .OrderBy(x => x.Id) 
-                .Select(x=>new ClientFormModel()
-                {
-                    LastId = x.Id
-                })
-                .TakeLast(1)
-                .ToListAsync();
-
-            var lastId = modelId.First();
-            int lastIdValue = lastId.LastId;
+            string midleNameSet;
+            
+         
+            if (model.MiddleName == null || model.MiddleName==string.Empty)
+            {
+                midleNameSet = string.Empty;
+            }
+            else
+            {
+                midleNameSet= model.MiddleName;
+            }
 
             await repository.AddAsync(new Client()
             {
-                ContractNumber = lastIdValue+ 100000,
+               
                 CivilNumber = model.CivilNumber,
                 PhoneNumber = model.PhoneNumber,
                 City =model.City,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                MiddleName = model.MiddleName,
+                MiddleName = midleNameSet,
                 StreetName = model.StreetName,
                 StreetNumber = model.StreetNumber,
                 Email = model.Email
@@ -47,10 +46,28 @@ namespace BillingSystem.Core.Services
             await repository.SaveChangesAsync();
         }
 
-        public async Task<bool> ExistByCivilNumberAsync(int civilNumber)
+        public async Task<bool> ExistByCivilNumberAsync(string civilNumber)
         {
             return await repository.AllReadOnly<Client>()
                 .AnyAsync(a => a.CivilNumber == civilNumber);
+        }
+        public  bool IsValidEmail(string email)
+        {
+            var trimmedEmail = email.Trim();
+
+            if (trimmedEmail.EndsWith("."))
+            {
+                return false; 
+            }
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == trimmedEmail;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

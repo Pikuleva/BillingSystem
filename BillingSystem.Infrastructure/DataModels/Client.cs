@@ -19,13 +19,6 @@ namespace BillingSystem.Infrastructure.DataModels
         public int Id { get; set; }
 
         /// <summary>
-        /// Номер на клиентски договор
-        /// </summary>
-        [Required]
-        [Range(100000, 199999)]
-        [Comment("Contract number")]
-        public int ContractNumber { get; set; }
-        /// <summary>
         /// Първо име на клиента
         /// </summary>
         [Required]
@@ -52,9 +45,9 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
 
         [Required]
-        [RegexStringValidator(RegexCivilNumber)]
+        [MaxLength(10)]
         [Comment("Client persanal number")]
-        public int CivilNumber { get; set; }
+        public string CivilNumber { get; set; } = string.Empty;
 
         /// <summary>
         /// Адрес на клиента - записва се мястото на което се ползва услугата
@@ -83,8 +76,9 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
         [Required]
         [RegexStringValidator(RegexValidationPhoneNumber)]
+        [MaxLength(ClientPhoneNumberMaxLength)]
         [Comment("Client phone number")]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; } = string.Empty;
 
         /// <summary>
         /// Електроенен адрес на клиента

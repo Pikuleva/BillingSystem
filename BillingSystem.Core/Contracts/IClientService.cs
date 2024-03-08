@@ -9,8 +9,9 @@ namespace BillingSystem.Core.Contracts
 {
     public interface IClientService
     {
-        Task<bool> ExistByCivilNumberAsync(int civilNumber);
+        Task<bool> ExistByCivilNumberAsync(string civilNumber);
 
         Task CreateAsync(ClientFormModel model);
+        bool IsValidEmail(string email);
     }
 }

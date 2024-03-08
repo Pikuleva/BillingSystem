@@ -1,9 +1,7 @@
-﻿using BillingSystem.Infrastructure.DataModels;
-using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Configuration;
-using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ClientContract;
 using static BillingSystem.Core.Constants.MessageConstants;
+using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ClientContract;
 
 namespace BillingSystem.Core.ViewModels
 {
@@ -12,9 +10,6 @@ namespace BillingSystem.Core.ViewModels
         [Required]
         public int LastId { get; set; }
 
-        [Required]
-        [Range(100000, 199999)]
-        public int ContractNumber {  get; set; }
 
         [Required(ErrorMessage = RequiredMessage)]
         [StringLength(FirstNameMaxLength,MinimumLength =FirstNameMinLength,ErrorMessage = StringLengthMessage)]
@@ -28,8 +23,8 @@ namespace BillingSystem.Core.ViewModels
         public string LastName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredMessage)]
-        [RegexStringValidator(RegexCivilNumber)]
-        public int CivilNumber { get; set; }
+        [RegularExpression("^\\d{10}$", ErrorMessage = "Valid Learner Number must be supplied")]
+        public string CivilNumber { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredMessage)]
         [StringLength(CityMaxLength,MinimumLength =CityMinLength, ErrorMessage =StringLengthMessage)]
@@ -38,12 +33,13 @@ namespace BillingSystem.Core.ViewModels
         [StringLength(StreetNameMaxLength,MinimumLength =StreetNameMinLength, ErrorMessage = StringLengthMessage)]
         public string StreetName { get; set; } = string.Empty;
 
-        [StringLength(StreetNumberMaxLength,MinimumLength =StreetNumberMaxLength,ErrorMessage =StringLengthMessage)]
+        [StringLength(StreetNumberMaxLength,MinimumLength =StreetNumberMinLength,ErrorMessage =StringLengthMessage)]
         public string StreetNumber { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredMessage)]
+        [StringLength(ClientPhoneNumberMaxLength, MinimumLength = ClientPhoneNumberMinLength, ErrorMessage = StringLengthMessage)]
         [RegexStringValidator(RegexValidationPhoneNumber)]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; } = string.Empty;
 
         [RegexStringValidator(RegexValidationEmail)]
         public string Email { get; set; } = string.Empty;
