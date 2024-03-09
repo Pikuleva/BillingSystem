@@ -39,10 +39,9 @@ namespace BillingSystem.Controllers
                 ModelState.AddModelError(nameof(model.Email), EmailValidationMessage);
             }
 
-
-
             await clientService.CreateAsync(model);
-            return RedirectToAction(nameof(Add), "Clients");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
+
     }
 }

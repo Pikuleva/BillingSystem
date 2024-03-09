@@ -3,7 +3,6 @@ using BillingSystem.Core.ViewModels;
 using BillingSystem.Infrastructure.Common;
 using BillingSystem.Infrastructure.DataModels;
 using Microsoft.EntityFrameworkCore;
-using System.Net.Mail;
 using System.Text.RegularExpressions;
 
 namespace BillingSystem.Core.Services
@@ -18,10 +17,8 @@ namespace BillingSystem.Core.Services
 
         public async Task CreateAsync(ClientFormModel model)
         {
-
-            string midleNameSet;
-            
-         
+           string midleNameSet;
+               
             if (model.MiddleName == null || model.MiddleName==string.Empty)
             {
                 midleNameSet = string.Empty;
@@ -59,5 +56,6 @@ namespace BillingSystem.Core.Services
 
             return Regex.IsMatch(email, regex, RegexOptions.IgnoreCase);
         }
+      
     }
 }
