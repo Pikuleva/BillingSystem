@@ -1,47 +1,86 @@
 ﻿@model ClientFormModel
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>
+<div class="wrapper">
+    <form class="form-inline" method="post">
+        <div id="wizard">
 
-
-<div class="row">
-
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-
-        <form method="post">
-
-            <div class="form-group">
-
-                <label asp-for="FirstName"></label>
-
-                <input asp-for="FirstName" class="form-control" placeholder="Име...">
-
+            <section>
+                <div asp-for="FirstName" class="form-row"> 
+                    <input asp-for="FirstName" type="text" class="form-control" placeholder="Име"> 
+                </div>
                 <span asp-validation-for="FirstName" class="small text-danger"></span>
-
-            </div>
-
-            <div class="form-group">
-
-                <label asp-for="MiddleName"></label>
-
-                <input asp-for="MiddleName" class="form-control" placeholder="Презиме...">
-
+                <div asp-for="MiddleName" class="form-row"> 
+                    <input asp-for="MiddleName" type="text" class="form-control" placeholder="Презиме"> 
+                    </div>
                 <span asp-validation-for="MiddleName" class="small text-danger"></span>
-
-            </div>
-            <div class="form-group">
-
-                <label asp-for="LastName"></label>
-
-                <input asp-for="LastName" class="form-control" placeholder="Фамилия...">
-
+                <div asp-for="LastName" class="form-row"> 
+                    <input asp-for="LastName" type="text" class="form-control" placeholder="Фамилия">
+                    </div>
                 <span asp-validation-for="LastName" class="small text-danger"></span>
+                <div asp-for="CivilNumber" class="form-row"> 
+                    <input asp-for="CivilNumber" type="text" class="form-control" placeholder="ЕГН">
+                    </div>
+                <span asp-validation-for="CivilNumber" class="small text-danger"></span>
+                <div asp-for="PhoneNumber" class="form-row"> 
+                    <input asp-for="PhoneNumber" type="text" class="form-control" placeholder="Телефон за връзка"> 
+                    </div>
+                <span asp-validation-for="PhoneNumber" class="small text-danger"></span>
+                <div asp-for="City" class="form-row"> 
+                    <input asp-for="City" type="text" class="form-control" placeholder="Град">
+                    </div>
+                <span asp-validation-for="City" class="small text-danger"></span>
+                <div asp-for="StreetName" class="form-row"> 
+                    <input asp-for="StreetName" type="text" class="form-control" placeholder="Улица"> 
+                    </div>
+                <span asp-validation-for="StreetName" class="small text-danger"></span>
+                <div asp-for="StreetNumber" class="form-row">
+                    <input asp-for="StreetNumber" type="text" class="form-control" placeholder="Номер">
+                    </div>
+                <span asp-validation-for="StreetNumber" class="small text-danger"></span>
+                <div asp-for="Email" class="form-row">
+                    <input asp-for="Email" type="text" class="form-control" placeholder="Email"> 
+                    </div>
+                <span asp-validation-for="Email" class="small text-danger"></span>
+                <div class="text-center">
 
+                    <input class="btn btn-primary mt-3" type="submit" value="Save" />
+
+                </div>
+            </section> 
+
+        </div>
+    </form>
+</div> 
+@* <div class="row">
+    <div class="col-xs-6">
+        <form class="form-inline" method="post">
+            <span class="input-group">
+            <div class="row">
+                    <div class="form-group">
+                <label asp-for="FirstName" class="sr-only"></label>
+                <input asp-for="FirstName" class="form-control input-group-lg reg_name" placeholder="Име...">
+                <span asp-validation-for="FirstName" class="small text-danger"></span>
+                </div>
             </div>
-
+            <div class="row">
+                <div class="form-group">
+                    <label asp-for="MiddleName" class="sr-only"></label>
+                    <input asp-for="MiddleName" class="form-control input-group-lg reg_name row-cols-12" placeholder="Презиме...">
+                    <span asp-validation-for="MiddleName" class="small text-danger"></span>
+                </div>
+            </div>
+                <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" placeholder="Фамилия...">
+                <span asp-validation-for="LastName" class="small text-danger"></span>
+            </div>
+            </span>
             <div class="form-group">
 
                 <label asp-for="CivilNumber"></label>
 
-                <textarea asp-for="CivilNumber" rows="form-control" class="form-control" placeholder="ЕГН"></textarea>
+                <input asp-for="CivilNumber" class="form-control" placeholder="ЕГН...">
 
                 <span asp-validation-for="CivilNumber" class="small text-danger"></span>
 
@@ -104,4 +143,4 @@
 
     </div>
 
-</div>
+</div> *@
