@@ -35,7 +35,7 @@ namespace BillingSystem.Controllers
             }
             if (clientService.IsValidEmail(model.Email))
             {
-                ModelState.AddModelError(nameof(model.Email), Email);
+                ModelState.AddModelError(nameof(model.Email), EmailValidationMessage);
             }
 
 

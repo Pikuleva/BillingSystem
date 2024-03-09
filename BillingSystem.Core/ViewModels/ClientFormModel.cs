@@ -7,9 +7,6 @@ namespace BillingSystem.Core.ViewModels
 {
     public class ClientFormModel
     {
-        [Required]
-        public int LastId { get; set; }
-
 
         [Required(ErrorMessage = RequiredMessage)]
         [StringLength(FirstNameMaxLength,MinimumLength =FirstNameMinLength,ErrorMessage = StringLengthMessage)]
@@ -23,7 +20,7 @@ namespace BillingSystem.Core.ViewModels
         public string LastName { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredMessage)]
-        [RegularExpression("^\\d{10}$", ErrorMessage = "Valid Learner Number must be supplied")]
+        [RegularExpression("^\\d{10}$", ErrorMessage = CivilNumberValidation)]
         public string CivilNumber { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredMessage)]
@@ -42,6 +39,7 @@ namespace BillingSystem.Core.ViewModels
         public string PhoneNumber { get; set; } = string.Empty;
 
         [RegexStringValidator(RegexValidationEmail)]
+        [StringLength(EmailMaxLength,MinimumLength =EmailMinLength,ErrorMessage =EmailValidationMessage)]
         public string Email { get; set; } = string.Empty;
     }
 }

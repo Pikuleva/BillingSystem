@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BillingSystem.Core.Constants
+﻿namespace BillingSystem.Core.Constants
 {
     public static class MessageConstants
     {
@@ -13,6 +7,9 @@ namespace BillingSystem.Core.Constants
         public const string StringLengthMessage = "Yhe field {0} must be between {2} and {1} charter";
 
         public const string CivilExist = "The {0} exist";
-        public const string Email = "The {0} is not valid";
+
+        public const string EmailValidationMessage = "The {0} is not valid";
+
+        public const string CivilNumberValidation = "The {0} must to be 10 digits";
     }
 }

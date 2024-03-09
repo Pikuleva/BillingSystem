@@ -3,6 +3,8 @@ using BillingSystem.Core.ViewModels;
 using BillingSystem.Infrastructure.Common;
 using BillingSystem.Infrastructure.DataModels;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
 
 namespace BillingSystem.Core.Services
 {
@@ -53,21 +55,9 @@ namespace BillingSystem.Core.Services
         }
         public  bool IsValidEmail(string email)
         {
-            var trimmedEmail = email.Trim();
+            string regex = @"^[^@\s]+@[^@\s]+\.[a-zA-Z]{2,}$";
 
-            if (trimmedEmail.EndsWith("."))
-            {
-                return false; 
-            }
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == trimmedEmail;
-            }
-            catch
-            {
-                return false;
-            }
+            return Regex.IsMatch(email, regex, RegexOptions.IgnoreCase);
         }
     }
 }
