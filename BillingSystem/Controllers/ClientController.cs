@@ -43,5 +43,23 @@ namespace BillingSystem.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
+        
+        public async Task<IActionResult> Search()
+        {
+            var model = new ClientDetail();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Search(string civilNumber)
+        {
+            var model = await clientService.SearchClientAsync(civilNumber);
+            return RedirectToAction(nameof(Detail), model);
+        }
+        public async Task<IActionResult> Detail(int id, ClientDetail model)
+        {
+            var modelNew = await clientService.SearchClientDetailAsyn(id);
+            return View(modelNew);
+        }
+
     }
 }

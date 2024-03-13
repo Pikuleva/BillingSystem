@@ -2,6 +2,7 @@
 using BillingSystem.Core.ViewModels;
 using BillingSystem.Infrastructure.Common;
 using BillingSystem.Infrastructure.DataModels;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 
@@ -44,7 +45,7 @@ namespace BillingSystem.Core.Services
             });
             await repository.SaveChangesAsync();
         }
-
+        
         public async Task<bool> ExistByCivilNumberAsync(string civilNumber)
         {
             return await repository.AllReadOnly<Client>()
@@ -56,6 +57,42 @@ namespace BillingSystem.Core.Services
 
             return Regex.IsMatch(email, regex, RegexOptions.IgnoreCase);
         }
-      
+
+        public async Task<ClientDetail?> SearchClientAsync(string civilNumber)
+        {
+
+            var model= await repository.AllReadOnly<Client>()
+                .Where(c=>c.CivilNumber==civilNumber)
+                .Select(c=>new ClientDetail()
+                {
+                    Id = c.Id,
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    PhoneNumber= c.PhoneNumber,
+                    Email = c.Email,
+                    MiddleName= c.MiddleName,
+                    Address = c.City + " " + c.StreetName + " " + c.StreetNumber
+                })
+                .FirstAsync();
+            return model;
+        }
+
+        public async Task<ClientDetail> SearchClientDetailAsyn(int id)
+        {
+            var model = await repository.AllReadOnly<Client>()
+                .Where(c => c.Id == id)
+                .Select(c => new ClientDetail()
+                {
+               
+                    FirstName = c.FirstName,
+                    LastName = c.LastName,
+                    PhoneNumber = c.PhoneNumber,
+                    Email = c.Email,
+                    MiddleName = c.MiddleName,
+                    Address = c.City + " " + c.StreetName + " " + c.StreetNumber
+                })
+                .FirstAsync();
+            return model;
+        }
     }
 }

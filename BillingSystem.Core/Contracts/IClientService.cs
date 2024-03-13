@@ -8,5 +8,8 @@ namespace BillingSystem.Core.Contracts
 
         Task CreateAsync(ClientFormModel model);
         bool IsValidEmail(string email);
+
+        Task<ClientDetail?> SearchClientAsync(string civilNumber);
+        Task<ClientDetail> SearchClientDetailAsyn(int id);
     }
 }
