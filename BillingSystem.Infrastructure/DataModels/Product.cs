@@ -31,7 +31,7 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
         [Required]
         [MaxLength(NameMaxLength)]
-        public string Type { get; set; } = string.Empty;
+        public TypeOfService Type { get; set; } = null!;
         /// <summary>
         /// Цена на услугата
         /// </summary>
