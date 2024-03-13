@@ -4,6 +4,7 @@ using BillingSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BillingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(BillingSystemDbContext))]
-    partial class BillingSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240313121937_AddedNewPropertyTypeId")]
+    partial class AddedNewPropertyTypeId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,8 +115,8 @@ namespace BillingSystem.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
                         .HasComment("Name of service. Include internet speed");
 
                     b.Property<int>("ProductId")
@@ -189,8 +191,8 @@ namespace BillingSystem.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
                         .HasComment("Name of the service");
 
                     b.Property<decimal>("Price")
@@ -208,78 +210,6 @@ namespace BillingSystem.Infrastructure.Migrations
                     b.ToTable("Products");
 
                     b.HasComment("IPTV product");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 2,
-                            Name = "InternetProduct50Mbps",
-                            Price = 12.99m,
-                            TypeId = 1
-                        },
-                        new
-                        {
-                            Id = 1,
-                            Name = "InternetProduct25Mbps",
-                            Price = 10.99m,
-                            TypeId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "InternetProduct75Mbps",
-                            Price = 14.99m,
-                            TypeId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "InternetProduct100Mbps",
-                            Price = 16.99m,
-                            TypeId = 1
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Name = "Start",
-                            Price = 9.99m,
-                            TypeId = 3
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Name = "Sport",
-                            Price = 11.99m,
-                            TypeId = 3
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Name = "Kids",
-                            Price = 3.99m,
-                            TypeId = 3
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Name = "Erotic",
-                            Price = 7.99m,
-                            TypeId = 3
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Name = "Films",
-                            Price = 5.99m,
-                            TypeId = 3
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Name = "Popularsciene",
-                            Price = 8.99m,
-                            TypeId = 3
-                        });
                 });
 
             modelBuilder.Entity("BillingSystem.Infrastructure.DataModels.SatelliteTV", b =>
@@ -391,23 +321,6 @@ namespace BillingSystem.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TypeOfService");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Internet"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "SatelliteTv"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "IPTV"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -525,56 +438,6 @@ namespace BillingSystem.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "6d5800ce-d826-4fc8-83d9-d6b3ac1f591e",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "0361a448-dabd-416b-9e80-5945b1c47578",
-                            Email = "cashier@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "cashier@mail.com",
-                            NormalizedUserName = "cashier@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAECWCGz7RLs0U/3QukN5dKr6IumjN1cqYVbU+3YrP+rDh9HLQmDZ3Q5j7YvWkooTqxQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "a8020dec-1635-4142-a94c-7ba6c8fe52d0",
-                            TwoFactorEnabled = false,
-                            UserName = "cashier@mail.com"
-                        },
-                        new
-                        {
-                            Id = "6d5610ce-d726-4fc8-83d9-d6b3ac1f591e",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "5acbc661-04c5-4bf3-85ae-f70e1b8c1f0e",
-                            Email = "support@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "support@mail.com",
-                            NormalizedUserName = "support@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAENzF27tSZmTS6RBiFtrKo8IqcaIb3Ro2C76O7TRYhzevXlqGvrPAlfOkLn6OJvnkOw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "00eb3b69-24ff-4091-8922-d43d36c33e93",
-                            TwoFactorEnabled = false,
-                            UserName = "support@mail.com"
-                        },
-                        new
-                        {
-                            Id = "dea12896-c198-4129-b3f3-b893d8395082",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "2d511e23-0971-4e40-8992-e56d401bc851",
-                            Email = "client@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "client@mail.com",
-                            NormalizedUserName = "client@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPSJA+JL+PRRyVmRJ2qNibISYAxJP53vt3SBnG2pB3jfQhGKEEUmbH1oPPEucqRJng==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "b8958224-f94e-4c3e-aba8-f6d409255ae9",
-                            TwoFactorEnabled = false,
-                            UserName = "client@mail.com"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

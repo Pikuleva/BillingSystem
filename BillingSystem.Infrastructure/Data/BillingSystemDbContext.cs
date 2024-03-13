@@ -1,4 +1,5 @@
-﻿using BillingSystem.Infrastructure.DataModels;
+﻿using BillingSystem.Infrastructure.Data.SeedDb;
+using BillingSystem.Infrastructure.DataModels;
 using BillingSystem.Infrastructure.DataModels.Constants;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,10 @@ namespace BillingSystem.Data
             builder.Entity<Product>()
               .Property(e => e.Price)
               .HasPrecision(18, 2);
+
+            builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new ProductCofiguration());
+            builder.ApplyConfiguration(new TypeOfServiceConfiguration());
 
             base.OnModelCreating(builder);
         }

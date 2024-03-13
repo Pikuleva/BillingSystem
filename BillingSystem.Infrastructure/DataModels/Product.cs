@@ -31,7 +31,10 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
         [Required]
         [MaxLength(NameMaxLength)]
+        [ForeignKey(nameof(TypeId))]
+
         public TypeOfService Type { get; set; } = null!;
+        public int TypeId { get; set; } 
         /// <summary>
         /// Цена на услугата
         /// </summary>

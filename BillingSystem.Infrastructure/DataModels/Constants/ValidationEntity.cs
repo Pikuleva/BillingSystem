@@ -44,7 +44,7 @@
             public const int MACLength = 17;
 
             public const int NameMinLength = 5;
-            public const int NameMaxLength = 20;
+            public const int NameMaxLength = 40;
         }
         public static class IPTVConst
         {
