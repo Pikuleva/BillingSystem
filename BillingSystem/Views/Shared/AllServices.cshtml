@@ -1,0 +1,17 @@
+﻿@model ServicesViewModel
+
+@{
+    ViewBag.Title = "Услуги";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-start">
+    @foreach (var item in Model.Names)
+    {
+        <p class="mb-0 text-start">Име @item</p>
+    }
+
+
+</div>

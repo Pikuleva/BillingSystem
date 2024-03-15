@@ -19,6 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<ISatellieteService, SatelliteService>();
             services.AddScoped<IIPTVService, IPTVService>();
             services.AddScoped<ITicketService, TicketService>();
+            services.AddScoped<IServiceService, ServiceService>();
 
             return services;
         }
