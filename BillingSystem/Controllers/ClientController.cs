@@ -43,8 +43,8 @@ namespace BillingSystem.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-        
-        public async Task<IActionResult> Search()
+
+        public IActionResult Search()
         {
             var model = new ClientDetail();
             return View(model);
@@ -52,13 +52,63 @@ namespace BillingSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Search(string civilNumber)
         {
-            var model = await clientService.SearchClientAsync(civilNumber);
+            var model = new ClientDetail();
+            try
+            {
+                model = await clientService.SearchClientAsync(civilNumber);
+            }
+            catch (Exception)
+            {
+
+                if (model == null)
+                {
+                    ModelState.AddModelError(nameof(model.CivilNumber), CivilNotValid);
+                }
+            }
+            
+           
             return RedirectToAction(nameof(Detail), model);
         }
         public async Task<IActionResult> Detail(int id, ClientDetail model)
         {
-            var modelNew = await clientService.SearchClientDetailAsyn(id);
+            var modelNew = new ClientDetail();
+            try
+            {
+                modelNew = await clientService.SearchClientDetailAsyn(id);
+            }
+            catch (Exception)
+            {
+                if (model == null)
+                {
+                    ModelState.AddModelError(nameof(model.CivilNumber), CivilNotValid);
+                }
+
+            }
+          
             return View(modelNew);
+        }
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (await clientService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            var model = await clientService.GetClientFormModelByIdAsync(id);
+
+            return View(model);
+        }
+   
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, ClientFormModel model)
+        {
+            if (await clientService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            await clientService.EditAsync(id, model);
+            return RedirectToAction(nameof(Detail), new { id });
         }
 
     }

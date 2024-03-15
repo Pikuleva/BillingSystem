@@ -10,10 +10,20 @@
 
 <form class="input-group" asp-controller="Client" asp-action="Search" asp-route-id="@Model.Id">
     <i class="fas fa-search" aria-hidden="true"></i>
-    <input asp-for="CivilNumber" class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+    <input asp-for="CivilNumber" class="form-control form-control-sm ml-3 w-75" type="text" placeholder="ЕГН;Телефон;Email"
+           aria-label="Search">
+    <input type="submit" class="btn btn-info" value="Search">  
+</form>
+@* <form>
+    <input asp-for="PhoneNumber" class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Телефон"
+           aria-label="Search">
+    <input type="submit" class="btn btn-info" value="Search">
+</form>
+<form>
+    <input asp-for="Email" class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Email"
            aria-label="Search">
     <input type="submit" class="btn btn-info" value="Search">
 </form>
 
 
-
+ *@

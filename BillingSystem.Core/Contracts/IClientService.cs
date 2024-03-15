@@ -11,5 +11,9 @@ namespace BillingSystem.Core.Contracts
 
         Task<ClientDetail?> SearchClientAsync(string civilNumber);
         Task<ClientDetail> SearchClientDetailAsyn(int id);
+        Task EditAsync(int clientId, ClientFormModel model);
+        Task<bool> ExistAsync(int id);
+
+        Task<ClientFormModel> GetClientFormModelByIdAsync(int id);
     }
 }

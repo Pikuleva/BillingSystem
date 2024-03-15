@@ -44,7 +44,22 @@ namespace BillingSystem.Core.Services
             });
             await repository.SaveChangesAsync();
         }
-        
+
+        public async Task EditAsync(int clientId, ClientFormModel model)
+        {
+            var client = await repository.GetByIdAsync<Client>(clientId);
+
+            if (client != null)
+            {
+                client.StreetNumber = model.StreetNumber;
+                client.City = model.City;
+                client.Email=model.Email;
+                client.StreetName= model.StreetName;
+                client.PhoneNumber= model.PhoneNumber;    
+            }
+            await repository.SaveChangesAsync();
+        }
+
         public async Task<bool> ExistByCivilNumberAsync(string civilNumber)
         {
             return await repository.AllReadOnly<Client>()
@@ -59,8 +74,8 @@ namespace BillingSystem.Core.Services
 
         public async Task<ClientDetail?> SearchClientAsync(string civilNumber)
         {
-
-            var model= await repository.AllReadOnly<Client>()
+        
+            var modelCivil= await repository.AllReadOnly<Client>()
                 .Where(c=>c.CivilNumber==civilNumber)
                 .Select(c=>new ClientDetail()
                 {
@@ -73,16 +88,17 @@ namespace BillingSystem.Core.Services
                     Address = c.City + " " + c.StreetName + " " + c.StreetNumber
                 })
                 .FirstAsync();
-            return model;
+          
+            return modelCivil;
         }
 
         public async Task<ClientDetail> SearchClientDetailAsyn(int id)
         {
-            var model = await repository.AllReadOnly<Client>()
+            return await repository.AllReadOnly<Client>()
                 .Where(c => c.Id == id)
                 .Select(c => new ClientDetail()
                 {
-               
+                    Id= c.Id,
                     FirstName = c.FirstName,
                     LastName = c.LastName,
                     PhoneNumber = c.PhoneNumber,
@@ -90,8 +106,30 @@ namespace BillingSystem.Core.Services
                     MiddleName = c.MiddleName,
                     Address = c.City + " " + c.StreetName + " " + c.StreetNumber
                 })
+                .FirstAsync();   
+        }
+        public async Task<bool> ExistAsync(int id)
+        {
+            return await repository.AllReadOnly<Client>()
+                .AnyAsync(h => h.Id == id);
+        }
+
+        public async Task<ClientFormModel> GetClientFormModelByIdAsync(int id)
+        {
+            var client = await repository.AllReadOnly<Client>()
+                .Where(h => h.Id == id)
+                .Select(h => new ClientFormModel()
+                {
+                    StreetName = h.StreetName,
+                    StreetNumber = h.StreetNumber,
+                    City = h.City,
+                    PhoneNumber= h.PhoneNumber,
+                    Email = h.Email,
+                   
+                })
                 .FirstAsync();
-            return model;
+           
+            return client;
         }
     }
 }

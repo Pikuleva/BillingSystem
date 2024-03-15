@@ -1,0 +1,47 @@
+﻿@model ClientFormModel
+
+@{
+    ViewBag.Title = "Edit Client";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>
+<div class="wrapper">
+    <form asp-action="Edit" method="post">
+        <div id="wizard">
+
+            <section>
+               
+                <div asp-for="@Model.PhoneNumber" class="form-row">
+                    <input asp-for="@Model.PhoneNumber" type="text" class="form-control" placeholder="@Model.PhoneNumber">
+                </div>
+                <span asp-validation-for="@Model.PhoneNumber" class="small text-danger"></span>
+                <div asp-for="City" class="form-row">
+                    <input asp-for="@Model.City" type="text" class="form-control" placeholder="Град">
+                </div>
+                <span asp-validation-for="City" class="small text-danger"></span>
+                <div asp-for="StreetName" class="form-row">
+                    <input asp-for="@Model.StreetName" type="text" class="form-control" placeholder="Улица">
+                </div>
+                <span asp-validation-for="StreetName" class="small text-danger"></span>
+                <div asp-for="StreetNumber" class="form-row">
+                    <input asp-for="@Model.StreetNumber" type="text" class="form-control" placeholder="Номер">
+                </div>
+                <span asp-validation-for="StreetNumber" class="small text-danger"></span>
+                <div asp-for="Email" class="form-row">
+                    <input asp-for="@Model.Email" type="text" class="form-control" placeholder="Email">
+                </div>
+                <span asp-validation-for="Email" class="small text-danger"></span>
+                <div class="text-center">
+
+                    <input class="btn btn-primary mt-3" type="submit" value="Save" />
+
+                </div>
+            </section>
+
+        </div>
+    </form>
+</div> 
