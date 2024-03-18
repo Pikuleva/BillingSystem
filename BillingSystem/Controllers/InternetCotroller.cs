@@ -1,12 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BillingSystem.Core.Contracts;
+using BillingSystem.Core.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BillingSystem.Controllers
 {
-    public class InternetCotroller : Controller
+    public class InternetController : Controller
     {
-        public IActionResult Index()
+        private readonly IInternetService internetService;
+        public InternetController(IInternetService internetService)
         {
-            return View();
+            this.internetService = internetService;
+        }
+        public IActionResult Add()
+        {
+
+            var model = new InternetFormModel();
+            return View(model);
         }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BillingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(BillingSystemDbContext))]
-    [Migration("20240313121937_AddedNewPropertyTypeId")]
-    partial class AddedNewPropertyTypeId
+    [Migration("20240318192811_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,6 +56,12 @@ namespace BillingSystem.Infrastructure.Migrations
                         .HasColumnType("nvarchar(15)")
                         .HasComment("Client first name");
 
+                    b.Property<int?>("IPTVId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("InternetServiceId")
+                        .HasColumnType("int");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(15)
@@ -74,6 +80,9 @@ namespace BillingSystem.Infrastructure.Migrations
                         .HasColumnType("nvarchar(15)")
                         .HasComment("Client phone number");
 
+                    b.Property<int?>("SatelliteTvId")
+                        .HasColumnType("int");
+
                     b.Property<string>("StreetName")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -88,7 +97,13 @@ namespace BillingSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ClientsContracts");
+                    b.HasIndex("IPTVId");
+
+                    b.HasIndex("InternetServiceId");
+
+                    b.HasIndex("SatelliteTvId");
+
+                    b.ToTable("Clients");
 
                     b.HasComment("Client contract");
                 });
@@ -106,17 +121,14 @@ namespace BillingSystem.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasComment("Until which date the service is active");
 
-                    b.Property<int?>("ClientId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit")
                         .HasComment("The service is paid/unpaid");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
                         .HasComment("Name of service. Include internet speed");
 
                     b.Property<int>("ProductId")
@@ -130,8 +142,6 @@ namespace BillingSystem.Infrastructure.Migrations
                         .HasComment("MAC address client device");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
 
                     b.HasIndex("ProductId");
 
@@ -153,9 +163,6 @@ namespace BillingSystem.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasComment("Until which date the service is active");
 
-                    b.Property<int?>("ClientId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -170,8 +177,6 @@ namespace BillingSystem.Infrastructure.Migrations
                         .HasComment("Serial number of device");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
 
                     b.HasIndex("ProductId");
 
@@ -191,8 +196,8 @@ namespace BillingSystem.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)")
                         .HasComment("Name of the service");
 
                     b.Property<decimal>("Price")
@@ -210,6 +215,78 @@ namespace BillingSystem.Infrastructure.Migrations
                     b.ToTable("Products");
 
                     b.HasComment("IPTV product");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            Name = "InternetProduct50Mbps",
+                            Price = 12.99m,
+                            TypeId = 1
+                        },
+                        new
+                        {
+                            Id = 1,
+                            Name = "InternetProduct25Mbps",
+                            Price = 10.99m,
+                            TypeId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "InternetProduct75Mbps",
+                            Price = 14.99m,
+                            TypeId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "InternetProduct100Mbps",
+                            Price = 16.99m,
+                            TypeId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Start",
+                            Price = 9.99m,
+                            TypeId = 3
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Sport",
+                            Price = 11.99m,
+                            TypeId = 3
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Kids",
+                            Price = 3.99m,
+                            TypeId = 3
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "Erotic",
+                            Price = 7.99m,
+                            TypeId = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Films",
+                            Price = 5.99m,
+                            TypeId = 3
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Popularsciene",
+                            Price = 8.99m,
+                            TypeId = 3
+                        });
                 });
 
             modelBuilder.Entity("BillingSystem.Infrastructure.DataModels.SatelliteTV", b =>
@@ -225,9 +302,6 @@ namespace BillingSystem.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasComment("Until which date the service is active");
 
-                    b.Property<int?>("ClientId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -241,8 +315,6 @@ namespace BillingSystem.Infrastructure.Migrations
                         .HasComment("Satellite device serial number");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
 
                     b.HasIndex("PacketId");
 
@@ -321,6 +393,23 @@ namespace BillingSystem.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TypeOfService");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Internet"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "SatelliteTv"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "IPTV"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -438,6 +527,56 @@ namespace BillingSystem.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "6d5800ce-d826-4fc8-83d9-d6b3ac1f591e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "8caf04d1-6208-4902-a7c3-99ed5a998c53",
+                            Email = "cashier@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "cashier@mail.com",
+                            NormalizedUserName = "cashier@mail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAsdSAycf7qFwOfeytutixtUBzkiFh/kbeenxmmZbwmAucIqH7+z8YE+sGz5NjOnmg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "bcc83e24-bc3c-4ad5-92c0-8c1a2295742b",
+                            TwoFactorEnabled = false,
+                            UserName = "cashier@mail.com"
+                        },
+                        new
+                        {
+                            Id = "6d5610ce-d726-4fc8-83d9-d6b3ac1f591e",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c1b7fd93-683b-45c7-af1e-6c603d0f675f",
+                            Email = "support@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "support@mail.com",
+                            NormalizedUserName = "support@mail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMaAtLdorjIed430mODMgTvdFvF1wXTuRGfkCoepcwvd48j0J+MmaPoEjOuf5OwV6Q==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "33bcf0aa-ebf6-4899-bc15-791ff76fda9e",
+                            TwoFactorEnabled = false,
+                            UserName = "support@mail.com"
+                        },
+                        new
+                        {
+                            Id = "dea12896-c198-4129-b3f3-b893d8395082",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "18eab486-6281-4367-aabe-1c46553e66f6",
+                            Email = "client@mail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "client@mail.com",
+                            NormalizedUserName = "client@mail.com",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAYtZLTqGqBPN8TQvQKXrTyLnSD67WCQBBGJaLRA3UAVNZIMJz3Jws90Fm1+pdNGgw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "5a147b58-c120-40e1-b746-9ff65bef451a",
+                            TwoFactorEnabled = false,
+                            UserName = "client@mail.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -525,16 +664,36 @@ namespace BillingSystem.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BillingSystem.Infrastructure.DataModels.Client", b =>
+                {
+                    b.HasOne("BillingSystem.Infrastructure.DataModels.IPTV", "IPTV")
+                        .WithMany()
+                        .HasForeignKey("IPTVId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("BillingSystem.Infrastructure.DataModels.InternetService", "InternetService")
+                        .WithMany()
+                        .HasForeignKey("InternetServiceId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("BillingSystem.Infrastructure.DataModels.SatelliteTV", "SatelliteTV")
+                        .WithMany()
+                        .HasForeignKey("SatelliteTvId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("IPTV");
+
+                    b.Navigation("InternetService");
+
+                    b.Navigation("SatelliteTV");
+                });
+
             modelBuilder.Entity("BillingSystem.Infrastructure.DataModels.InternetService", b =>
                 {
-                    b.HasOne("BillingSystem.Infrastructure.DataModels.Client", null)
-                        .WithMany("InternetServices")
-                        .HasForeignKey("ClientId");
-
                     b.HasOne("BillingSystem.Infrastructure.DataModels.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Product");
@@ -542,10 +701,6 @@ namespace BillingSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("BillingSystem.Infrastructure.DataModels.IPTV", b =>
                 {
-                    b.HasOne("BillingSystem.Infrastructure.DataModels.Client", null)
-                        .WithMany("IPTVs")
-                        .HasForeignKey("ClientId");
-
                     b.HasOne("BillingSystem.Infrastructure.DataModels.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
@@ -568,10 +723,6 @@ namespace BillingSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("BillingSystem.Infrastructure.DataModels.SatelliteTV", b =>
                 {
-                    b.HasOne("BillingSystem.Infrastructure.DataModels.Client", null)
-                        .WithMany("SatteliteTVs")
-                        .HasForeignKey("ClientId");
-
                     b.HasOne("BillingSystem.Infrastructure.DataModels.Product", "Packet")
                         .WithMany()
                         .HasForeignKey("PacketId")
@@ -641,12 +792,6 @@ namespace BillingSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("BillingSystem.Infrastructure.DataModels.Client", b =>
                 {
-                    b.Navigation("IPTVs");
-
-                    b.Navigation("InternetServices");
-
-                    b.Navigation("SatteliteTVs");
-
                     b.Navigation("Tickets");
                 });
 #pragma warning restore 612, 618

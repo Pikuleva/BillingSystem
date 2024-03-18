@@ -40,5 +40,6 @@ namespace BillingSystem.Infrastructure.Common
         {
             return await DbSet<T>().FindAsync(id);
         }
+      
     }
 }

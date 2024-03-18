@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Configuration;
 using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ClientContract;
 
@@ -87,10 +88,19 @@ namespace BillingSystem.Infrastructure.DataModels
         [Comment("Client Email address")]
         public string Email { get; set; } = string.Empty;
 
-  
+        public int? InternetServiceId { get; set; }
+        [ForeignKey(nameof(InternetServiceId))]
+        public InternetService? InternetService { get; set; } 
+
+        public int? IPTVId { get; set; }
+        [ForeignKey(nameof(IPTVId))]
+        public IPTV? IPTV { get; set; }
+
+        public int? SatelliteTvId { get; set; }
+        [ForeignKey(nameof(SatelliteTvId))]
+        public SatelliteTV? SatelliteTV { get; set; }
+
         public IEnumerable<Ticket> Tickets { get; set; } = new List<Ticket>();
-        public IEnumerable<IPTV> IPTVs { get; set; } = new List<IPTV>();
-        public IEnumerable<InternetService> InternetServices { get; set; } = new List<InternetService>();
-        public IEnumerable<SatelliteTV> SatteliteTVs { get; set; } = new List<SatelliteTV>();
+       
     }
 }

@@ -1,6 +1,9 @@
-﻿namespace BillingSystem.Core.Contracts
+﻿using BillingSystem.Core.ViewModels;
+
+namespace BillingSystem.Core.Contracts
 {
     public interface IInternetService
     {
+       
     }
 }

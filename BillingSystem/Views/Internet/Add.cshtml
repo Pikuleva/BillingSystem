@@ -1,5 +1,30 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model InternetFormModel
+
 @{
+    ViewBag.Title = "Добавяне на интернет";
 }
+<link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/js/services.js" asp-append-version="true" />
+<div class="col-lg-4 mb-5 mb-lg-10">
+    <div class="bg-white p-5 rounded-lg shadow">
+        <h1 class="h10 text-black  font-weight-bold mb-4">Интернет</h1>
+
+        <div class="custom-separator my-4 mx-auto bg-primary"></div>
+
+        <ul class="list-unstyled my-5 text-small text-left">
+            <li class="mb-3">
+                <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill">Интернет 25 Mbps - 10.99лв</a>
+            </li>
+            <li class="mb-3">
+                <i class="fa fa-check mr-2 text-primary"></i> <a href="#" class="btn  p-2 rounded-pill">Интернет 50 Mbps - 12.99лв</a>
+            </li>
+            <li class="mb-3">
+                <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Интернет 75 Mbps - 14.99лв</a>
+            </li>
+            <li class="mb-3">
+                <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Интернет 100 Mbps - 16.99лв</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
