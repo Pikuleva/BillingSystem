@@ -4,14 +4,126 @@
     ViewBag.Title = "Услуги";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
-<div class="text-start">
+@* <div class="text-start">
     @foreach (var item in Model.Names)
     {
         <p class="mb-0 text-start">Име @item</p>
+        <p class="mb-4 text-start">@if (item== "Internet")
+            {
+                <ol>
+                    <li></li>
+                </ol>
+                
+            }</p>
     }
 
 
-</div>
+</div> *@
+<link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/js/services.js" asp-append-version="true" />
+<section>
+    <div class="container py-5">
+
+        <header class="text-center mb-5 text-white">
+            <div class="row">
+                <div class="h10 text-black col-lg-7 mx-auto">
+                    <h1>Планове</h1>
+                </div>
+            </div>
+        </header>
+ 
+        <div class="row text-center align-items-end">
+            <div class="col-lg-4 mb-5 mb-lg-10">
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h1 class="h10 text-black  font-weight-bold mb-4">Интернет</h1>
+                   
+                    <div class="custom-separator my-4 mx-auto bg-primary"></div>
+
+                    <ul class="list-unstyled my-5 text-small text-left">
+                        <li class="mb-3">
+                            <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill">Интернет 25 Mbps - 10.99лв</a>
+                        </li>
+                         <li class="mb-3">
+                            <i class="fa fa-check mr-2 text-primary"></i> <a href="#" class="btn  p-2 rounded-pill">Интернет 50 Mbps - 12.99лв</a>
+                        </li>
+                        <li class="mb-3">
+                            <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Интернет 75 Mbps - 14.99лв</a>
+                        </li>
+                        <li class="mb-3">
+                            <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Интернет 100 Mbps - 16.99лв</a>
+                        </li>
+   
+                        </ul>                    
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h1 class="h10 text-uppercase font-weight-bold mb-4">IPTV</h1>
+
+                    <div class="custom-separator my-4 mx-auto bg-primary"></div>
+
+                    <ul class="list-unstyled my-5 text-small text-left">
+                        <li class="mb-0">
+                            <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill">Старт - 9.99лв</a>
+                        </li>
+                        <li class="h5 mb-0">
+                            <i class="fa fa-check mr-2 text-primary"></i>Добавяне на пакети:
+                        </li>
+                        <li class="mb-0">
+                            <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Филми - 5.99лв</a>
+                        </li>
+                        <li class="mb-0">
+                            <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Спорт - 11.99лв</a>
+                        </li>
+                        <li class="mb-0">
+                            <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Научнопопулярни - 8.99лв</a>
+                        </li>
+                        <li class="mb-0">
+                            <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Детски - 3.99лв</a>
+                        </li>
+                        <li class="mb-0">
+                            <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Еротични - 7.99лв</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- END -->
+            <!-- Pricing Table-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <div class="bg-white p-5 rounded-lg shadow">
+                    <h1 class="h7 text-uppercase font-weight-bold mb-4">Сателитна телевизия</h1>
+
+                    <div class="custom-separator my-4 mx-auto bg-primary"></div>
+
+                    <ul class="list-unstyled my-5 text-small text-left">
+                        <li class="mb-0">
+                            <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill">Старт - 9.99лв</a>
+                        </li>
+                        <li class="h5 mb-0">
+                            <i class="fa fa-check mr-2 text-primary"></i>Добавяне на пакети:
+                        </li>
+                        <li class="mb-0">
+                            <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Филми - 5.99лв</a>
+                        </li>
+                        <li class="mb-0">
+                            <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Спорт - 11.99лв</a>
+                        </li>
+                        <li class="mb-0">
+                            <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Научнопопулярни - 8.99лв</a>
+                        </li>
+                        <li class="mb-0">
+                            <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Детски - 3.99лв</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+            <!-- END -->
+
+        </div>
+    </div>
+</section>
