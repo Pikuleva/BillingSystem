@@ -10,6 +10,7 @@ namespace BillingSystem.Core.ViewModels
         public DateTime UntilDate {  get; set; }
         public string RouterMACAdress { get; set; } = string.Empty;
       
-        public InternetProductsWithPrice InternetProducts { get; set; }
+        public string InternetProducts { get; set; }
+        public decimal Price { get; set; }
     }
 }

@@ -41,5 +41,6 @@ namespace BillingSystem.Core.ViewModels
         [RegexStringValidator(RegexValidationEmail)]
         [StringLength(EmailMaxLength,MinimumLength =EmailMinLength,ErrorMessage =EmailValidationMessage)]
         public string Email { get; set; } = string.Empty;
+        public InternetFormModel InternetFormModel { get; set; }
     }
 }

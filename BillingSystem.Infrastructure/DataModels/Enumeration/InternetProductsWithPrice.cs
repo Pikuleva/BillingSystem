@@ -5,9 +5,9 @@
     /// </summary>
     public enum InternetProductsWithPrice
     {
-        Internet200Mbps=1,
-        Internet100Mbps=2,
-        Internet50Mbps=3,
-        Internet15Mbps=4
+        InternetProduct100Mbps=1,
+        InternetProduct75Mbps=2,
+        InternetProduct50Mbps=3,
+        InternetProduct25Mbps=4
     }
 }
