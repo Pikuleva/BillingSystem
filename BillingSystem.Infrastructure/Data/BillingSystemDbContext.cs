@@ -31,9 +31,9 @@ namespace BillingSystem.Data
               .HasPrecision(18, 2);
 
             builder.Entity<Client>()
-                .HasOne(c=>c.InternetService)
+                .HasOne(c => c.InternetService)
                 .WithMany()
-                .HasForeignKey(c=>c.InternetServiceId)
+                .HasForeignKey(c => c.InternetServiceId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Client>()
@@ -46,19 +46,16 @@ namespace BillingSystem.Data
          .HasOne(c => c.SatelliteTV)
          .WithMany()
          .HasForeignKey(c => c.SatelliteTvId)
-         .OnDelete(DeleteBehavior.Restrict); 
-
-            builder.Entity<InternetService>()
-         .HasOne(c => c.Product)
-         .WithMany()
-         .HasForeignKey(c => c.ProductId)
          .OnDelete(DeleteBehavior.Restrict);
-
 
 
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new ProductCofiguration());
             builder.ApplyConfiguration(new TypeOfServiceConfiguration());
+            builder.ApplyConfiguration(new ClientConfiguration());
+            builder.ApplyConfiguration(new InternetServiceConfiguration());
+            builder.ApplyConfiguration(new IPTVConfiguration());
+            builder.ApplyConfiguration(new SatelliteTVConfiguration());
 
             base.OnModelCreating(builder);
         }

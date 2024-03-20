@@ -7,7 +7,7 @@ namespace BillingSystem.Core.Contracts
     {
         Task CreateAsync(InternetFormModel model);
         Task<InternetFormModel> CreateInternetFormModel(string macAddress, InternetProductsWithPrice name,DateTime untilDate);
-        Task<InternetFormModel> AddNameToInternetProduct(string name);
+        //Task<InternetFormModel> AddNameToInternetProduct(string name);
         Task<InternetFormModel> AddPropToModel(string name, decimal price, string mac, DateTime date);
         Task<ClientFormModel> GetClientByIdAsync(int clientId);
     }

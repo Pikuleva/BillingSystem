@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BillingSystem.Infrastructure.DataModels
 {
@@ -38,14 +39,22 @@ namespace BillingSystem.Infrastructure.DataModels
         [Comment("Until which date the service is active")]
         public DateTime ActiveUntilDate { get; set; }
 
+        /// <summary>
+        /// Услугата е активна/неактивна спрямо това, дали е заплатена
+        /// </summary>
+        [Required]
+        [Comment("The service is paid/unpaid")]
+        public bool IsActive { get; set; }
 
         /// <summary>
         /// Начислен пакет спрямо абонамента
         /// </summary>
         [Required]
         [Comment("TV packet")]
-        public Product Packet { get; set; } = null!;
+        [ForeignKey(nameof(ProductId))]
+        public Product Product { get; set; } = null!;
 
-       
+        public int ProductId { get; set; }
+
     }
 }

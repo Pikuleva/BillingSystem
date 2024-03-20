@@ -41,5 +41,7 @@ namespace BillingSystem.Infrastructure.DataModels
         [Required]
         [Comment("Price of  service")]
         public decimal Price { get; set; }
+        public List<SatelliteTV> SatelliteTVs { get; set; }= new List<SatelliteTV>();
+
     }
 }

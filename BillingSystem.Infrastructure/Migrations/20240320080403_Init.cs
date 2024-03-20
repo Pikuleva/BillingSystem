@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BillingSystem.Infrastructure.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -209,7 +209,7 @@ namespace BillingSystem.Infrastructure.Migrations
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 },
                 comment: "Internet service");
 
@@ -222,6 +222,7 @@ namespace BillingSystem.Infrastructure.Migrations
                     SerialNumber = table.Column<int>(type: "int", nullable: false, comment: "Serial number of device"),
                     ActiveUntilDate = table.Column<DateTime>(type: "datetime2", nullable: false, comment: "Until which date the service is active"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false, comment: "Device model name"),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, comment: "The service is paid/unpaid"),
                     ProductId = table.Column<int>(type: "int", nullable: false, comment: "Television product Identificator")
                 },
                 constraints: table =>
@@ -245,14 +246,15 @@ namespace BillingSystem.Infrastructure.Migrations
                     SerialNumber = table.Column<int>(type: "int", nullable: false, comment: "Satellite device serial number"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false, comment: "Model of satelite device"),
                     ActiveUntilDate = table.Column<DateTime>(type: "datetime2", nullable: false, comment: "Until which date the service is active"),
-                    PacketId = table.Column<int>(type: "int", nullable: false)
+                    IsActive = table.Column<bool>(type: "bit", nullable: false, comment: "The service is paid/unpaid"),
+                    ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SatelliteTVs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SatelliteTVs_Products_PacketId",
-                        column: x => x.PacketId,
+                        name: "FK_SatelliteTVs_Products_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -333,9 +335,9 @@ namespace BillingSystem.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "6d5610ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "c1b7fd93-683b-45c7-af1e-6c603d0f675f", "support@mail.com", false, false, null, "support@mail.com", "support@mail.com", "AQAAAAEAACcQAAAAEMaAtLdorjIed430mODMgTvdFvF1wXTuRGfkCoepcwvd48j0J+MmaPoEjOuf5OwV6Q==", null, false, "33bcf0aa-ebf6-4899-bc15-791ff76fda9e", false, "support@mail.com" },
-                    { "6d5800ce-d826-4fc8-83d9-d6b3ac1f591e", 0, "8caf04d1-6208-4902-a7c3-99ed5a998c53", "cashier@mail.com", false, false, null, "cashier@mail.com", "cashier@mail.com", "AQAAAAEAACcQAAAAEAsdSAycf7qFwOfeytutixtUBzkiFh/kbeenxmmZbwmAucIqH7+z8YE+sGz5NjOnmg==", null, false, "bcc83e24-bc3c-4ad5-92c0-8c1a2295742b", false, "cashier@mail.com" },
-                    { "dea12896-c198-4129-b3f3-b893d8395082", 0, "18eab486-6281-4367-aabe-1c46553e66f6", "client@mail.com", false, false, null, "client@mail.com", "client@mail.com", "AQAAAAEAACcQAAAAEAYtZLTqGqBPN8TQvQKXrTyLnSD67WCQBBGJaLRA3UAVNZIMJz3Jws90Fm1+pdNGgw==", null, false, "5a147b58-c120-40e1-b746-9ff65bef451a", false, "client@mail.com" }
+                    { "6d5610ce-d726-4fc8-83d9-d6b3ac1f591e", 0, "34e55581-3247-4ddb-94c5-ae429635eb56", "support@mail.com", false, false, null, "support@mail.com", "support@mail.com", "AQAAAAEAACcQAAAAEMewojEA6WI4mv+PUsH6x/Q10+kOpMBNOVRE3PI92GxB29l+mSaU1QI2fgN8ywuWxg==", null, false, "4b8d7de5-71c6-40e7-954f-1a7329c98065", false, "support@mail.com" },
+                    { "6d5800ce-d826-4fc8-83d9-d6b3ac1f591e", 0, "4229b881-3d0f-4b35-977d-3b14cdadb437", "cashier@mail.com", false, false, null, "cashier@mail.com", "cashier@mail.com", "AQAAAAEAACcQAAAAEKCkiYJXM5KvfavM/kl8D04Zh2YHw5Lpk4EcKlgJTw341Pdy4lIRWS4mI0KM4oVByA==", null, false, "b8972293-a31a-41ac-813e-84c401e4a49f", false, "cashier@mail.com" },
+                    { "dea12896-c198-4129-b3f3-b893d8395082", 0, "2bd29ab0-7ad7-4aef-aa8e-30aab9b418b5", "client@mail.com", false, false, null, "client@mail.com", "client@mail.com", "AQAAAAEAACcQAAAAEJdL2paKtulR1ukmgcLfhkwg7bK2ve0a/7pOsSO2QeWuN1s/mcDSpfK8WwjfM0yIEg==", null, false, "4313920b-c447-491c-b747-95e3352d82a5", false, "client@mail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -357,6 +359,12 @@ namespace BillingSystem.Infrastructure.Migrations
                     { 2, "InternetProduct50Mbps", 12.99m, 1 },
                     { 3, "InternetProduct75Mbps", 14.99m, 1 },
                     { 4, "InternetProduct100Mbps", 16.99m, 1 },
+                    { 5, "Start", 9.99m, 2 },
+                    { 6, "Films", 5.99m, 2 },
+                    { 7, "Sport", 11.99m, 2 },
+                    { 8, "Popularsciene", 8.99m, 2 },
+                    { 9, "Kids", 3.99m, 2 },
+                    { 10, "Erotic", 7.99m, 2 },
                     { 11, "Start", 9.99m, 3 },
                     { 12, "Films", 5.99m, 3 },
                     { 13, "Sport", 11.99m, 3 },
@@ -364,6 +372,26 @@ namespace BillingSystem.Infrastructure.Migrations
                     { 15, "Kids", 3.99m, 3 },
                     { 16, "Erotic", 7.99m, 3 }
                 });
+
+            migrationBuilder.InsertData(
+                table: "IPTVs",
+                columns: new[] { "Id", "ActiveUntilDate", "IsActive", "Name", "ProductId", "SerialNumber" },
+                values: new object[] { 1, new DateTime(2024, 4, 20, 10, 4, 3, 190, DateTimeKind.Local).AddTicks(2069), true, "WinMat", 13, 3000001 });
+
+            migrationBuilder.InsertData(
+                table: "InternetServices",
+                columns: new[] { "Id", "ActiveUntilDate", "IsActive", "Name", "ProductId", "RouterMACAdress" },
+                values: new object[] { 1, new DateTime(2024, 4, 20, 10, 4, 3, 186, DateTimeKind.Local).AddTicks(9781), true, "InternetProduct75Mbps", 3, "0C:8B:3A:25:0D:F4" });
+
+            migrationBuilder.InsertData(
+                table: "SatelliteTVs",
+                columns: new[] { "Id", "ActiveUntilDate", "IsActive", "Name", "ProductId", "SerialNumber" },
+                values: new object[] { 1, new DateTime(2024, 4, 20, 10, 4, 3, 193, DateTimeKind.Local).AddTicks(4918), true, "PomSat", 5, 5000001 });
+
+            migrationBuilder.InsertData(
+                table: "Clients",
+                columns: new[] { "Id", "City", "CivilNumber", "Email", "FirstName", "IPTVId", "InternetServiceId", "LastName", "MiddleName", "PhoneNumber", "SatelliteTvId", "StreetName", "StreetNumber" },
+                values: new object[] { 9999, "Варна", "8801018899", "angel.angelov@gmail.com", "Ангел", 1, 1, "Ангелов", "Ангелов", "0888001100", 1, "Васил Левски", "10А" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -435,9 +463,9 @@ namespace BillingSystem.Infrastructure.Migrations
                 column: "TypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SatelliteTVs_PacketId",
+                name: "IX_SatelliteTVs_ProductId",
                 table: "SatelliteTVs",
-                column: "PacketId");
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tickets_ClientId",

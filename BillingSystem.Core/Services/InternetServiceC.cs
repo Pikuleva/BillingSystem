@@ -18,35 +18,35 @@ namespace BillingSystem.Core.Services
             this.repository = repository;
         }
 
-        public async Task<InternetFormModel> AddNameToInternetProduct(string name)
-        {
-            string searchName = string.Empty;
-            if (name == "Интернет 25 Mbps - 10.99лв")
-            {
-                searchName = "InternetProduct25Mbps";
-            } 
-            if (name == "Интернет 50 Mbps - 12.99лв")
-            {
-                searchName = "InternetProduct50Mbps";
-            } 
-            if (name == "Интернет 75 Mbps - 14.99лв")
-            {
-                searchName = "InternetProduct75Mbps";
-            }
-            if (name == "Интернет 100 Mbps - 16.99лв")
-            {
-                searchName = "InternetProduct100Mbps";
-            }
+        //public async Task<InternetFormModel> AddNameToInternetProduct(string name)
+        //{
+        //    string searchName = string.Empty;
+        //    if (name == "Интернет 25 Mbps - 10.99лв")
+        //    {
+        //        searchName = "InternetProduct25Mbps";
+        //    } 
+        //    if (name == "Интернет 50 Mbps - 12.99лв")
+        //    {
+        //        searchName = "InternetProduct50Mbps";
+        //    } 
+        //    if (name == "Интернет 75 Mbps - 14.99лв")
+        //    {
+        //        searchName = "InternetProduct75Mbps";
+        //    }
+        //    if (name == "Интернет 100 Mbps - 16.99лв")
+        //    {
+        //        searchName = "InternetProduct100Mbps";
+        //    }
 
-            return await repository.AllReadOnly<Product>()
-                .Where(p=>p.Name == name.ToString())
-                .Select(p=> new InternetFormModel()
-                {
-                    InternetProducts=searchName,
-                    Price=p.Price               
-                })
-                .FirstAsync();
-        }
+        //    return await repository.AllReadOnly<Product>()
+        //        .Where(p=>p.Name == name.ToString())
+        //        .Select(p=> new InternetFormModel()
+        //        {
+        //            InternetProducts=searchName,
+        //            Price=p.Price               
+        //        })
+        //        .FirstAsync();
+        //}
 
         public async Task CreateAsync(InternetFormModel model)
         {
@@ -56,7 +56,7 @@ namespace BillingSystem.Core.Services
            
            await repository.AddAsync(new InternetService()
             {
-                Name = model.InternetProducts.ToString(),
+                
                 RouterMACAdress = model.RouterMACAdress,
                 ActiveUntilDate=model.UntilDate
             });
@@ -73,8 +73,7 @@ namespace BillingSystem.Core.Services
 
             var model = new InternetFormModel()
             {
-                InternetProducts = name,
-                Price = price,
+              
                 UntilDate = date,
                 RouterMACAdress = mac
             };

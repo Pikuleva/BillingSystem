@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BillingSystem.Controllers
 {
-    public class SatelliteController : Controller
+    public class IPTVController : Controller
     {
         public async Task<IActionResult> Add()
         {
-            var model = new SatelliteFormModel();
+            var model = new IPTVFormModel();
             return View(model);
         }
     }

@@ -36,19 +36,22 @@ namespace BillingSystem.Infrastructure.DataModels
         [Comment("MAC address client device")]
         public string RouterMACAdress { get; set; } = string.Empty;
 
-        /// <summary>
-        /// Идентификатор на интернет услугата
-        /// </summary>
-        [Required]
-        [Comment("Internet product Identificator")]
-        public int ProductId { get; set; }
+ 
 
         /// <summary>
         /// Вида(скоростта) на интернет услугата
         /// </summary>
         [Required]
         [Comment("Internet package")]
+        [ForeignKey(nameof(ProductId))]
         public Product Product { get; set; } = null!;
+
+        /// <summary>
+        /// Идентификатор на интернет услугата
+        /// </summary>
+        [Required]
+        [Comment("Internet product Identificator")]
+        public int ProductId { get; set; }
 
         /// <summary>
         /// Услугата е активна/неактивна спрямо това, дали е заплатена

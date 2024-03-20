@@ -16,12 +16,19 @@ namespace BillingSystem.Infrastructure.Data.SeedDb
                 data.InternetProduct25Mbps,
                 data.InternetProduct75Mbps,
                 data.InternetProduct100Mbps,
-                data.TvBase,
-                data.TvSport,
-                data.TvKids,
-                data.TvErotic,
-                data.TvFilms,
-                data.TvPopularsciene
+                data.TvBaseSat,
+                data.TvSportSat,
+                data.TvKidsSat,
+                data.TvEroticSat,
+                data.TvFilmsSat,
+                data.TvPopularscieneSat,
+
+                data.TvSportIPTV,
+                data.TvBaseIPTV,
+                data.TvEroticIPTV,
+                data.TvKidsIPTV,
+                data.TvPopularscieneIPTV,
+                data.TvFilmsIPTV
             });
         }
     }

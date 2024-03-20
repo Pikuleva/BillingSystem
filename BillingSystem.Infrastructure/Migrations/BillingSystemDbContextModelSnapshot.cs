@@ -104,6 +104,24 @@ namespace BillingSystem.Infrastructure.Migrations
                     b.ToTable("Clients");
 
                     b.HasComment("Client contract");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 9999,
+                            City = "Варна",
+                            CivilNumber = "8801018899",
+                            Email = "angel.angelov@gmail.com",
+                            FirstName = "Ангел",
+                            IPTVId = 1,
+                            InternetServiceId = 1,
+                            LastName = "Ангелов",
+                            MiddleName = "Ангелов",
+                            PhoneNumber = "0888001100",
+                            SatelliteTvId = 1,
+                            StreetName = "Васил Левски",
+                            StreetNumber = "10А"
+                        });
                 });
 
             modelBuilder.Entity("BillingSystem.Infrastructure.DataModels.InternetService", b =>
@@ -146,6 +164,17 @@ namespace BillingSystem.Infrastructure.Migrations
                     b.ToTable("InternetServices");
 
                     b.HasComment("Internet service");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ActiveUntilDate = new DateTime(2024, 4, 20, 10, 4, 3, 186, DateTimeKind.Local).AddTicks(9781),
+                            IsActive = true,
+                            Name = "InternetProduct75Mbps",
+                            ProductId = 3,
+                            RouterMACAdress = "0C:8B:3A:25:0D:F4"
+                        });
                 });
 
             modelBuilder.Entity("BillingSystem.Infrastructure.DataModels.IPTV", b =>
@@ -160,6 +189,10 @@ namespace BillingSystem.Infrastructure.Migrations
                     b.Property<DateTime>("ActiveUntilDate")
                         .HasColumnType("datetime2")
                         .HasComment("Until which date the service is active");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit")
+                        .HasComment("The service is paid/unpaid");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -181,6 +214,17 @@ namespace BillingSystem.Infrastructure.Migrations
                     b.ToTable("IPTVs");
 
                     b.HasComment("Interactive television");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ActiveUntilDate = new DateTime(2024, 4, 20, 10, 4, 3, 190, DateTimeKind.Local).AddTicks(2069),
+                            IsActive = true,
+                            Name = "WinMat",
+                            ProductId = 13,
+                            SerialNumber = 3000001
+                        });
                 });
 
             modelBuilder.Entity("BillingSystem.Infrastructure.DataModels.Product", b =>
@@ -245,10 +289,45 @@ namespace BillingSystem.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = 11,
+                            Id = 5,
                             Name = "Start",
                             Price = 9.99m,
-                            TypeId = 3
+                            TypeId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Sport",
+                            Price = 11.99m,
+                            TypeId = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Kids",
+                            Price = 3.99m,
+                            TypeId = 2
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Erotic",
+                            Price = 7.99m,
+                            TypeId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Films",
+                            Price = 5.99m,
+                            TypeId = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Popularsciene",
+                            Price = 8.99m,
+                            TypeId = 2
                         },
                         new
                         {
@@ -259,9 +338,9 @@ namespace BillingSystem.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = 15,
-                            Name = "Kids",
-                            Price = 3.99m,
+                            Id = 11,
+                            Name = "Start",
+                            Price = 9.99m,
                             TypeId = 3
                         },
                         new
@@ -273,9 +352,9 @@ namespace BillingSystem.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = 12,
-                            Name = "Films",
-                            Price = 5.99m,
+                            Id = 15,
+                            Name = "Kids",
+                            Price = 3.99m,
                             TypeId = 3
                         },
                         new
@@ -283,6 +362,13 @@ namespace BillingSystem.Infrastructure.Migrations
                             Id = 14,
                             Name = "Popularsciene",
                             Price = 8.99m,
+                            TypeId = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Films",
+                            Price = 5.99m,
                             TypeId = 3
                         });
                 });
@@ -300,12 +386,16 @@ namespace BillingSystem.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasComment("Until which date the service is active");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit")
+                        .HasComment("The service is paid/unpaid");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasComment("Model of satelite device");
 
-                    b.Property<int>("PacketId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("SerialNumber")
@@ -314,11 +404,22 @@ namespace BillingSystem.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PacketId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("SatelliteTVs");
 
                     b.HasComment("Satellite televiision");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ActiveUntilDate = new DateTime(2024, 4, 20, 10, 4, 3, 193, DateTimeKind.Local).AddTicks(4918),
+                            IsActive = true,
+                            Name = "PomSat",
+                            ProductId = 5,
+                            SerialNumber = 5000001
+                        });
                 });
 
             modelBuilder.Entity("BillingSystem.Infrastructure.DataModels.Ticket", b =>
@@ -531,15 +632,15 @@ namespace BillingSystem.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d826-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8caf04d1-6208-4902-a7c3-99ed5a998c53",
+                            ConcurrencyStamp = "4229b881-3d0f-4b35-977d-3b14cdadb437",
                             Email = "cashier@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "cashier@mail.com",
                             NormalizedUserName = "cashier@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAsdSAycf7qFwOfeytutixtUBzkiFh/kbeenxmmZbwmAucIqH7+z8YE+sGz5NjOnmg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKCkiYJXM5KvfavM/kl8D04Zh2YHw5Lpk4EcKlgJTw341Pdy4lIRWS4mI0KM4oVByA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bcc83e24-bc3c-4ad5-92c0-8c1a2295742b",
+                            SecurityStamp = "b8972293-a31a-41ac-813e-84c401e4a49f",
                             TwoFactorEnabled = false,
                             UserName = "cashier@mail.com"
                         },
@@ -547,15 +648,15 @@ namespace BillingSystem.Infrastructure.Migrations
                         {
                             Id = "6d5610ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c1b7fd93-683b-45c7-af1e-6c603d0f675f",
+                            ConcurrencyStamp = "34e55581-3247-4ddb-94c5-ae429635eb56",
                             Email = "support@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "support@mail.com",
                             NormalizedUserName = "support@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMaAtLdorjIed430mODMgTvdFvF1wXTuRGfkCoepcwvd48j0J+MmaPoEjOuf5OwV6Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMewojEA6WI4mv+PUsH6x/Q10+kOpMBNOVRE3PI92GxB29l+mSaU1QI2fgN8ywuWxg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "33bcf0aa-ebf6-4899-bc15-791ff76fda9e",
+                            SecurityStamp = "4b8d7de5-71c6-40e7-954f-1a7329c98065",
                             TwoFactorEnabled = false,
                             UserName = "support@mail.com"
                         },
@@ -563,15 +664,15 @@ namespace BillingSystem.Infrastructure.Migrations
                         {
                             Id = "dea12896-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "18eab486-6281-4367-aabe-1c46553e66f6",
+                            ConcurrencyStamp = "2bd29ab0-7ad7-4aef-aa8e-30aab9b418b5",
                             Email = "client@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "client@mail.com",
                             NormalizedUserName = "client@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAYtZLTqGqBPN8TQvQKXrTyLnSD67WCQBBGJaLRA3UAVNZIMJz3Jws90Fm1+pdNGgw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJdL2paKtulR1ukmgcLfhkwg7bK2ve0a/7pOsSO2QeWuN1s/mcDSpfK8WwjfM0yIEg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5a147b58-c120-40e1-b746-9ff65bef451a",
+                            SecurityStamp = "4313920b-c447-491c-b747-95e3352d82a5",
                             TwoFactorEnabled = false,
                             UserName = "client@mail.com"
                         });
@@ -691,7 +792,7 @@ namespace BillingSystem.Infrastructure.Migrations
                     b.HasOne("BillingSystem.Infrastructure.DataModels.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
@@ -721,13 +822,13 @@ namespace BillingSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("BillingSystem.Infrastructure.DataModels.SatelliteTV", b =>
                 {
-                    b.HasOne("BillingSystem.Infrastructure.DataModels.Product", "Packet")
-                        .WithMany()
-                        .HasForeignKey("PacketId")
+                    b.HasOne("BillingSystem.Infrastructure.DataModels.Product", "Product")
+                        .WithMany("SatelliteTVs")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Packet");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("BillingSystem.Infrastructure.DataModels.Ticket", b =>
@@ -791,6 +892,11 @@ namespace BillingSystem.Infrastructure.Migrations
             modelBuilder.Entity("BillingSystem.Infrastructure.DataModels.Client", b =>
                 {
                     b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("BillingSystem.Infrastructure.DataModels.Product", b =>
+                {
+                    b.Navigation("SatelliteTVs");
                 });
 #pragma warning restore 612, 618
         }

@@ -42,19 +42,27 @@ namespace BillingSystem.Infrastructure.DataModels
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        /// Идентификатор на ТВ услугата
+        /// Услугата е активна/неактивна спрямо това, дали е заплатена
         /// </summary>
         [Required]
-        [Comment("Television product Identificator")]
-        public int ProductId { get; set; }
+        [Comment("The service is paid/unpaid")]
+        public bool IsActive { get; set; }
+
+       
         /// <summary>
         /// Начислен пакет спрямо абонамента
         /// </summary>
         [Required]
         [Comment("TV packet")]
+        [ForeignKey(nameof(ProductId))]
         public Product Product { get; set; } = null!;
+        /// <summary>
+        /// Идентификатор на ТВ услугата
+        /// </summary>
+        [Required]
+        [Comment("Television product Identificator")]
+        public int ProductId { get; set; }
 
-       
 
     }
 }
