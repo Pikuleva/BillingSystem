@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BillingSystem.Infrastructure.DataModels.Enumeration
+﻿namespace BillingSystem.Infrastructure.DataModels.Enumeration
 {
     /// <summary>
     /// Модели сателитни приемници

@@ -10,5 +10,10 @@
         public string Email { get; set; } = string.Empty;
         public string PhoneNumber {get; set; } = string.Empty;
         public string CivilNumber {get; set; } = string.Empty;
+
+        public InternetDetails? InternetDetails { get; set; }
+        public SatelliteDetails? SatelliteDetails {  get; set; }
+        public IPTVDetails? IPTVDetails { get; set; }
+
     }
 }

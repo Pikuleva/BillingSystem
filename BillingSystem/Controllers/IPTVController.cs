@@ -1,13 +1,39 @@
-﻿using BillingSystem.Core.ViewModels;
+﻿using BillingSystem.Core.Contracts;
+using BillingSystem.Core.ViewModels;
+using BillingSystem.Infrastructure.DataModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BillingSystem.Controllers
 {
     public class IPTVController : Controller
     {
-        public async Task<IActionResult> Add()
+        private readonly IIPTVService IPTVService;
+        public IPTVController(IIPTVService IPTVService)
         {
-            var model = new IPTVFormModel();
+            this.IPTVService = IPTVService;
+        }
+        public async Task<IActionResult> Details(int id, IPTVDetails model)
+        {
+            var modelNew = new IPTVDetails();
+            try
+            {
+                modelNew = await IPTVService.IPTVServiceDetailsAsync(id);
+            }
+            catch (Exception)
+            {
+                if (model == null)
+                {
+                    ModelState.AddModelError(nameof(model), "Not valid");
+                }
+
+            }
+
+            return View(modelNew);
+        }
+        public IActionResult Add()
+        {
+
+            var model = new ClientFormModel();
             return View(model);
         }
     }

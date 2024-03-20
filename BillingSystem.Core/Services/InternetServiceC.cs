@@ -3,9 +3,12 @@ using BillingSystem.Core.ViewModels;
 using BillingSystem.Infrastructure.Common;
 using BillingSystem.Infrastructure.DataModels;
 using BillingSystem.Infrastructure.DataModels.Enumeration;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
+using Microsoft.Data.SqlClient.Server;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using System.Xml.Linq;
 
 namespace BillingSystem.Core.Services
@@ -99,6 +102,34 @@ namespace BillingSystem.Core.Services
                     InternetFormModel= new InternetFormModel()
                 })
                 .FirstAsync();
+        }
+
+        public async Task<InternetDetails> InternetServiceDetailsAsync(int clientId)
+        {
+            var service = await repository.AllReadOnly<Client>()
+                .Where(c=>c.Id==clientId)
+                .Select(c=>c.InternetServiceId)
+                .FirstAsync();
+           
+            if (service == null)
+            {
+                return null;
+            }
+
+            var client = await repository.AllReadOnly<Client>()
+                .Where(c => c.Id == clientId)
+                .Select(c => new InternetDetails()
+                { 
+                    Id=c.InternetService.Id,
+                    Name = c.InternetService.Name,
+                    RouterMAC = c.InternetService.RouterMACAdress,
+                    UntilDate = c.InternetService.ActiveUntilDate,
+                    Price = c.InternetService.Product.Price
+                })
+                .FirstAsync();
+          
+
+            return client;
         }
     }
 }

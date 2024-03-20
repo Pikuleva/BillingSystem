@@ -1,4 +1,5 @@
 ﻿using BillingSystem.Core.Contracts;
+using BillingSystem.Core.Services;
 using BillingSystem.Core.ViewModels;
 using BillingSystem.Infrastructure.DataModels.Constants;
 using BillingSystem.Infrastructure.DataModels.Enumeration;
@@ -30,6 +31,25 @@ namespace BillingSystem.Controllers
             var newIntServ = new InternetFormModel();
 
             return View(newIntServ);
+        }
+
+        public async Task<IActionResult> Details(int id, InternetDetails model)
+        {
+            var modelNew = new InternetDetails();
+            try
+            {
+                modelNew = await internetService.InternetServiceDetailsAsync(id);
+            }
+            catch (Exception)
+            {
+                if (model == null)
+                {
+                    ModelState.AddModelError(nameof(model), "Not valid");
+                }
+
+            }
+
+            return View(modelNew);
         }
 
         //[HttpPost]

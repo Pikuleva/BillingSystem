@@ -14,7 +14,11 @@
     <p class="mb-0 text-start">E-mail @Model.Email</p>
     <p class="mb-0 text-start">Телефон @Model.PhoneNumber</p>
     <p class="mb-0 text-start">Адрес @Model.Address</p>
-
+   
+        <a href="/Internet/Details/@Model.Id" class="btn" >Internet Details</a>
+        <a href="/IPTV/Details/@Model.Id" class="btn" >IPTV Details</a>
+        <a href="/Satellite/Details/@Model.Id" class="btn" >Satellite Details</a>
+    
     <form method="get">
     <a href ="/Client/Edit/@Model.Id"  class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Edit</a>
 

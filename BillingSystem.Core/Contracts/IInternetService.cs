@@ -10,5 +10,9 @@ namespace BillingSystem.Core.Contracts
         //Task<InternetFormModel> AddNameToInternetProduct(string name);
         Task<InternetFormModel> AddPropToModel(string name, decimal price, string mac, DateTime date);
         Task<ClientFormModel> GetClientByIdAsync(int clientId);
+
+
+        
+        Task<InternetDetails> InternetServiceDetailsAsync(int clientId);
     }
 }
