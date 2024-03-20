@@ -3,13 +3,8 @@ using BillingSystem.Core.ViewModels;
 using BillingSystem.Infrastructure.Common;
 using BillingSystem.Infrastructure.DataModels;
 using BillingSystem.Infrastructure.DataModels.Enumeration;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
-using Microsoft.Data.SqlClient.Server;
 using Microsoft.EntityFrameworkCore;
-using System.Globalization;
-using System.Xml.Linq;
 
 namespace BillingSystem.Core.Services
 {

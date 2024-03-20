@@ -1,6 +1,5 @@
 ﻿using BillingSystem.Core.Contracts;
 using BillingSystem.Core.ViewModels;
-using BillingSystem.Infrastructure.DataModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BillingSystem.Controllers

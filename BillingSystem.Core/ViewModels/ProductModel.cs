@@ -1,6 +1,4 @@
-﻿using BillingSystem.Infrastructure.DataModels;
-
-namespace BillingSystem.Core.ViewModels
+﻿namespace BillingSystem.Core.ViewModels
 {
     public class ProductModel
     {

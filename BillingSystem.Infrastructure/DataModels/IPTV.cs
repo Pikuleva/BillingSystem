@@ -1,6 +1,4 @@
-﻿using BillingSystem.Infrastructure.DataModels.Constants;
-using BillingSystem.Infrastructure.DataModels.Enumeration;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

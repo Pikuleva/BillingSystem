@@ -1,11 +1,6 @@
 ﻿using BillingSystem.Core.Contracts;
-using BillingSystem.Core.Services;
 using BillingSystem.Core.ViewModels;
-using BillingSystem.Infrastructure.DataModels.Constants;
-using BillingSystem.Infrastructure.DataModels.Enumeration;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Build.Framework;
-using System.Xml.Linq;
 
 namespace BillingSystem.Controllers
 {
