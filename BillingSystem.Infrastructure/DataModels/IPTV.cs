@@ -21,7 +21,7 @@ namespace BillingSystem.Infrastructure.DataModels
         /// Сериен номер на приемника
         /// </summary>
         [Required]
-        [Range(3000000,3999999)]
+        [Range(3000000, 3999999)]
         [Comment("Serial number of device")]
         public int SerialNumber { get; set; }
 
@@ -46,7 +46,7 @@ namespace BillingSystem.Infrastructure.DataModels
         [Comment("The service is paid/unpaid")]
         public bool IsActive { get; set; }
 
-       
+
         /// <summary>
         /// Начислен пакет спрямо абонамента
         /// </summary>
@@ -61,6 +61,6 @@ namespace BillingSystem.Infrastructure.DataModels
         [Comment("Television product Identificator")]
         public int ProductId { get; set; }
 
-
+       
     }
 }

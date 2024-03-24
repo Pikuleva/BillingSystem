@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 
 namespace BillingSystem.Core.ViewModels
 {
@@ -19,5 +20,8 @@ namespace BillingSystem.Core.ViewModels
         [ForeignKey(nameof(ProductModelId))]
         //price and name
         public ProductModel Product { get; set; } = null!;
+
+        public int ClientId { get; set; }
+        public string CivilNumber { get; set; }= string.Empty;
     }
 }

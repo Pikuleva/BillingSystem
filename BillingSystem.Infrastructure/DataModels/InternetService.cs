@@ -65,6 +65,7 @@ namespace BillingSystem.Infrastructure.DataModels
         [Comment("Until which date the service is active")]
         public DateTime ActiveUntilDate { get; set; }
 
-       
+
+
     }
 }

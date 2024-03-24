@@ -56,5 +56,6 @@ namespace BillingSystem.Infrastructure.DataModels
 
         public int ProductId { get; set; }
 
+
     }
 }

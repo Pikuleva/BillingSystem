@@ -6,9 +6,12 @@ namespace BillingSystem.Controllers
     public class ServicesController : Controller
     {
         private readonly IServiceService serviceService;
-        public ServicesController(IServiceService serviceService)
+        private readonly IClientService clientService;
+
+        public ServicesController(IServiceService serviceService, IClientService clientService)
         {
             this.serviceService = serviceService;
+            this.clientService = clientService;
         }
         public async Task<IActionResult> AllServices()
         {

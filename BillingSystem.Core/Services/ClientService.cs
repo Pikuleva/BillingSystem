@@ -3,6 +3,7 @@ using BillingSystem.Core.ViewModels;
 using BillingSystem.Infrastructure.Common;
 using BillingSystem.Infrastructure.DataModels;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace BillingSystem.Core.Services
@@ -30,7 +31,7 @@ namespace BillingSystem.Core.Services
 
             await repository.AddAsync(new Client()
             {
-               
+               Id= model.Id,
                 CivilNumber = model.CivilNumber,
                 PhoneNumber = model.PhoneNumber,
                 City =model.City,
@@ -120,16 +121,43 @@ namespace BillingSystem.Core.Services
                 .Where(h => h.Id == id)
                 .Select(h => new ClientFormModel()
                 {
+                    Id = h.Id,
                     StreetName = h.StreetName,
                     StreetNumber = h.StreetNumber,
                     City = h.City,
                     PhoneNumber= h.PhoneNumber,
                     Email = h.Email,
-                   
+                    SatelliteFormModel = new SatelliteFormModel()
+                    {
+                        ClientId = h.Id,
+                        CivilNumber = h.CivilNumber
+                    },
+                    InternetFormModel = new InternetFormModel()
+                    {
+                        ClientId=h.Id,
+                        CivilNumber = h.CivilNumber
+
+                    },
+                    IPTVFormModel= new IPTVFormModel()
+                    {
+                        ClientId= h.Id,
+                        CivilNumber = h.CivilNumber
+
+                    }
+
                 })
                 .FirstAsync();
            
             return client;
+        }
+
+      
+        public async Task<bool> GetSatTvServiceASyc(int id)
+        {
+            var model = await repository.AllReadOnly<Client>()
+                .AnyAsync(c => c.SatelliteTvId == id);
+
+            return model;
         }
     }
 }

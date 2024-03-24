@@ -9,5 +9,6 @@
         public DateTime UntilDate { get; set; }
         public decimal Price { get; set; }
         public int SerialNumber { get; set; }
+        public string CivilNumber { get; set; }
     }
 }

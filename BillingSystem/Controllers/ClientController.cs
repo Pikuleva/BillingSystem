@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using BillingSystem.Core.ViewModels;
 using BillingSystem.Core.Contracts;
 using static BillingSystem.Core.Constants.MessageConstants;
+using BillingSystem.Infrastructure.DataModels;
 
 namespace BillingSystem.Controllers
 {
@@ -10,11 +11,13 @@ namespace BillingSystem.Controllers
     public class ClientController : Controller
     {
         private readonly IClientService clientService;
-        public ClientController(IClientService clientService)
+        private readonly ISatellieteService satellieteService;
+        public ClientController(IClientService clientService, ISatellieteService satellieteService)
         {
             this.clientService = clientService;
+            this.satellieteService = satellieteService;
         }
-        
+
         public IActionResult Add()
         {
 
@@ -65,8 +68,8 @@ namespace BillingSystem.Controllers
                     ModelState.AddModelError(nameof(model.CivilNumber), CivilNotValid);
                 }
             }
-            
-           
+
+
             return RedirectToAction(nameof(Detail), model);
         }
         public async Task<IActionResult> Detail(int id, ClientDetail model)
@@ -84,7 +87,7 @@ namespace BillingSystem.Controllers
                 }
 
             }
-          
+
             return View(modelNew);
         }
         public async Task<IActionResult> Edit(int id)
@@ -98,7 +101,7 @@ namespace BillingSystem.Controllers
 
             return View(model);
         }
-   
+
         [HttpPost]
         public async Task<IActionResult> Edit(int id, ClientFormModel model)
         {
@@ -110,6 +113,6 @@ namespace BillingSystem.Controllers
             await clientService.EditAsync(id, model);
             return RedirectToAction(nameof(Detail), new { id });
         }
-
+    
     }
 }

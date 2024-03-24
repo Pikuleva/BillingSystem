@@ -7,7 +7,7 @@ namespace BillingSystem.Core.ViewModels
 {
     public class ClientFormModel
     {
-
+        public int Id { get; set; }
         [Required(ErrorMessage = RequiredMessage)]
         [StringLength(FirstNameMaxLength,MinimumLength =FirstNameMinLength,ErrorMessage = StringLengthMessage)]
         public string FirstName { get; set; } = string.Empty;

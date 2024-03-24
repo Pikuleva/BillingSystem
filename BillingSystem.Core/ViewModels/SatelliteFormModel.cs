@@ -20,10 +20,14 @@ namespace BillingSystem.Core.ViewModels
         [Required]
         [Comment("Until which date the service is active")]
         public DateTime ActiveUntilDate { get; set; }
-
+        public string CivilNumber { get; set; } = string.Empty;
         public int ProductModelId { get; set; }
         [ForeignKey(nameof(ProductModelId))]
-        //price and name
-        public ProductModel Product { get; set; } = null!;
+
+
+        public IEnumerable<ProductModel> Product { get; set; } = new List<ProductModel>();
+
+        public int ClientId { get; set; }
+        
     }
 }

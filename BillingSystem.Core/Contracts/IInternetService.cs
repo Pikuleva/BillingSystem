@@ -13,6 +13,6 @@ namespace BillingSystem.Core.Contracts
 
 
         
-        Task<InternetDetails> InternetServiceDetailsAsync(int clientId);
+        //Task<InternetDetails> InternetServiceDetailsAsync(int clientId);
     }
 }

@@ -4,6 +4,6 @@ namespace BillingSystem.Core.Contracts
 {
     public interface IIPTVService
     {
-        Task<IPTVDetails> IPTVServiceDetailsAsync(int clientId);
+       // Task<IPTVDetails> IPTVServiceDetailsAsync(int clientId);
     }
 }

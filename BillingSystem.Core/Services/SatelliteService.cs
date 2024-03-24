@@ -2,7 +2,9 @@
 using BillingSystem.Core.ViewModels;
 using BillingSystem.Infrastructure.Common;
 using BillingSystem.Infrastructure.DataModels;
+using BillingSystem.Infrastructure.DataModels.Enumeration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace BillingSystem.Core.Services
 {
@@ -12,6 +14,22 @@ namespace BillingSystem.Core.Services
         public SatelliteService(IRepository repository)
         {
             this.repository = repository;
+        }
+
+    
+
+        public async Task<IEnumerable<ProductModel>> GetProductModelIdAsync()
+        {
+           return await repository.AllReadOnly<Product>()
+                .Where(p=>p.TypeId==2)
+                .Select(p=>new ProductModel()
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price
+                    
+                })
+                .ToListAsync();
         }
 
         public async Task<SatelliteDetails> SatelliteServiceDetailsAsync(int clientId)
@@ -26,23 +44,64 @@ namespace BillingSystem.Core.Services
                 return null;
             }
 
-            var client = await repository.AllReadOnly<Client>()
-                .Where(c => c.Id == clientId)
-                .Select(c => new SatelliteDetails()
+            var satTv = await repository.AllReadOnly<SatelliteTV>()
+                .Where(s => s.Id == service)
+                .Select(s => new SatelliteDetails()
                 {
-
-                    Id=c.SatelliteTV.Id,
-                    NameOfService = c.SatelliteTV.Product.Name,
-                    DeviceName = c.SatelliteTV.Name,
-                    UntilDate = c.SatelliteTV.ActiveUntilDate,
-                    Price = c.SatelliteTV.Product.Price,
-                    SerialNumber = c.SatelliteTV.SerialNumber
-
+                    Id = s.Id,
+                    SerialNumber = s.SerialNumber,
+                    NameOfService = s.Product.Name,
+                    Price = s.Product.Price,
+                    UntilDate = DateTime.Now
                 })
                 .FirstAsync();
+            return satTv;
+        }
 
+        public async Task<bool> ProductExistAsync(int id)
+        {
+            return await repository.AllReadOnly<Product>()
+                 .AnyAsync(c => c.Id == id);
+        }
 
-            return client;
+        public async Task<int> CreateAsync(SatelliteFormModel model, string civilNumber)
+        {
+            SatelliteTV satTV = new SatelliteTV()
+            {
+                Name = model.Name,
+                SerialNumber= model.SerialNumber,
+                ActiveUntilDate = model.ActiveUntilDate,
+                ProductId=model.ProductModelId,
+
+         
+            };
+            Client client = await repository.AllReadOnly<Client>()
+                .Where(c => c.CivilNumber == civilNumber)
+                .FirstAsync();
+
+          
+            await repository.AddAsync(satTV);
+            await repository.SaveChangesAsync();
+
+           
+
+            return satTV.Id;
+        }
+
+        public async Task<SatelliteDetails> GetSatelliteTVByIdAsync(int id)
+        {
+           return await repository.AllReadOnly<SatelliteTV>()
+                .Where(s=>s.Id==id)
+                .Select(s => new SatelliteDetails()
+                {
+                    Id = s.Id,
+                    SerialNumber = s.SerialNumber,
+                    NameOfService = s.Product.Name,
+                    Price = s.Product.Price,
+                    UntilDate = DateTime.Now,
+                    
+                })
+                .FirstAsync();
         }
     }
 }

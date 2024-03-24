@@ -1,4 +1,5 @@
 ﻿using BillingSystem.Core.ViewModels;
+using BillingSystem.Infrastructure.DataModels;
 
 namespace BillingSystem.Core.Contracts
 {
@@ -15,5 +16,8 @@ namespace BillingSystem.Core.Contracts
         Task<bool> ExistAsync(int id);
 
         Task<ClientFormModel> GetClientFormModelByIdAsync(int id);
+
+        Task<bool> GetSatTvServiceASyc(int id);
+ 
     }
 }

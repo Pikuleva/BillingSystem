@@ -6,5 +6,11 @@ namespace BillingSystem.Core.Contracts
     {
         Task<SatelliteDetails> SatelliteServiceDetailsAsync(int clientId);
 
+        Task<IEnumerable<ProductModel>> GetProductModelIdAsync();
+
+        Task<bool> ProductExistAsync(int id);
+        Task<int> CreateAsync(SatelliteFormModel model,string civilNumber);
+        Task<SatelliteDetails> GetSatelliteTVByIdAsync(int id);
+       
     }
 }

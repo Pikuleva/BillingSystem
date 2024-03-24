@@ -1,4 +1,5 @@
 ﻿using BillingSystem.Core.Contracts;
+using BillingSystem.Core.Services;
 using BillingSystem.Core.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,53 +8,43 @@ namespace BillingSystem.Controllers
     public class InternetController : Controller
     {
         private readonly IInternetService internetService;
-        public InternetController(IInternetService internetService)
+        private readonly IClientService clientService;
+
+        public InternetController(IInternetService internetService, IClientService clientService)
         {
             this.internetService = internetService;
+            this.clientService = clientService;
         }
-        [HttpGet]
-        public async Task<IActionResult> Add()
+        public async Task<IActionResult> Add(int id)
         {
-          
-            var newIntServ = new InternetFormModel();
-            
-            return View(newIntServ);
-        }
-        [HttpPost]
-        public async Task<IActionResult> Add(InternetFormModel model)
-        {
-
-            var newIntServ = new InternetFormModel();
-
-            return View(newIntServ);
-        }
-
-        public async Task<IActionResult> Details(int id, InternetDetails model)
-        {
-            var modelNew = new InternetDetails();
-            try
+            if (await clientService.ExistAsync(id) == false)
             {
-                modelNew = await internetService.InternetServiceDetailsAsync(id);
-            }
-            catch (Exception)
-            {
-                if (model == null)
-                {
-                    ModelState.AddModelError(nameof(model), "Not valid");
-                }
-
+                return BadRequest();
             }
 
-            return View(modelNew);
-        }
+            var model = await clientService.GetClientFormModelByIdAsync(id);
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddAsync(InternetFormModel query)
+            return View(model);
+        }
+        //public async Task<IActionResult> Details(int id, InternetDetails model)
         //{
+        //    var modelNew = new InternetDetails();
+        //    try
+        //    {
+        //        modelNew = await internetService.InternetServiceDetailsAsync(id);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        if (model == null)
+        //        {
+        //            ModelState.AddModelError(nameof(model), "Not valid");
+        //        }
 
-        //    var modelView = internetService.CreateAsync(query);
+        //    }
 
-        //    return View(modelView);
+        //    return View(modelNew);
         //}
+
+
     }
 }
