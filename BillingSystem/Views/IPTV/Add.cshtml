@@ -1,36 +1,95 @@
 ﻿@model IPTVFormModel
 
 @{
-    ViewBag.Title = "Добавяне на интернет";
+    ViewBag.Title = "Добавяне на интерактивна телевизия";
 }
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
-<div class="col-lg-4 mb-5 mb-lg-0">
-    <div class="bg-white p-5 rounded-lg shadow">
-        <h1 class="h10 text-uppercase font-weight-bold mb-4">IPTV</h1>
+<div class="row">
 
-        <div class="custom-separator my-4 mx-auto bg-primary"></div>
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
 
-        <ul class="list-unstyled my-5 text-small text-left">
-            <li class="mb-0">
-                <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill">Старт - 9.99лв</a>
-            </li>
-            <li class="mb-0">
-                <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Филми - 5.99лв</a>
-            </li>
-            <li class="mb-0">
-                <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Спорт - 11.99лв</a>
-            </li>
-            <li class="mb-0">
-                <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Научнопопулярни - 8.99лв</a>
-            </li>
-            <li class="mb-0">
-                <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Детски - 3.99лв</a>
-            </li>
-            <li class="mb-0">
-                <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Еротични - 7.99лв</a>
-            </li>
-        </ul>
+        <form method="post">
+
+            <div class="form-group">
+
+                <label asp-for="Name"></label>
+
+                <input asp-for="Name" class="form-control" placeholder="Модел на устройството">
+
+                <span asp-validation-for="Name" class="small text-danger"></span>
+
+            </div>
+            <div class="form-group">
+
+                <label asp-for="CivilNumber"></label>
+
+                <input asp-for="CivilNumber" class="form-control" placeholder="ЕГН">
+
+                <span asp-validation-for="CivilNumber" class="small text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+
+                <label asp-for="SerialNumber"></label>
+
+                <input asp-for="SerialNumber" class="form-control" placeholder="3000000 - 3999999">
+
+                <span asp-validation-for="SerialNumber" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group">
+
+                <label asp-for="ProductModelId"></label>
+
+                <select asp-for="ProductModelId" class="form-control">
+
+                    @foreach (var product in Model.Product)
+
+                    {
+                        <option value="@product.Id">@product.Name - @product.Price лв</option>
+                    }
+
+                </select>
+                <span asp-validation-for="ProductModelId" class="small text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TypeOfServiceId"></label>
+                <select asp-for="TypeOfServiceId" class="form-control">
+                    @foreach (var product in Model.TypeOfServiceModels)
+                    {
+                        <option value="@product.Id">@product.Name</option>
+                    }
+
+                </select>
+                <span asp-validation-for="TypeOfServiceId" class="small text-danger"></span>
+
+            </div>
+            <div class="form-group">
+
+                <label asp-for="ActiveUntilDate"></label>
+                <input asp-for="ActiveUntilDate" class="form-control" value="@DateTime.Today.AddMonths(1).ToString("MM/dd/yyyy")" />
+
+                <span class="input-group-addon">
+                    <span class="fa fa-calendar"></span>
+                    <span asp-validation-for="ActiveUntilDate" class="small text-danger"></span>
+                </span>
+
+                <script src="js/bootstrap.min.js"></script>
+            </div>
+
+            <div class="text-center">
+
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+
+            </div>
+
+        </form>
+
     </div>
+
 </div>

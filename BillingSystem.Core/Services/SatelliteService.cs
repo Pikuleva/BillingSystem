@@ -57,13 +57,6 @@ namespace BillingSystem.Core.Services
                 .FirstAsync();
             return satTv;
         }
-
-        public async Task<bool> ProductExistAsync(int id)
-        {
-            return await repository.AllReadOnly<Product>()
-                 .AnyAsync(c => c.Id == id);
-        }
-
         public async Task<int> CreateAsync(SatelliteFormModel model, string civilNumber)
         {
             SatelliteTV satTV = new SatelliteTV()
@@ -83,25 +76,19 @@ namespace BillingSystem.Core.Services
             await repository.AddAsync(satTV);
             await repository.SaveChangesAsync();
 
-           
-
             return satTV.Id;
         }
 
-        public async Task<SatelliteDetails> GetSatelliteTVByIdAsync(int id)
+        public async Task<IEnumerable<TypeOfServiceModel>> GetTypeModel()
         {
-           return await repository.AllReadOnly<SatelliteTV>()
-                .Where(s=>s.Id==id)
-                .Select(s => new SatelliteDetails()
+            return await repository.AllReadOnly<TypeOfService>()
+                .Select(t => new TypeOfServiceModel()
                 {
-                    Id = s.Id,
-                    SerialNumber = s.SerialNumber,
-                    NameOfService = s.Product.Name,
-                    Price = s.Product.Price,
-                    UntilDate = DateTime.Now,
-                    
+                    Id = t.Id,
+                    Name = t.Name
+
                 })
-                .FirstAsync();
+                .ToListAsync();
         }
     }
 }

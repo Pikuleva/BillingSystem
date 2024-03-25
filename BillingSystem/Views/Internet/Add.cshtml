@@ -7,34 +7,91 @@
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
-<link rel="stylesheet" href="~/css/StyleSheet.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/js/services.js" asp-append-version="true" />
-<div class="col-lg-4 mb-5 mb-lg-10">
-    <form>
-        <div class="bg-white p-5 rounded-lg shadow">
-            <h1 class="h10 text-black  font-weight-bold mb-4">Интернет</h1>
+<div class="row">
 
-            <div class="custom-separator my-4 mx-auto bg-primary"></div>
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
 
-            <ul class="list-unstyled my-5 text-small text-left">
+        <form method="post">
+           
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <select asp-for="Name" class="form-control">
+                        <option value="0">InternetProduct100Mbps</option>
+                        <option value="1">InternetProduct75Mbps</option>
+                        <option value="2">InternetProduct50Mbps</option>
+                        <option value="3">InternetProduct25Mbps</option>
+                    </select>
+                </div>
+        
+            <div class="form-group">
 
-                <li class="form-group mb-3" name="InternetProduct25Mbps">
-                    <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill">Интернет 25 Mbps - 10.99лв</a>
-                </li>
+                <label asp-for="CivilNumber"></label>
 
-                <li class="mb-3">
+                <input asp-for="CivilNumber" class="form-control" placeholder="ЕГН">
 
-                    <i class="fa fa-check mr-2 text-primary"></i> <a href="#" class="btn  p-2 rounded-pill">Интернет 50 Mbps - 12.99лв</a>
-                </li>
-                <li class="mb-3">
-                    <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Интернет 75 Mbps - 14.99лв</a>
-                </li>
-                <li class="mb-3">
-                    <i class="fa fa-check mr-2 text-primary"></i><a href="#" class="btn  p-2 rounded-pill"> Интернет 100 Mbps - 16.99лв</a>
-                </li>
+                <span asp-validation-for="CivilNumber" class="small text-danger"></span>
 
-            </ul>
+            </div>
 
-        </div>
-    </form>
+            <div class="form-group">
+
+                <label asp-for="RouterMACAdress"></label>
+
+                <input asp-for="RouterMACAdress" class="form-control" placeholder="ff:ff:ff:ff:ff:ff">
+
+                <span asp-validation-for="RouterMACAdress" class="small text-danger"></span>
+            </div>
+
+            <div class="form-group">
+
+                <label asp-for="ProductModelId"></label>
+
+                <select asp-for="ProductModelId" class="form-control">
+
+                    @foreach (var product in Model.Product)
+
+                    {
+                        <option value="@product.Id">@product.Name - @product.Price лв</option>
+                    }
+
+                </select>
+                <span asp-validation-for="ProductModelId" class="small text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TypeOfServiceId"></label>
+                <select asp-for="TypeOfServiceId" class="form-control">
+                    @foreach (var product in Model.TypeOfServiceModels)
+                    {
+                        <option value="@product.Id">@product.Name</option>
+                    }
+
+                </select>
+                <span asp-validation-for="TypeOfServiceId" class="small text-danger"></span>
+
+            </div>
+            <div class="form-group">
+
+                <label asp-for="ActiveUntilDate"></label>
+                <input asp-for="ActiveUntilDate" class="form-control"  />
+
+                <span class="input-group-addon">
+                    <span class="fa fa-calendar"></span>
+                    @* <span asp-validation-for="ActiveUntilDate" class="small text-danger"></span> *@
+                </span>
+
+                <script src="js/bootstrap.min.js"></script>
+            </div>
+
+            <div class="text-center">
+
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+
+            </div>
+
+        </form>
+
+    </div>
+
 </div>

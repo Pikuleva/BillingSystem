@@ -37,13 +37,10 @@
 
                 <label asp-for="SerialNumber"></label>
 
-                <input asp-for="SerialNumber" class="form-control" placeholder="3000000 - 3999999">
+                <input asp-for="SerialNumber" class="form-control" placeholder="5000000-5999999/">
 
                 <span asp-validation-for="SerialNumber" class="small text-danger"></span>
-
-            </div>
-
-
+                </div>
 
             <div class="form-group">
 
@@ -54,19 +51,39 @@
                     @foreach (var product in Model.Product)
 
                     {
-
                         <option value="@product.Id">@product.Name - @product.Price лв</option>
-                      
-                     
-
                     }
 
                 </select>
-
                 <span asp-validation-for="ProductModelId" class="small text-danger"></span>
 
             </div>
 
+            <div class="form-group">
+                <label asp-for="TypeOfServiceId"></label>
+                <select asp-for="TypeOfServiceId" class="form-control">
+                    @foreach (var product in Model.TypeOfServiceModels)
+                    {
+                        <option value="@product.Id">@product.Name</option>
+                    }
+
+                </select>
+                <span asp-validation-for="TypeOfServiceId" class="small text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                
+                    <label asp-for="ActiveUntilDate"></label>
+                <input asp-for="ActiveUntilDate" class="form-control" value="@DateTime.Today.AddMonths(1).ToString("MM/dd/yyyy")" />
+                
+                <span class="input-group-addon">
+                    <span class="fa fa-calendar" ></span>
+                        <span asp-validation-for="ActiveUntilDate" class="small text-danger"></span>
+                    </span>
+                
+                    <script src="js/bootstrap.min.js" ></script>                
+            </div>
+            
             <div class="text-center">
 
                 <input class="btn btn-primary mt-3" type="submit" value="Save" />

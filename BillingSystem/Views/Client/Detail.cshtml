@@ -24,13 +24,9 @@
     <div class="mb-4 col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6 ">
         @if (this.User.Identity.IsAuthenticated)
         {
-            <a href="/Internet/GetId/@Model.Id" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Добавяне на интернет услуга</a>
-            <a href="/Satellite/Add" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Добавяне на сателитна телевизия</a>
-            <a href="/IPTV/Add/@Model.Id" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Добавяне на интерактивна телевизия</a>
-            <a href="/Client/Edit/@Model.Id" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Редактиране</a>
-
-            <a href="/Internet/GetId/@Model.Id" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Добавяне на интернет услуга</a>
-            <a href="/Satellite/Add" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Добавяне на сателитна телевизия</a>
+          
+            <a href="/Internet/Add/@Model.Id" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Добавяне на интернет услуга</a>
+            <a href="/Satellite/Add/@Model.CivilNumber" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Добавяне на сателитна телевизия</a>
             <a href="/IPTV/Add/@Model.Id" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Добавяне на интерактивна телевизия</a>
             <a href="/Client/Edit/@Model.Id" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Редактиране</a>
         }

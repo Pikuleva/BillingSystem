@@ -5,14 +5,13 @@ namespace BillingSystem.Core.Contracts
 {
     public interface IInternetService
     {
-        Task CreateAsync(InternetFormModel model);
-        Task<InternetFormModel> CreateInternetFormModel(string macAddress, InternetProductsWithPrice name,DateTime untilDate);
-        //Task<InternetFormModel> AddNameToInternetProduct(string name);
-        Task<InternetFormModel> AddPropToModel(string name, decimal price, string mac, DateTime date);
-        Task<ClientFormModel> GetClientByIdAsync(int clientId);
+        Task<InternetDetails> InternetServiceDetailsAsync(int clientId);
 
 
-        
-        //Task<InternetDetails> InternetServiceDetailsAsync(int clientId);
+        Task<IEnumerable<ProductModel>> GetProductModelIdAsync();
+
+
+        Task<int> CreateAsync(InternetFormModel model, string civilNumber);
+        Task<IEnumerable<TypeOfServiceModel>> GetTypeModel();
     }
 }

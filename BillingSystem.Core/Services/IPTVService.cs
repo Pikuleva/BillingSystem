@@ -14,7 +14,55 @@ namespace BillingSystem.Core.Services
             this.repository = repository;
         }
 
-        public async Task<IPTVDetails> IPTVServiceDetailsAsync(int clientId)
+        public async Task<int> CreateAsync(IPTVFormModel model, string civilNumber)
+        {
+            IPTV iPTVFormModel = new IPTV()
+            {
+                Name = model.Name,
+                SerialNumber = model.SerialNumber,
+                ActiveUntilDate = model.ActiveUntilDate,
+                ProductId = model.ProductModelId,
+                
+
+            };
+            Client client = await repository.AllReadOnly<Client>()
+                .Where(c => c.CivilNumber == civilNumber)
+                .FirstAsync();
+
+
+            await repository.AddAsync(iPTVFormModel);
+            await repository.SaveChangesAsync();
+
+            return iPTVFormModel.Id;
+        }
+
+        public async Task<IEnumerable<ProductModel>> GetProductModelIdAsync()
+        {
+            return await repository.AllReadOnly<Product>()
+                 .Where(p => p.TypeId == 3)
+                 .Select(p => new ProductModel()
+                 {
+                     Id = p.Id,
+                     Name = p.Name,
+                     Price = p.Price
+
+                 })
+                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<TypeOfServiceModel>> GetTypeModel()
+        {
+            return await repository.AllReadOnly<TypeOfService>()
+               .Select(t => new TypeOfServiceModel()
+               {
+                   Id = t.Id,
+                   Name = t.Name
+
+               })
+               .ToListAsync();
+        }
+
+            public async Task<IPTVDetails> IPTVServiceDetailsAsync(int clientId)
         {
             var service = await repository.AllReadOnly<Client>()
                 .Where(c => c.Id == clientId)

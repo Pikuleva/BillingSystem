@@ -14,9 +14,11 @@ namespace BillingSystem.Controllers
             this.satellieteService = satellieteService;
             this.clientService = clientService;
         }
-        [HttpGet]
+       //не взима ИД-то което му се подава от адд
         public async Task<IActionResult> Details(int id, SatelliteDetails model)
         {
+            
+
             var modelNew = new SatelliteDetails();
             try
             {
@@ -34,7 +36,6 @@ namespace BillingSystem.Controllers
             return View(modelNew);
         }
         
-
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -43,28 +44,24 @@ namespace BillingSystem.Controllers
             {
 
                 Product = await satellieteService.GetProductModelIdAsync(),
-                
+                TypeOfServiceModels = await satellieteService.GetTypeModel()
             };
             return View(model);
         }
-
         [HttpPost]
         public async Task<IActionResult> Add(SatelliteFormModel model, string civilNumber)
         {
-            
-            //if (await satellieteService.ProductExistAsync(model.Id) == false)
-            //{
-            //    ModelState.AddModelError(nameof(model.Id), "");
-            //}
             if (ModelState.IsValid == false)
             {
                 model.Product = await satellieteService.GetProductModelIdAsync();
+                model.TypeOfServiceModels = await satellieteService.GetTypeModel();
             }
 
-            //int? clientId = await clientService.SearchClientAsync(User.Id());
+       
             int newSatId = await satellieteService.CreateAsync(model,civilNumber);
-           
-            return RedirectToAction(nameof(Details), new { newSatId});
+            var client = await clientService.SearchClientAsync(civilNumber);
+            int clientId = client.Id;
+            return RedirectToAction(nameof(Details), new { clientId });
         }
     }
 }

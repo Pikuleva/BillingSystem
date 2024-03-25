@@ -8,9 +8,9 @@ namespace BillingSystem.Core.Contracts
 
         Task<IEnumerable<ProductModel>> GetProductModelIdAsync();
 
-        Task<bool> ProductExistAsync(int id);
+       
         Task<int> CreateAsync(SatelliteFormModel model,string civilNumber);
-        Task<SatelliteDetails> GetSatelliteTVByIdAsync(int id);
+        Task<IEnumerable<TypeOfServiceModel>> GetTypeModel();
        
     }
 }
