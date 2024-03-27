@@ -75,7 +75,7 @@ namespace BillingSystem.Core.Services
 
         public async Task<ClientDetail?> SearchClientAsync(string civilNumber)
         {
-        
+            
             var modelCivil= await repository.AllReadOnly<Client>()
                 .Where(c=>c.CivilNumber==civilNumber)
                 .Select(c=>new ClientDetail()
@@ -89,8 +89,12 @@ namespace BillingSystem.Core.Services
                     Address = c.City + " " + c.StreetName + " " + c.StreetNumber
                 })
                 .FirstAsync();
+
+           
+                return modelCivil;
+            
           
-            return modelCivil;
+           
         }
 
         public async Task<ClientDetail> SearchClientDetailAsyn(int id)

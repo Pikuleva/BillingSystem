@@ -56,6 +56,11 @@ namespace BillingSystem.Controllers
         public async Task<IActionResult> Search(string civilNumber)
         {
             var model = new ClientDetail();
+           
+            if (await clientService.ExistAsync(model.Id) == false)
+            {
+                return NotFound();
+            }
             try
             {
                 model = await clientService.SearchClientAsync(civilNumber);
