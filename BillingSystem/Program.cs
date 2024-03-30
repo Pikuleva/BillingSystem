@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 namespace BillingSystem
 {
     public class Program
@@ -9,7 +11,10 @@ namespace BillingSystem
             builder.Services.AddApplicatoionDbContext(builder.Configuration);
             builder.Services.AddApplicatoionIdentity(builder.Configuration);
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+            });
 
             builder.Services.AddApplicatoionServices();
 

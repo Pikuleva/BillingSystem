@@ -1,5 +1,4 @@
 ﻿using BillingSystem.Core.ViewModels;
-using BillingSystem.Infrastructure.DataModels.Enumeration;
 
 namespace BillingSystem.Core.Contracts
 {

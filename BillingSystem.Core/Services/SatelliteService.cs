@@ -2,9 +2,7 @@
 using BillingSystem.Core.ViewModels;
 using BillingSystem.Infrastructure.Common;
 using BillingSystem.Infrastructure.DataModels;
-using BillingSystem.Infrastructure.DataModels.Enumeration;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace BillingSystem.Core.Services
 {

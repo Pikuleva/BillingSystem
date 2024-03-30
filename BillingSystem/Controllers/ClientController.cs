@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using BillingSystem.Core.Contracts;
 using BillingSystem.Core.ViewModels;
-using BillingSystem.Core.Contracts;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using static BillingSystem.Core.Constants.MessageConstants;
-using BillingSystem.Infrastructure.DataModels;
 
 namespace BillingSystem.Controllers
 {
@@ -57,10 +56,7 @@ namespace BillingSystem.Controllers
         {
             var model = new ClientDetail();
            
-            if (await clientService.ExistAsync(model.Id) == false)
-            {
-                return NotFound();
-            }
+           
             try
             {
                 model = await clientService.SearchClientAsync(civilNumber);
@@ -73,11 +69,14 @@ namespace BillingSystem.Controllers
                     ModelState.AddModelError(nameof(model.CivilNumber), CivilNotValid);
                 }
             }
+            if (await clientService.ExistAsync(model.Id) == false)
+            {
+                return NotFound();
+            }
 
-
-            return RedirectToAction(nameof(Detail), model);
+            return RedirectToAction(nameof(Details), model);
         }
-        public async Task<IActionResult> Detail(int id, ClientDetail model)
+        public async Task<IActionResult> Details(int id, ClientDetail model)
         {
             var modelNew = new ClientDetail();
             try
@@ -116,7 +115,7 @@ namespace BillingSystem.Controllers
             }
 
             await clientService.EditAsync(id, model);
-            return RedirectToAction(nameof(Detail), new { id });
+            return RedirectToAction(nameof(Details), new { id });
         }
     
     }
