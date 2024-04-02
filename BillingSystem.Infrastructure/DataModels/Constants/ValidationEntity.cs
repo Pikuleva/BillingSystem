@@ -32,6 +32,8 @@
             public const int ClientPhoneNumberMinLength = 7;
             public const int ClientPhoneNumberMaxLength = 15;
 
+            public const int CivilLength = 10;
+
             public const string RegexValidationEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\r\n";
 
             public const string RegexValidationPhoneNumber = "^[0 - 9]{10}$";

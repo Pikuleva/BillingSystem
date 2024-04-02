@@ -132,18 +132,18 @@ namespace BillingSystem.Core.Services
                     Email = h.Email,
                     SatelliteFormModel = new SatelliteFormModel()
                     {
-                        ClientId = h.Id,
+                        
                         CivilNumber = h.CivilNumber
                     },
                     InternetFormModel = new InternetFormModel()
                     {
-                        ClientId=h.Id,
+                      
                         CivilNumber = h.CivilNumber
 
                     },
                     IPTVFormModel= new IPTVFormModel()
                     {
-                        ClientId= h.Id,
+                       
                         CivilNumber = h.CivilNumber
 
                     }
