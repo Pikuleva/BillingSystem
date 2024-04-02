@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ClientContract;
+using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ServiceConst;
 
 namespace BillingSystem.Infrastructure.DataModels
 {
@@ -30,6 +32,7 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
         [Required]
         [Comment("Model of satelite device")]
+        [MaxLength(NameMaxLength)]
         public string Name { get; set; } = string.Empty;
 
         /// <summary>

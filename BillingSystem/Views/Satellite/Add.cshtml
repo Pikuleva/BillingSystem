@@ -71,27 +71,26 @@
                 <span asp-validation-for="TypeOfServiceId" class="small text-danger"></span>
 
             </div>
+
             <div class="form-group">
-                
+                <div class="input-group date" id="datetimepicker1">
                     <label asp-for="ActiveUntilDate"></label>
-                <input asp-for="ActiveUntilDate" class="form-control" value="@DateTime.Today.AddMonths(1).ToString("MM/dd/yyyy")" />
-                
-                <span class="input-group-addon">
-                    <span class="fa fa-calendar" ></span>
-                        <span asp-validation-for="ActiveUntilDate" class="small text-danger"></span>
-                    </span>
-                
-                    <script src="js/bootstrap.min.js" ></script>                
-            </div>
-            
+                    <input asp-for="ActiveUntilDate" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd H:mm")" />
+                    <span asp-validation-for="ActiveUntilDate" class="text-danger"></span>
+                </div>
+            </div>            
             <div class="text-center">
-
                 <input class="btn btn-primary mt-3" type="submit" value="Save" />
-
             </div>
-
         </form>
-
     </div>
-
 </div>
+
+       @section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+    </script>
+
+       }                 

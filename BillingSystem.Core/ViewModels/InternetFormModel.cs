@@ -1,8 +1,8 @@
 ﻿using BillingSystem.Core.Enum;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Drawing;
+using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ClientContract;
+using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ServiceConst;
 
 namespace BillingSystem.Core.ViewModels
 {
@@ -27,6 +27,7 @@ namespace BillingSystem.Core.ViewModels
 
         [Required]
         [Display(Name = "ЕГН на клиента")]
+        [StringLength(CivilLength,MinimumLength =CivilLength)]
         public string CivilNumber { get; set; } = string.Empty;
 
         [Display(Name = "Вид на услугата")]

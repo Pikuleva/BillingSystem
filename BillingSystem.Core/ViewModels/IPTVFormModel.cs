@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ServiceConst;
+using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ClientContract;
 
 namespace BillingSystem.Core.ViewModels
 {
@@ -17,6 +19,7 @@ namespace BillingSystem.Core.ViewModels
         [Required]
         [Comment("Device model name")]
         [Display(Name = "Модел на устройството")]
+        [StringLength(NameMaxLength,MinimumLength =NameMinLength)]
         public string Name { get; set; } = string.Empty;
 
         [Required]
@@ -26,6 +29,7 @@ namespace BillingSystem.Core.ViewModels
 
         [Required]
         [Display(Name = "ЕГН на клиента")]
+        [StringLength(CivilLength,MinimumLength =CivilLength)]
         public string CivilNumber { get; set; } = string.Empty;
 
         [Display(Name = "Вид на услугата")]
@@ -40,6 +44,5 @@ namespace BillingSystem.Core.ViewModels
 
         public IEnumerable<TypeOfServiceModel> TypeOfServiceModels { get; set; } = new List<TypeOfServiceModel>();
 
-        public int ClientId { get; set; }
     }
 }

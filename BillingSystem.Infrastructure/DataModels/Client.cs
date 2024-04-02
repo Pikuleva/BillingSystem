@@ -46,7 +46,7 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
 
         [Required]
-        [MaxLength(10)]
+        [MaxLength(CivilLength)]
         [Comment("Client persanal number")]
         public string CivilNumber { get; set; } = string.Empty;
 
