@@ -98,7 +98,20 @@ namespace BillingSystem.Core.Services
 
         public async Task<ClientDetail> SearchClientDetailAsyn(int id)
         {
-            return await repository.AllReadOnly<Client>()
+            var interentId =await repository.AllReadOnly<Client>()
+                .Where(c => c.Id == id)
+                .Select(c => c.InternetServiceId)
+                .FirstAsync();
+            var satteliteTvId = await repository.AllReadOnly<Client>()
+               .Where(c => c.Id == id)
+               .Select(c => c.SatelliteTvId)
+               .FirstAsync(); 
+            var iptvId = await repository.AllReadOnly<Client>()
+                .Where(c => c.Id == id)
+                .Select(c => c.IPTVId)
+                .FirstAsync();
+
+            var model = await repository.AllReadOnly<Client>()
                 .Where(c => c.Id == id)
                 .Select(c => new ClientDetail()
                 {
@@ -108,9 +121,25 @@ namespace BillingSystem.Core.Services
                     PhoneNumber = c.PhoneNumber,
                     Email = c.Email,
                     MiddleName = c.MiddleName,
-                    Address = c.City + " " + c.StreetName + " " + c.StreetNumber
+                    Address = c.City + " " + c.StreetName + " " + c.StreetNumber            
+                  
                 })
-                .FirstAsync();   
+                .FirstAsync();
+
+            if (interentId != null)
+            {
+                model.InternetServiceId = (int)interentId;
+            }
+       
+            if (interentId != null)
+            {
+                model.SatelliteTvId = (int)satteliteTvId;
+            }
+            if (interentId != null)
+            {
+                model.IPTVId = (int)iptvId;
+            }
+            return model;
         }
         public async Task<bool> ExistAsync(int id)
         {
