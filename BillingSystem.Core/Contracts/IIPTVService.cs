@@ -10,7 +10,7 @@ namespace BillingSystem.Core.Contracts
         Task<IEnumerable<ProductModel>> GetProductModelIdAsync();
 
 
-        Task<int> CreateAsync(IPTVFormModel model, string civilNumber);
+        Task<int> CreateAsync(IPTVFormModel model, int clientId);
         Task<IEnumerable<TypeOfServiceModel>> GetTypeModel();
     }
 }

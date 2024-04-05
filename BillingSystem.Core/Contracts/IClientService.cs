@@ -18,6 +18,8 @@ namespace BillingSystem.Core.Contracts
         Task<ClientFormModel> GetClientFormModelByIdAsync(int id);
 
         Task<bool> GetSatTvServiceASyc(int id);
+
+        Task AddIptvAsync(int clientId,int iptvId);
  
     }
 }

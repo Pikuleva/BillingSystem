@@ -12,5 +12,7 @@
 
         public const string CivilNumberValidation = "The {0} must to be 10 digits";
         public const string CivilNotValid = "The {0} is not valid or the client not exist";
+
+       
     }
 }

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ServiceConst;
 using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ClientContract;
+using static BillingSystem.Core.Constants.MessageConstants;
 
 namespace BillingSystem.Core.ViewModels
 {
@@ -19,7 +20,7 @@ namespace BillingSystem.Core.ViewModels
         [Required]
         [Comment("Device model name")]
         [Display(Name = "Модел на устройството")]
-        [StringLength(NameMaxLength,MinimumLength =NameMinLength)]
+        [StringLength(NameMaxLength,MinimumLength =NameMinLength,ErrorMessage = StringLengthMessage)]
         public string Name { get; set; } = string.Empty;
 
         [Required]
@@ -28,9 +29,8 @@ namespace BillingSystem.Core.ViewModels
         public DateTime ActiveUntilDate { get; set; }
 
         [Required]
-        [Display(Name = "ЕГН на клиента")]
-        [StringLength(CivilLength,MinimumLength =CivilLength)]
-        public string CivilNumber { get; set; } = string.Empty;
+        [Display(Name = "ID на клиента")]
+        public int ClientId { get; set; } 
 
         [Display(Name = "Вид на услугата")]
         public int TypeOfServiceId { get; set; }

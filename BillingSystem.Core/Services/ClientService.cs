@@ -121,24 +121,27 @@ namespace BillingSystem.Core.Services
                     PhoneNumber = c.PhoneNumber,
                     Email = c.Email,
                     MiddleName = c.MiddleName,
-                    Address = c.City + " " + c.StreetName + " " + c.StreetNumber            
+                    Address = c.City + " " + c.StreetName + " " + c.StreetNumber,
+                    IPTVId=(int)iptvId,
+                   
+
                   
                 })
                 .FirstAsync();
 
-            if (interentId != null)
-            {
-                model.InternetServiceId = (int)interentId;
-            }
+            //if (interentId != 0 || interentId != null)
+            //{
+            //    model.InternetServiceId = (int)interentId;
+            //}
        
-            if (interentId != null)
-            {
-                model.SatelliteTvId = (int)satteliteTvId;
-            }
-            if (interentId != null)
-            {
-                model.IPTVId = (int)iptvId;
-            }
+            //if (interentId != 0)
+            //{
+            //    model.SatelliteTvId = (int)satteliteTvId;
+            //}
+            //if (interentId != 0)
+            //{
+            //    model.IPTVId = (int)iptvId;
+            //}
             return model;
         }
         public async Task<bool> ExistAsync(int id)
@@ -159,23 +162,7 @@ namespace BillingSystem.Core.Services
                     City = h.City,
                     PhoneNumber= h.PhoneNumber,
                     Email = h.Email,
-                    SatelliteFormModel = new SatelliteFormModel()
-                    {
-                        
-                        CivilNumber = h.CivilNumber
-                    },
-                    InternetFormModel = new InternetFormModel()
-                    {
-                      
-                        CivilNumber = h.CivilNumber
-
-                    },
-                    IPTVFormModel= new IPTVFormModel()
-                    {
-                       
-                        CivilNumber = h.CivilNumber
-
-                    }
+                   
 
                 })
                 .FirstAsync();
@@ -190,6 +177,18 @@ namespace BillingSystem.Core.Services
                 .AnyAsync(c => c.SatelliteTvId == id);
 
             return model;
+        }
+
+        public async Task AddIptvAsync(int clientId, int iptvId)
+        {
+            var client = await repository.GetByIdAsync<Client>(clientId);
+            var model = await repository.GetByIdAsync<IPTV>(iptvId);
+
+            if (client != null && model != null)
+            {
+                client.IPTV = model;
+                await repository.SaveChangesAsync();
+            }
         }
     }
 }

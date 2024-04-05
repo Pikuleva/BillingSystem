@@ -9,12 +9,13 @@ namespace BillingSystem.Core.Services
     public class IPTVService : IIPTVService
     {
         private readonly IRepository repository;
+        
         public IPTVService(IRepository repository)
         {
             this.repository = repository;
         }
 
-        public async Task<int> CreateAsync(IPTVFormModel model, string civilNumber)
+        public async Task<int> CreateAsync(IPTVFormModel model, int clientId)
         {
             IPTV iPTVFormModel = new IPTV()
             {
@@ -22,13 +23,9 @@ namespace BillingSystem.Core.Services
                 SerialNumber = model.SerialNumber,
                 ActiveUntilDate = model.ActiveUntilDate,
                 ProductId = model.ProductModelId,
-                
+
 
             };
-            Client client = await repository.AllReadOnly<Client>()
-                .Where(c => c.CivilNumber == civilNumber)
-                .FirstAsync();
-
 
             await repository.AddAsync(iPTVFormModel);
             await repository.SaveChangesAsync();
@@ -57,7 +54,6 @@ namespace BillingSystem.Core.Services
                {
                    Id = t.Id,
                    Name = t.Name
-
                })
                .ToListAsync();
         }
