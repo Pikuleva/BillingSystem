@@ -19,6 +19,7 @@ namespace BillingSystem.Core.Services
         {
             IPTV iPTVFormModel = new IPTV()
             {
+                Id = model.Id,
                 Name = model.Name,
                 SerialNumber = model.SerialNumber,
                 ActiveUntilDate = model.ActiveUntilDate,
@@ -70,11 +71,11 @@ namespace BillingSystem.Core.Services
                 return null;
             }
 
-            var client = await repository.AllReadOnly<Client>()
+            IPTVDetails iptvModel = await repository.AllReadOnly<Client>()
                 .Where(c => c.Id == clientId)
                 .Select(c => new IPTVDetails()
                 {
-                    Id=c.IPTV.Id,
+                    Id = c.IPTV.Id,
                     NameOfService=c.IPTV.Product.Name,
                     DeviceName=c.IPTV.Name,
                     UntilDate=c.IPTV.ActiveUntilDate,
@@ -85,7 +86,7 @@ namespace BillingSystem.Core.Services
                 .FirstAsync();
 
 
-            return client;
+            return iptvModel;
         }
     }
 }

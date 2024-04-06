@@ -26,7 +26,7 @@ namespace BillingSystem.Tests
         public void Setup()
         {
             var contextOptions = new DbContextOptionsBuilder<BillingSystemDbContext>()
-                   .UseInMemoryDatabase("HouseDB")
+                   .UseInMemoryDatabase("BillingSystemDB")
                    .Options;
 
             context = new BillingSystemDbContext(contextOptions);
@@ -105,7 +105,7 @@ namespace BillingSystem.Tests
             Assert.That(dbClient.City, Is.EqualTo("Created"));
         }
         [Test]
-        public async Task ExistByCivilNumberAsync()
+        public async Task TestExistByCivilNumberAsync()
         {
             var loggerMock = new Mock<ILogger<ClientService>>();
             logger = loggerMock.Object;
@@ -150,7 +150,7 @@ namespace BillingSystem.Tests
             Assert.That(notExist, Is.EqualTo(false));
         }
         [Test]
-        public async Task SearchClientAsync()
+        public async Task TestSearchClientAsync()
         {
             var loggerMock = new Mock<ILogger<ClientService>>();
             logger = loggerMock.Object;
@@ -179,7 +179,7 @@ namespace BillingSystem.Tests
             Assert.That(client.CivilNumber, Is.EqualTo("9102312234"));
         }
         [Test]
-        public async Task IsValidEmail()
+        public async Task TestIsValidEmail()
         {
            var loggerMock = new Mock<ILogger<ClientService>>();
             logger = loggerMock.Object;
@@ -206,7 +206,7 @@ namespace BillingSystem.Tests
             Assert.That(notValid, Is.EqualTo(false));
         }
         [Test]
-        public async Task SearchClientDetailsAsync()
+        public async Task TestSearchClientDetailsAsync()
         {
 
             var loggerMock = new Mock<ILogger<ClientService>>();
@@ -242,7 +242,7 @@ namespace BillingSystem.Tests
         }
 
         [Test]
-        public async Task AddIptvAsync()
+        public async Task TestAddIptvAsync()
         {
 
             var loggerMock = new Mock<ILogger<ClientService>>();
@@ -271,7 +271,7 @@ namespace BillingSystem.Tests
             Assert.That(client.IPTVId,Is.EqualTo(2));
         }
         [Test]
-        public async Task AddInternetAsync()
+        public async Task TestAddInternetAsync()
         {
 
             var loggerMock = new Mock<ILogger<ClientService>>();
@@ -300,7 +300,7 @@ namespace BillingSystem.Tests
             Assert.That(client.InternetServiceId, Is.EqualTo(2));
         }
         [Test]
-        public async Task AddSatelliteTvAsync()
+        public async Task TestAddSatelliteTvAsync()
         {
 
             var loggerMock = new Mock<ILogger<ClientService>>();
