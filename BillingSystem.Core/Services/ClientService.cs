@@ -65,7 +65,7 @@ namespace BillingSystem.Core.Services
             return await repository.AllReadOnly<Client>()
                 .AnyAsync(a => a.CivilNumber == civilNumber);
         }
-        public  bool IsValidEmail(string email)
+        public async Task<bool> IsValidEmail(string email)
         {
             string regex = @"^[^@\s]+@[^@\s]+\.[a-zA-Z]{2,}$";
 
@@ -94,7 +94,7 @@ namespace BillingSystem.Core.Services
                 return modelCivil;          
         }
 
-        public async Task<ClientDetail> SearchClientDetailAsyn(int id)
+        public async Task<ClientDetail> SearchClientDetailsAsync(int id)
         {
             var interentId = await repository.AllReadOnly<Client>()
                 .Where(c => c.Id == id)
@@ -163,15 +163,6 @@ namespace BillingSystem.Core.Services
                 .FirstAsync();
            
             return client;
-        }
-
-      
-        public async Task<bool> GetSatTvServiceASyc(int id)
-        {
-            var model = await repository.AllReadOnly<Client>()
-                .AnyAsync(c => c.SatelliteTvId == id);
-
-            return model;
         }
 
         public async Task AddIptvAsync(int clientId, int iptvId)

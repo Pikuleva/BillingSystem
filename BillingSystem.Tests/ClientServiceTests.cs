@@ -16,6 +16,9 @@ namespace BillingSystem.Tests
     {
         private  IRepository repository;
         private  IClientService clientService;
+        private  IIPTVService iptvService;
+        private  IInternetService internetService;
+        private  ISatellieteService satelliteService;
         private  BillingSystemDbContext context;
         private ILogger logger;
 
@@ -82,9 +85,6 @@ namespace BillingSystem.Tests
             var repo = new Repository(context);
             clientService = new ClientService(repo);
 
-         
-            
-
             await clientService.CreateAsync(new ClientFormModel()
             {
                 Id = 2,
@@ -103,7 +103,230 @@ namespace BillingSystem.Tests
             var dbClient = await repo.GetByIdAsync<Client>(2);
 
             Assert.That(dbClient.City, Is.EqualTo("Created"));
+        }
+        [Test]
+        public async Task ExistByCivilNumberAsync()
+        {
+            var loggerMock = new Mock<ILogger<ClientService>>();
+            logger = loggerMock.Object;
+            var repo = new Repository(context);
+            clientService = new ClientService(repo);
 
+            await clientService.CreateAsync(new ClientFormModel()
+            {
+                Id = 1,
+                FirstName = "",
+                MiddleName = "",
+                LastName = "",
+                CivilNumber = "9102312234",
+                StreetName = "",
+                StreetNumber = "",
+                PhoneNumber = "",
+                Email = "",
+                City = ""
+            });
+            await clientService.CreateAsync(new ClientFormModel()
+            {
+                Id = 2,
+                FirstName = "",
+                MiddleName = "",
+                LastName = "",
+                CivilNumber = "9102312238",
+                StreetName = "",
+                StreetNumber = "",
+                PhoneNumber = "",
+                Email = "",
+                City = ""
+            });
+            await repo.SaveChangesAsync();
+            
+            var dbClient = await repo.GetByIdAsync<Client>(1);
+            var dbClient2 = await repo.GetByIdAsync<Client>(2);
+
+            var exist = await clientService.ExistByCivilNumberAsync(dbClient.CivilNumber);
+            var notExist = await clientService.ExistByCivilNumberAsync("9102312235");
+
+            Assert.That(exist, Is.EqualTo(true));
+            Assert.That(notExist, Is.EqualTo(false));
+        }
+        [Test]
+        public async Task SearchClientAsync()
+        {
+            var loggerMock = new Mock<ILogger<ClientService>>();
+            logger = loggerMock.Object;
+            var repo = new Repository(context);
+            clientService = new ClientService(repo);
+
+            await clientService.CreateAsync(new ClientFormModel()
+            {
+                Id = 3,
+                FirstName = "",
+                MiddleName = "",
+                LastName = "",
+                CivilNumber = "9102312234",
+                StreetName = "",
+                StreetNumber = "",
+                PhoneNumber = "",
+                Email = "",
+                City = ""
+            });
+            await repo.SaveChangesAsync();
+
+            var client = await clientService.SearchClientAsync("9102312234");
+
+           
+
+            Assert.That(client.CivilNumber, Is.EqualTo("9102312234"));
+        }
+        [Test]
+        public async Task IsValidEmail()
+        {
+           var loggerMock = new Mock<ILogger<ClientService>>();
+            logger = loggerMock.Object;
+            var repo = new Repository(context);
+            clientService = new ClientService(repo);
+
+            await clientService.CreateAsync(new ClientFormModel()
+            {
+                Id=1,
+                Email="valid@gmail.com"
+            });
+            await clientService.CreateAsync(new ClientFormModel()
+            {
+                Id = 2,
+                Email = "notvalid.com"
+            });
+            await repo.SaveChangesAsync();
+            var validClient = await repo.GetByIdAsync<Client>(1);
+            var notValidClient = await repo.GetByIdAsync<Client>(2);
+
+            bool valid = await clientService.IsValidEmail(validClient.Email);
+            bool notValid =await clientService.IsValidEmail(notValidClient.Email);
+            Assert.That(valid, Is.EqualTo(true));
+            Assert.That(notValid, Is.EqualTo(false));
+        }
+        [Test]
+        public async Task SearchClientDetailsAsync()
+        {
+
+            var loggerMock = new Mock<ILogger<ClientService>>();
+            logger = loggerMock.Object;
+            var repo = new Repository(context);
+            clientService = new ClientService(repo);
+
+            await clientService.CreateAsync(new ClientFormModel()
+            {
+                Id = 1,
+                FirstName="Ivan",
+                CivilNumber="8801012233",
+                Email = ""
+            });
+            await clientService.CreateAsync(new ClientFormModel()
+            {
+                Id = 2,
+                FirstName="Petkan",
+                CivilNumber="7701023344",
+                Email = ""
+            });
+
+            await repo.SaveChangesAsync();
+
+            var client1=await clientService.SearchClientDetailsAsync(1);
+            var client2=await clientService.SearchClientDetailsAsync(2);
+
+            var client1ById = await repo.GetByIdAsync<Client>(1);
+            var client2ById = await repo.GetByIdAsync<Client>(2);
+
+            Assert.That(client1.FirstName, Is.EqualTo(client1ById.FirstName));
+            Assert.That(client2.FirstName, Is.EqualTo(client2ById.FirstName));
+        }
+
+        [Test]
+        public async Task AddIptvAsync()
+        {
+
+            var loggerMock = new Mock<ILogger<ClientService>>();
+            logger = loggerMock.Object;
+            var repo = new Repository(context);
+            clientService = new ClientService(repo);
+            iptvService = new IPTVService(repo);
+
+          
+            await iptvService.CreateAsync(new IPTVFormModel()
+            {
+                Id = 2,
+                Name="TestIPTV"
+            });
+
+            await repo.SaveChangesAsync();
+              await clientService.CreateAsync(new ClientFormModel()
+            {
+                Id = 1,
+                FirstName="Som"
+            });
+            await repo.SaveChangesAsync();
+
+            await clientService.AddIptvAsync(1, 2);
+            var client = await repo.GetByIdAsync<Client>(1);
+            Assert.That(client.IPTVId,Is.EqualTo(2));
+        }
+        [Test]
+        public async Task AddInternetAsync()
+        {
+
+            var loggerMock = new Mock<ILogger<ClientService>>();
+            logger = loggerMock.Object;
+            var repo = new Repository(context);
+            clientService = new ClientService(repo);
+            internetService = new InternetServiceC(repo);
+
+
+            await internetService.CreateAsync(new InternetFormModel()
+            {
+                Id = 2,
+                ClientId = 1
+            });
+
+            await repo.SaveChangesAsync();
+            await clientService.CreateAsync(new ClientFormModel()
+            {
+                Id = 1,
+                FirstName = "Som"
+            });
+            await repo.SaveChangesAsync();
+
+            await clientService.AddInternetAsync(1, 2);
+            var client = await repo.GetByIdAsync<Client>(1);
+            Assert.That(client.InternetServiceId, Is.EqualTo(2));
+        }
+        [Test]
+        public async Task AddSatelliteTvAsync()
+        {
+
+            var loggerMock = new Mock<ILogger<ClientService>>();
+            logger = loggerMock.Object;
+            var repo = new Repository(context);
+            clientService = new ClientService(repo);
+            satelliteService = new SatelliteService(repo);
+
+
+            await satelliteService.CreateAsync(new SatelliteFormModel()
+            {
+                Id = 2,
+                Name="SatTv"
+            });
+
+            await repo.SaveChangesAsync();
+            await clientService.CreateAsync(new ClientFormModel()
+            {
+                Id = 1,
+                FirstName = "Som"
+            });
+            await repo.SaveChangesAsync();
+
+            await clientService.AddSatelliteTvAsync(1, 2);
+            var client = await repo.GetByIdAsync<Client>(1);
+            Assert.That(client.SatelliteTvId, Is.EqualTo(2));
         }
     }
 }

@@ -36,13 +36,15 @@ namespace BillingSystem.Controllers
             {
                 ModelState.AddModelError(nameof(model.CivilNumber), CivilExist);
             }
-            if (clientService.IsValidEmail(model.Email))
+            if (await clientService.IsValidEmail(model.Email))
             {
                 ModelState.AddModelError(nameof(model.Email), EmailValidationMessage);
             }
 
             await clientService.CreateAsync(model);
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            var modelView = new ClientDetail();
+            modelView = await clientService.SearchClientAsync(model.CivilNumber);
+            return RedirectToAction(nameof(Details), modelView);
         }
 
 
@@ -81,7 +83,7 @@ namespace BillingSystem.Controllers
             var modelNew = new ClientDetail();
             try
             {
-                modelNew = await clientService.SearchClientDetailAsyn(id);
+                modelNew = await clientService.SearchClientDetailsAsync(id);
             }
             catch (Exception)
             {
