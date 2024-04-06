@@ -49,19 +49,22 @@ namespace BillingSystem.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Add(SatelliteFormModel model, string civilNumber)
+        public async Task<IActionResult> Add(SatelliteFormModel model, int clientId)
         {
             if (ModelState.IsValid == false)
             {
                 model.Product = await satellieteService.GetProductModelIdAsync();
                 model.TypeOfServiceModels = await satellieteService.GetTypeModel();
+                return View(model);
             }
 
-       
-            int newSatId = await satellieteService.CreateAsync(model,civilNumber);
-            var client = await clientService.SearchClientAsync(civilNumber);
-            int clientId = client.Id;
-            return RedirectToAction(nameof(Details), new { clientId });
+
+            int newSatId = await satellieteService.CreateAsync(model);
+
+            await clientService.AddSatelliteTvAsync(model.Id, newSatId);
+
+
+            return RedirectToAction(nameof(Details), new { model.Id });
         }
     }
 }

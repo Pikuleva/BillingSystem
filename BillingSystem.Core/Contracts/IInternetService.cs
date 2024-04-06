@@ -10,7 +10,7 @@ namespace BillingSystem.Core.Contracts
         Task<IEnumerable<ProductModel>> GetProductModelIdAsync();
 
 
-        Task<int> CreateAsync(InternetFormModel model, string civilNumber);
+        Task<int> CreateAsync(InternetFormModel model);
         Task<IEnumerable<TypeOfServiceModel>> GetTypeModel();
     }
 }

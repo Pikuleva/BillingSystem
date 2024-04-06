@@ -20,6 +20,8 @@ namespace BillingSystem.Core.Contracts
         Task<bool> GetSatTvServiceASyc(int id);
 
         Task AddIptvAsync(int clientId,int iptvId);
- 
+        Task AddSatelliteTvAsync(int clientId, int satId);
+        Task AddInternetAsync(int clientId, int internetId);
+
     }
 }

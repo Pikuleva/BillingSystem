@@ -25,10 +25,6 @@ namespace BillingSystem.Core.ViewModels
         [Display(Name = "Плащане до:")]
         public DateTime ActiveUntilDate { get; set; }
 
-        [Required]
-        [Display(Name = "ЕГН на клиента")]
-        [StringLength(CivilLength,MinimumLength =CivilLength)]
-        public string CivilNumber { get; set; } = string.Empty;
 
         [Display(Name = "Вид на услугата")]
         public int TypeOfServiceId { get; set; }

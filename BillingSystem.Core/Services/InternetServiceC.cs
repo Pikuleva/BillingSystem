@@ -15,7 +15,7 @@ namespace BillingSystem.Core.Services
             this.repository = repository;
         }
 
-        public async Task<int> CreateAsync(InternetFormModel model, string civilNumber)
+        public async Task<int> CreateAsync(InternetFormModel model)
         {
             InternetService internet = new InternetService()
             {
@@ -25,9 +25,7 @@ namespace BillingSystem.Core.Services
                 RouterMACAdress = model.RouterMACAdress
 
             };
-            Client client = await repository.AllReadOnly<Client>()
-                .Where(c => c.CivilNumber == civilNumber)
-                .FirstAsync();
+          
 
 
             await repository.AddAsync(internet);

@@ -57,7 +57,7 @@ namespace BillingSystem.Controllers
             }
 
 
-            int newIptvId = await IPTVService.CreateAsync(model, model.Id);
+            int newIptvId = await IPTVService.CreateAsync(model);
 
                 await clientService.AddIptvAsync(model.Id, newIptvId);
                     

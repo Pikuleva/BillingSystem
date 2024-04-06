@@ -15,7 +15,7 @@ namespace BillingSystem.Core.Services
             this.repository = repository;
         }
 
-        public async Task<int> CreateAsync(IPTVFormModel model, int clientId)
+        public async Task<int> CreateAsync(IPTVFormModel model)
         {
             IPTV iPTVFormModel = new IPTV()
             {

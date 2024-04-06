@@ -55,7 +55,7 @@ namespace BillingSystem.Core.Services
                 .FirstAsync();
             return satTv;
         }
-        public async Task<int> CreateAsync(SatelliteFormModel model, string civilNumber)
+        public async Task<int> CreateAsync(SatelliteFormModel model)
         {
             SatelliteTV satTV = new SatelliteTV()
             {
@@ -66,11 +66,7 @@ namespace BillingSystem.Core.Services
 
          
             };
-            Client client = await repository.AllReadOnly<Client>()
-                .Where(c => c.CivilNumber == civilNumber)
-                .FirstAsync();
-
-          
+                      
             await repository.AddAsync(satTV);
             await repository.SaveChangesAsync();
 
@@ -88,5 +84,7 @@ namespace BillingSystem.Core.Services
                 })
                 .ToListAsync();
         }
+
+       
     }
 }

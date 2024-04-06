@@ -28,19 +28,22 @@ namespace BillingSystem.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Add(InternetFormModel model, string civilNumber)
+        public async Task<IActionResult> Add(InternetFormModel model)
         {
             if (ModelState.IsValid == false)
             {
                 model.Product = await internetService.GetProductModelIdAsync();
                 model.TypeOfServiceModels = await internetService.GetTypeModel();
+                return View(model);
             }
 
 
-            int newSatId = await internetService.CreateAsync(model, civilNumber);
-            var client = await clientService.SearchClientAsync(civilNumber);
-            int clientId = client.Id;
-            return RedirectToAction(nameof(Details), new { clientId });
+            int internetId = await internetService.CreateAsync(model);
+
+            await clientService.AddInternetAsync(model.Id, internetId);
+
+
+            return RedirectToAction(nameof(Details), new { model.Id });
         }
         public async Task<IActionResult> Details(int id, InternetDetails model)
         {

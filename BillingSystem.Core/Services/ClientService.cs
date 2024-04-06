@@ -84,28 +84,26 @@ namespace BillingSystem.Core.Services
                     LastName = c.LastName,
                     PhoneNumber= c.PhoneNumber,
                     Email = c.Email,
+                    CivilNumber=c.CivilNumber,
                     MiddleName= c.MiddleName,
                     Address = c.City + " " + c.StreetName + " " + c.StreetNumber
                 })
                 .FirstAsync();
 
            
-                return modelCivil;
-            
-          
-           
+                return modelCivil;          
         }
 
         public async Task<ClientDetail> SearchClientDetailAsyn(int id)
         {
-            var interentId =await repository.AllReadOnly<Client>()
+            var interentId = await repository.AllReadOnly<Client>()
                 .Where(c => c.Id == id)
                 .Select(c => c.InternetServiceId)
                 .FirstAsync();
             var satteliteTvId = await repository.AllReadOnly<Client>()
                .Where(c => c.Id == id)
                .Select(c => c.SatelliteTvId)
-               .FirstAsync(); 
+               .FirstAsync();
             var iptvId = await repository.AllReadOnly<Client>()
                 .Where(c => c.Id == id)
                 .Select(c => c.IPTVId)
@@ -115,36 +113,33 @@ namespace BillingSystem.Core.Services
                 .Where(c => c.Id == id)
                 .Select(c => new ClientDetail()
                 {
-                    Id= c.Id,
+                    Id = c.Id,
                     FirstName = c.FirstName,
                     LastName = c.LastName,
                     PhoneNumber = c.PhoneNumber,
                     Email = c.Email,
                     MiddleName = c.MiddleName,
                     Address = c.City + " " + c.StreetName + " " + c.StreetNumber,
-                    IPTVId=(int)iptvId,
-                   
-
-                  
+                   IPTVId=0,
+                   InternetServiceId=0,
+                   SatelliteTvId=0
                 })
                 .FirstAsync();
-
-            //if (interentId != 0 || interentId != null)
-            //{
-            //    model.InternetServiceId = (int)interentId;
-            //}
-       
-            //if (interentId != 0)
-            //{
-            //    model.SatelliteTvId = (int)satteliteTvId;
-            //}
-            //if (interentId != 0)
-            //{
-            //    model.IPTVId = (int)iptvId;
-            //}
+            if (iptvId != null)
+            {
+                model.IPTVId = (int)iptvId;
+            }
+            if (interentId != null)
+            {
+                model.InternetServiceId = (int)interentId;
+            }
+            if (satteliteTvId != null)
+            {
+                model.SatelliteTvId = (int)satteliteTvId;
+            }
             return model;
         }
-        public async Task<bool> ExistAsync(int id)
+            public async Task<bool> ExistAsync(int id)
         {
             return await repository.AllReadOnly<Client>()
                 .AnyAsync(h => h.Id == id);
@@ -187,6 +182,28 @@ namespace BillingSystem.Core.Services
             if (client != null && model != null)
             {
                 client.IPTV = model;
+                await repository.SaveChangesAsync();
+            }
+        }
+        public async Task AddSatelliteTvAsync(int clientId, int satId)
+        {
+            var client = await repository.GetByIdAsync<Client>(clientId);
+            var model = await repository.GetByIdAsync<SatelliteTV>(satId);
+
+            if (client != null && model != null)
+            {
+                client.SatelliteTV = model;
+                await repository.SaveChangesAsync();
+            }
+        }
+        public async Task AddInternetAsync(int clientId, int internetId)
+        {
+            var client = await repository.GetByIdAsync<Client>(clientId);
+            var model = await repository.GetByIdAsync<InternetService>(internetId);
+
+            if (client != null && model != null)
+            {
+                client.InternetService = model;
                 await repository.SaveChangesAsync();
             }
         }
