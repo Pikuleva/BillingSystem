@@ -2,16 +2,17 @@
 {
     public static class MessageConstants
     {
-        public const string RequiredMessage = "The {0} field is required";
+        public const string RequiredMessage = "Полето {0} е задължително";
 
-        public const string StringLengthMessage = "The field {0} must be between {2} and {1} charter";
+        public const string StringLengthMessage = "Полето {0} трябва да бъде между {2} и {1} цимвола";
 
         public const string CivilExist = "The {0} exist";
 
-        public const string EmailValidationMessage = "The {0} is not valid";
+        public const string EmailValidationMessage = "Невалиден Email адрес";
+        public const string InvalidCivilNumber = "Невалидно ЕГН";
 
-        public const string CivilNumberValidation = "The {0} must to be 10 digits";
-        public const string CivilNotValid = "The {0} is not valid or the client not exist";
+        public const string CivilNumberValidation = "ЕГН-то трябва да съдържа 10 цифри";
+        public const string CivilNotValid = "Полето {0} не е валидно или клиента не същствува";
 
        
     }

@@ -4,6 +4,7 @@ using BillingSystem.Infrastructure.Common;
 using BillingSystem.Infrastructure.DataModels;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
+using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ClientContract;
 
 namespace BillingSystem.Core.Services
 {
@@ -67,7 +68,7 @@ namespace BillingSystem.Core.Services
         }
         public async Task<bool> IsValidEmail(string email)
         {
-            string regex = @"^[^@\s]+@[^@\s]+\.[a-zA-Z]{2,}$";
+            string regex = RegexValidationEmail;
 
             Match match = Regex.Match(email, regex, RegexOptions.IgnoreCase);
 
