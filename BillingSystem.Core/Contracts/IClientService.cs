@@ -10,6 +10,7 @@ namespace BillingSystem.Core.Contracts
         Task CreateAsync(ClientFormModel model);
         Task<bool> IsValidEmail(string email);
         Task<bool> IsValidCivilNumber(string civilNumber);
+        Task<bool> PhoneExist(string phoneNumber);
        
         Task<ClientDetail?> SearchClientAsync(string civilNumber);
         Task<ClientDetail> SearchClientDetailsAsync(int id);

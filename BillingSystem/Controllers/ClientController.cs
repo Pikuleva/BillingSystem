@@ -47,7 +47,12 @@ namespace BillingSystem.Controllers
                 ModelState.AddModelError(nameof(model.CivilNumber), InvalidCivilNumber);
                 return View(model);
             }
-       
+            if (await clientService.PhoneExist(model.PhoneNumber) == false)
+            {
+                ModelState.AddModelError(nameof(model.PhoneNumber), PhoneExist);
+                return View(model);
+            }
+
 
             await clientService.CreateAsync(model);
             var modelView = new ClientDetail();
