@@ -94,7 +94,7 @@ namespace BillingSystem.Controllers
             }
 
             await internetService.EditAsync(id, model);
-            return RedirectToAction(nameof(Details), new { id });
+            return RedirectToAction(nameof(Details), new {model.ClientId, model});
         }
 
     }
