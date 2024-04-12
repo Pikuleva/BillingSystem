@@ -27,21 +27,25 @@ namespace BillingSystem.Infrastructure.DataModels
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        /// Вид на услугата Интернет или Телевизия
+        /// Вид на услугата 
         /// </summary>
         [Required]
         [MaxLength(NameMaxLength)]
         [ForeignKey(nameof(TypeId))]
-
         public TypeOfService Type { get; set; } = null!;
+
+        /// <summary>
+        /// Идентификатор на вида
+        /// </summary>
         public int TypeId { get; set; } 
+
         /// <summary>
         /// Цена на услугата
         /// </summary>
         [Required]
         [Comment("Price of  service")]
         public decimal Price { get; set; }
-        public List<SatelliteTV> SatelliteTVs { get; set; }= new List<SatelliteTV>();
+
 
     }
 }
