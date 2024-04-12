@@ -59,7 +59,17 @@ namespace BillingSystem.Infrastructure.DataModels
 
         public int ProductId { get; set; }
 
-        public Client Client { get; set; } = null!;
+
+        /// <summary>
+        /// Идентификатор на клиента
+        /// </summary>
+        [Comment("Client Id")]
         public int ClientId { get; set; }
+
+        /// <summary>
+        /// Клиент 
+        /// </summary>
+        [Comment("Client")]
+        public Client Client { get; set; } = null!;
     }
 }

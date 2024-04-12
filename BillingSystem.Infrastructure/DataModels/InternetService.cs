@@ -34,8 +34,6 @@ namespace BillingSystem.Infrastructure.DataModels
         [Comment("MAC address client device")]
         public string RouterMACAdress { get; set; } = string.Empty;
 
- 
-
         /// <summary>
         /// Вида(скоростта) на интернет услугата
         /// </summary>
@@ -65,8 +63,18 @@ namespace BillingSystem.Infrastructure.DataModels
         [Comment("Until which date the service is active")]
         public DateTime ActiveUntilDate { get; set; }
 
-        public Client Client { get; set; } = null!;
+        /// <summary>
+        /// Идентификатор на клиента
+        /// </summary>
+        [Comment("Client Id")]
         public int ClientId { get; set; }
+
+        /// <summary>
+        /// Клиент 
+        /// </summary>
+        [Comment("Client")]
+        public Client Client { get; set; } = null!;
+       
 
     }
 }
