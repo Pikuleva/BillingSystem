@@ -35,12 +35,11 @@ namespace BillingSystem.Controllers
         }
         [HttpGet]
        
-        public async Task<IActionResult> Add(int clientId)
+        public async Task<IActionResult> Add()
         {
             
             var model = new IPTVFormModel()
             {
-                ClientId = clientId,
                 Product = await IPTVService.GetProductModelIdAsync(),
                 TypeOfServiceModels = await IPTVService.GetTypeModel()
             };

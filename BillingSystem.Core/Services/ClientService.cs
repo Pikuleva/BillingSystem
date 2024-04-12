@@ -69,7 +69,13 @@ namespace BillingSystem.Core.Services
         {
             string regex = @"^[^@\s]+@[^@\s]+\.[a-zA-Z]{2,}$";
 
-            return Regex.IsMatch(email, regex, RegexOptions.IgnoreCase);
+            Match match = Regex.Match(email, regex, RegexOptions.IgnoreCase);
+
+            if (email != string.Empty && match.Success)
+            {
+                return true;
+            }
+            return false;
         }
 
         public async Task<ClientDetail?> SearchClientAsync(string civilNumber)
