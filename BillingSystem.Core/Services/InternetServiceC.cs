@@ -26,8 +26,6 @@ namespace BillingSystem.Core.Services
 
             };
           
-
-
             await repository.AddAsync(internet);
             await repository.SaveChangesAsync();
 

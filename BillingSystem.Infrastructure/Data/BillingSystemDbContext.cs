@@ -30,23 +30,23 @@ namespace BillingSystem.Data
               .Property(e => e.Price)
               .HasPrecision(18, 2);
 
-            builder.Entity<Client>()
-                .HasOne(c => c.InternetService)
-                .WithMany()
-                .HasForeignKey(c => c.InternetServiceId)
-                .OnDelete(DeleteBehavior.Restrict);
+         //   builder.Entity<Client>()
+         //       .HasOne(c => c.InternetService)
+         //       .WithMany()
+         //       .HasForeignKey(c => c.InternetServiceId)
+         //       .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Client>()
-         .HasOne(c => c.IPTV)
-         .WithMany()
-         .HasForeignKey(c => c.IPTVId)
-         .OnDelete(DeleteBehavior.Restrict);
+         //   builder.Entity<Client>()
+         //.HasOne(c => c.IPTV)
+         //.WithMany()
+         //.HasForeignKey(c => c.IPTVId)
+         //.OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Client>()
-         .HasOne(c => c.SatelliteTV)
-         .WithMany()
-         .HasForeignKey(c => c.SatelliteTvId)
-         .OnDelete(DeleteBehavior.Restrict);
+         //   builder.Entity<Client>()
+         //.HasOne(c => c.SatelliteTV)
+         //.WithMany()
+         //.HasForeignKey(c => c.SatelliteTvId)
+         //.OnDelete(DeleteBehavior.Restrict);
 
 
             builder.ApplyConfiguration(new UserConfiguration());

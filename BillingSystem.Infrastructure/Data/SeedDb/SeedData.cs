@@ -53,7 +53,8 @@ namespace BillingSystem.Infrastructure.Data.SeedDb
                 Name= "PomSat",
                 ActiveUntilDate= DateTime.Now.AddMonths(1),
                 ProductId= 5,
-                IsActive=true
+                IsActive=true,
+                ClientId= 9999
             };
         }
         private void SeedIPTV()
@@ -65,7 +66,8 @@ namespace BillingSystem.Infrastructure.Data.SeedDb
                 Name = "WinMat",
                 ActiveUntilDate = DateTime.Now.AddMonths(1),
                 ProductId = 13,
-                IsActive=true
+                IsActive=true,
+                ClientId = 9999
             };
         }
         private void SeedInternetService()
@@ -77,7 +79,8 @@ namespace BillingSystem.Infrastructure.Data.SeedDb
                 Name = "InternetProduct75Mbps",
                 ActiveUntilDate = DateTime.Now.AddMonths(1),
                 ProductId = 3,
-                IsActive=true
+                IsActive=true,
+                ClientId = 9999
             };
         }
         private void SeedUsers()

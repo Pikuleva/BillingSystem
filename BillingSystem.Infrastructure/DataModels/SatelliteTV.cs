@@ -59,6 +59,7 @@ namespace BillingSystem.Infrastructure.DataModels
 
         public int ProductId { get; set; }
 
-
+        public Client Client { get; set; } = null!;
+        public int ClientId { get; set; }
     }
 }

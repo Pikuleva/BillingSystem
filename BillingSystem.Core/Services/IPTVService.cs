@@ -19,13 +19,10 @@ namespace BillingSystem.Core.Services
         {
             IPTV iPTVFormModel = new IPTV()
             {
-                Id = model.Id,
                 Name = model.Name,
                 SerialNumber = model.SerialNumber,
                 ActiveUntilDate = model.ActiveUntilDate,
-                ProductId = model.ProductModelId,
-
-
+                ProductId = model.ProductModelId
             };
 
             await repository.AddAsync(iPTVFormModel);

@@ -60,7 +60,8 @@ namespace BillingSystem.Infrastructure.DataModels
         [Required]
         [Comment("Television product Identificator")]
         public int ProductId { get; set; }
+        public Client Client { get; set; } = null!;
+        public int ClientId { get; set; }
 
-       
     }
 }
