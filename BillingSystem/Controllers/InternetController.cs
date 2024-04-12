@@ -38,7 +38,7 @@ namespace BillingSystem.Controllers
                 return View(model);
             }
 
-            if (await internetService.IsExistMACAddress(model.RouterMACAdress) == false)
+            if (await internetService.IsExistMACAddress(model.RouterMACAdress))
             {
                 ModelState.AddModelError(nameof(model.RouterMACAdress), MACAddressExist);
                 model.Product = await internetService.GetProductModelIdAsync();
