@@ -88,15 +88,42 @@ namespace BillingSystem.Infrastructure.DataModels
         [Comment("Client Email address")]
         public string Email { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Идентификатор на интернет услуга
+        /// </summary>
+        [Comment("Internet Service Id")]
         public int? InternetServiceId { get; set; }
-        [ForeignKey(nameof(InternetServiceId))]
-        public InternetService? InternetService { get; set; } 
 
+        /// <summary>
+        /// Интернет услуга
+        /// </summary>
+        [Comment("Internet Service")]
+        [ForeignKey(nameof(InternetServiceId))]
+        public InternetService? InternetService { get; set; }
+
+        /// <summary>
+        /// Идентификато на интерактиван телевизия
+        /// </summary>
+        [Comment("IPTV Id")]
         public int? IPTVId { get; set; }
+
+        /// <summary>
+        /// Интерактивна телевизия
+        /// </summary>
+        [Comment("IPTV service")]
         [ForeignKey(nameof(IPTVId))]
         public IPTV? IPTV { get; set; }
 
+        /// <summary>
+        /// Идентификатор на сателитна телевизия
+        /// </summary>
+        [Comment("Satellite Id")]
         public int? SatelliteTvId { get; set; }
+
+        /// <summary>
+        /// Сателитна телевизия
+        /// </summary>
+        [Comment("Satellite TV")]
         [ForeignKey(nameof(SatelliteTvId))]
         public SatelliteTV? SatelliteTV { get; set; }
 
