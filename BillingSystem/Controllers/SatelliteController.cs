@@ -49,7 +49,7 @@ namespace BillingSystem.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Add(SatelliteFormModel model, int clientId)
+        public async Task<IActionResult> Add(SatelliteFormModel model)
         {
             if (ModelState.IsValid == false)
             {

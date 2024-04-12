@@ -47,6 +47,7 @@ namespace BillingSystem.Core.Services
                 .Select(s => new SatelliteDetails()
                 {
                     Id = s.Id,
+                    DeviceName=s.Name,
                     SerialNumber = s.SerialNumber,
                     NameOfService = s.Product.Name,
                     Price = s.Product.Price,

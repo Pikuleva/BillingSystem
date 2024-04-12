@@ -26,20 +26,13 @@ namespace BillingSystem.Core.ViewModels
         [Display(Name = "Плащане до:")]
         public DateTime ActiveUntilDate { get; set; }
 
-        [Required]
-        [Display(Name = "ЕГН на клиента")]
-        [StringLength(CivilLength,MinimumLength =CivilLength)]
-        public string CivilNumber { get; set; } = string.Empty;
-
         [Display(Name = "Вид на услугата")]
         [Range(1,int.MaxValue)]
         public int TypeOfServiceId { get; set; }
 
         [Display(Name = "Пакет ТВ услуга")]
         public int ProductModelId { get; set; }
-    
-
-        
+     
         public IEnumerable<ProductModel> Product { get; set; } = new List<ProductModel>();
 
         public IEnumerable<TypeOfServiceModel> TypeOfServiceModels { get; set; } = new List<TypeOfServiceModel>();
