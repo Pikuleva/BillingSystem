@@ -34,7 +34,7 @@
 
             public const int CivilLength = 10;
 
-            public const string RegexValidationEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$\r\n";
+            public const string RegexValidationEmail = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
 
             public const string RegexValidationPhoneNumber = "^[0 - 9]{10}$";
 
