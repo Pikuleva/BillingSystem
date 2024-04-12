@@ -91,5 +91,38 @@ namespace BillingSystem.Core.Services
             return await repository.AllReadOnly<InternetService>()
                 .AnyAsync(m => m.RouterMACAdress == macAddress);
         }
+        public async Task<bool> ExistAsync(int id)
+        {
+            return await repository.AllReadOnly<InternetService>()
+                .AnyAsync(h => h.Id == id);
+        }
+        public async Task<InternetFormModel> GetInternetFormModelByIdAsync(int id)
+        {
+            var internet = await repository.AllReadOnly<InternetService>()
+                .Where(h => h.Id == id)
+                .Select(h => new InternetFormModel()
+                {
+                    Id = h.Id,
+                    ActiveUntilDate = h.ActiveUntilDate,
+                    RouterMACAdress = h.RouterMACAdress,
+                    ProductModelId=h.ProductId
+                })
+                .FirstAsync();
+
+            return internet;
+        }
+        public async Task EditAsync(int internetId, InternetFormModel model)
+        {
+            var internet = await repository.GetByIdAsync<InternetService>(internetId);
+
+            if (internet != null)
+            {
+                internet.ActiveUntilDate = model.ActiveUntilDate;
+                internet.RouterMACAdress = model.RouterMACAdress;
+                internet.ProductId = model.ProductModelId;
+
+            }
+            await repository.SaveChangesAsync();
+        }
     }
 }

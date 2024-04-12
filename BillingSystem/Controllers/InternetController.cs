@@ -71,7 +71,31 @@ namespace BillingSystem.Controllers
 
             return View(modelNew);
         }
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (await internetService.ExistAsync(id) == false)
+            {
 
+                return BadRequest();
+            }
+
+            var model = await internetService.GetInternetFormModelByIdAsync(id);
+            model.Product = await internetService.GetProductModelIdAsync();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, InternetFormModel model)
+        {
+           
+            if (await internetService.ExistAsync(id) == false)
+            {
+                return BadRequest();
+            }
+
+            await internetService.EditAsync(id, model);
+            return RedirectToAction(nameof(Details), new { id });
+        }
 
     }
 }

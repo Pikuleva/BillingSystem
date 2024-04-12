@@ -14,11 +14,9 @@ namespace BillingSystem.Controllers
             this.satellieteService = satellieteService;
             this.clientService = clientService;
         }
-       //не взима ИД-то което му се подава от адд
+      
         public async Task<IActionResult> Details(int id, SatelliteDetails model)
         {
-            
-
             var modelNew = new SatelliteDetails();
             try
             {
