@@ -9,7 +9,7 @@ namespace BillingSystem.Core.Contracts
 
         Task<IEnumerable<ProductModel>> GetProductModelIdAsync();
 
-
+        Task<bool> IsExistMACAddress(string macAddress);
         Task<int> CreateAsync(InternetFormModel model);
         Task<IEnumerable<TypeOfServiceModel>> GetTypeModel();
     }

@@ -2,6 +2,7 @@
 using BillingSystem.Core.Services;
 using BillingSystem.Core.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using static BillingSystem.Core.Constants.MessageConstants;
 
 namespace BillingSystem.Controllers
 {
@@ -37,6 +38,13 @@ namespace BillingSystem.Controllers
                 return View(model);
             }
 
+            if (await internetService.IsExistMACAddress(model.RouterMACAdress) == false)
+            {
+                ModelState.AddModelError(nameof(model.RouterMACAdress), MACAddressExist);
+                model.Product = await internetService.GetProductModelIdAsync();
+                model.TypeOfServiceModels = await internetService.GetTypeModel();
+                return View(model);
+            }
 
             int internetId = await internetService.CreateAsync(model);
 

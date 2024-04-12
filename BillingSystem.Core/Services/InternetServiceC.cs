@@ -88,6 +88,10 @@ namespace BillingSystem.Core.Services
             return client;
         }
 
-
+        public async Task<bool> IsExistMACAddress(string macAddress)
+        {
+            return await repository.AllReadOnly<InternetService>()
+                .AnyAsync(m => m.RouterMACAdress == macAddress);
+        }
     }
 }

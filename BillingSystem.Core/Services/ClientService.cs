@@ -205,5 +205,20 @@ namespace BillingSystem.Core.Services
                 await repository.SaveChangesAsync();
             }
         }
+
+        public async Task<bool> IsValidCivilNumber(string civilNumber)
+        {
+            string regex = RegexCivilNumber;
+
+            Match match = Regex.Match(civilNumber, regex, RegexOptions.IgnoreCase);
+
+            if (civilNumber != string.Empty && match.Success)
+            {
+                return true;
+            }
+            return false;
+        }
+
+       
     }
 }

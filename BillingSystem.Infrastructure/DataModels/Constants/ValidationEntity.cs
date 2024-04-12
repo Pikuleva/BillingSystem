@@ -38,7 +38,7 @@
 
             public const string RegexValidationPhoneNumber = "^[0 - 9]{10}$";
 
-            public const string RegexCivilNumber = "^\\d{10}$";
+            public const string RegexCivilNumber = "^[0-9][0-9][0-1][0-9][0-3][0-9][0-9][0-9][0-9][0-9]$";
 
         }
         public static class ServiceConst

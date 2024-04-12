@@ -42,11 +42,12 @@ namespace BillingSystem.Controllers
                 ModelState.AddModelError(nameof(model.Email), EmailValidationMessage);
                 return View(model);
             }
-            if (await clientService.IsValidEmail(model.CivilNumber) == false)
+            if (await clientService.IsValidCivilNumber(model.CivilNumber) == false)
             {
                 ModelState.AddModelError(nameof(model.CivilNumber), InvalidCivilNumber);
                 return View(model);
             }
+       
 
             await clientService.CreateAsync(model);
             var modelView = new ClientDetail();

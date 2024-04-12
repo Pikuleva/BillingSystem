@@ -14,6 +14,8 @@
         public const string CivilNumberValidation = "ЕГН-то трябва да съдържа 10 цифри";
         public const string CivilNotValid = "Полето {0} не е валидно или клиента не същствува";
 
+        public const string MACAddressExist = "MAC адреса вече съществува";
+
        
     }
 }
