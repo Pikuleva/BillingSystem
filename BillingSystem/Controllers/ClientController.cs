@@ -84,9 +84,15 @@ namespace BillingSystem.Controllers
                     ModelState.AddModelError(nameof(model.CivilNumber), CivilNotValid);
                 }
             }
+            if (ModelState.IsValid==false)
+            {
+                ModelState.AddModelError(nameof(model.CivilNumber), CivilNotValid);
+                return View(model);
+            }
             if (await clientService.ExistAsync(model.Id) == false)
             {
-                return NotFound();
+                ModelState.AddModelError(nameof(model.CivilNumber), CivilNotValid);
+                return View(model);
             }
 
             return RedirectToAction(nameof(Details), model);
@@ -103,8 +109,14 @@ namespace BillingSystem.Controllers
                 if (model == null)
                 {
                     ModelState.AddModelError(nameof(model.CivilNumber), CivilNotValid);
+                    return View(model);
                 }
 
+            }
+            if (await clientService.ExistAsync(model.Id) == false)
+            {
+                ModelState.AddModelError(nameof(model.CivilNumber), CivilNotValid);
+                return View(model);
             }
 
             return View(modelNew);
