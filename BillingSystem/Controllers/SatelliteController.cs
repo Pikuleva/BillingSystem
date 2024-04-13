@@ -99,14 +99,19 @@ namespace BillingSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, SatelliteFormModel model)
         {
-
+            if (id == 0)
+            {
+                id = model.Id;
+            }
             if (await satellieteService.ExistAsync(id) == false)
             {
                 return BadRequest();
             }
 
             await satellieteService.EditAsync(id, model);
-            return RedirectToAction(nameof(Details), new { model.ClientId, model });
+            SatelliteDetails modelNew = new SatelliteDetails();
+            modelNew = await satellieteService.SatelliteServiceDetailsAsync(model.ClientId);
+            return RedirectToAction(nameof(Details), modelNew);
         }
     }
 }

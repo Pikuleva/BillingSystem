@@ -25,6 +25,7 @@ namespace BillingSystem.Core.Services
                 satelliteTV.ActiveUntilDate = model.ActiveUntilDate;
                 satelliteTV.SerialNumber = model.SerialNumber;
                 satelliteTV.ProductId = model.ProductModelId;
+                model.ClientId= satelliteTV.ClientId;
             }
             await repository.SaveChangesAsync();
         }
