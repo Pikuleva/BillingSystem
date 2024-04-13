@@ -78,8 +78,8 @@ namespace BillingSystem.Core.Services
                     DeviceName=c.IPTV.Name,
                     ActiveUntilDate=c.IPTV.ActiveUntilDate,
                     Price=c.IPTV.Product.Price,
-                    SerialNumber=c.IPTV.SerialNumber
-
+                    SerialNumber=c.IPTV.SerialNumber,
+                    ClientId=c.Id
                 })
                 .FirstAsync();
 

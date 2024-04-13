@@ -176,7 +176,7 @@ namespace BillingSystem.Core.Services
         {
             var client = await repository.GetByIdAsync<Client>(clientId);
             var model = await repository.GetByIdAsync<IPTV>(iptvId);
-
+            model.ClientId = clientId;
             if (client != null && model != null)
             {
                 client.IPTV = model;
@@ -187,7 +187,7 @@ namespace BillingSystem.Core.Services
         {
             var client = await repository.GetByIdAsync<Client>(clientId);
             var model = await repository.GetByIdAsync<SatelliteTV>(satId);
-
+            model.ClientId= clientId;
             if (client != null && model != null)
             {
                 client.SatelliteTV = model;

@@ -55,12 +55,16 @@ namespace BillingSystem.Controllers
 
             return RedirectToAction(nameof(Details), modelView);
         }
-        public async Task<IActionResult> Details(int id, InternetDetails model)
+        public async Task<IActionResult> Details(int id,InternetDetails model)
         {
+            if (id==0)
+            {
+                id = model.ClientId;
+            }
             var modelNew = new InternetDetails();
             try
             {
-                modelNew = await internetService.InternetServiceDetailsAsync(model.ClientId);
+                modelNew = await internetService.InternetServiceDetailsAsync(id);
             }
             catch (Exception)
             {
