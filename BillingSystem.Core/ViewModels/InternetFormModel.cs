@@ -30,13 +30,14 @@ namespace BillingSystem.Core.ViewModels
         [Display(Name = "План")]
         public int ProductModelId { get; set; }
 
-
+        public int ClientId { get; set; }
 
         public IEnumerable<ProductModel> Product { get; set; } = new List<ProductModel>();
 
         public IEnumerable<TypeOfServiceModel> TypeOfServiceModels { get; set; } = new List<TypeOfServiceModel>();
 
-        public int ClientId { get; set; }
+       
+
 
     }
 }

@@ -17,9 +17,9 @@ namespace BillingSystem.Controllers
             this.clientService = clientService;
         }
         [HttpGet]
-        public async Task<IActionResult> Add()
+        public async Task<IActionResult> Add(int clientId)
         {
-
+            
             var model = new InternetFormModel()
             {
 
@@ -29,8 +29,9 @@ namespace BillingSystem.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Add(InternetFormModel model)
+        public async Task<IActionResult> Add(InternetFormModel model,int id)
         {
+            var clientId = id;
             if (ModelState.IsValid == false)
             {
                 model.Product = await internetService.GetProductModelIdAsync();
@@ -45,20 +46,21 @@ namespace BillingSystem.Controllers
                 model.TypeOfServiceModels = await internetService.GetTypeModel();
                 return View(model);
             }
-
+            model.ClientId= clientId;
             int internetId = await internetService.CreateAsync(model);
 
-            await clientService.AddInternetAsync(model.Id, internetId);
+            await clientService.AddInternetAsync(model.ClientId, internetId);
+            var modelView = new InternetDetails();
+            modelView = await internetService.InternetServiceDetailsAsync(model.ClientId);
 
-
-            return RedirectToAction(nameof(Details), new { model.Id });
+            return RedirectToAction(nameof(Details), modelView);
         }
         public async Task<IActionResult> Details(int id, InternetDetails model)
         {
             var modelNew = new InternetDetails();
             try
             {
-                modelNew = await internetService.InternetServiceDetailsAsync(id);
+                modelNew = await internetService.InternetServiceDetailsAsync(model.ClientId);
             }
             catch (Exception)
             {

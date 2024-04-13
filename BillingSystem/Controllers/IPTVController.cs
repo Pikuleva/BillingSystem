@@ -36,7 +36,7 @@ namespace BillingSystem.Controllers
         }
         [HttpGet]
 
-        public async Task<IActionResult> Add()
+        public async Task<IActionResult> Add(int clientId)
         {
 
             var model = new IPTVFormModel()
@@ -44,6 +44,7 @@ namespace BillingSystem.Controllers
                 Product = await IPTVService.GetProductModelIdAsync(),
                 TypeOfServiceModels = await IPTVService.GetTypeModel()
             };
+            model.ClientId = clientId;
             return View(model);
         }
         [HttpPost]
@@ -59,7 +60,7 @@ namespace BillingSystem.Controllers
 
             int newIptvId = await IPTVService.CreateAsync(model);
 
-            await clientService.AddIptvAsync(model.Id, newIptvId);
+            await clientService.AddIptvAsync(model.ClientId, newIptvId);
 
 
             return RedirectToAction(nameof(Details), new { model.Id });

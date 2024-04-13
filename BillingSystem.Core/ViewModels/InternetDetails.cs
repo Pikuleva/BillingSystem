@@ -8,5 +8,6 @@
         public DateTime ActiveUntilDate { get; set; }
         public string RouterMAC { get; set; }
         public decimal Price { get; set; }
+        public int ClientId { get; set; }
     }
 }

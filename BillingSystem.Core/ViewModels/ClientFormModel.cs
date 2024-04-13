@@ -42,6 +42,7 @@ namespace BillingSystem.Core.ViewModels
         [StringLength(EmailMaxLength,MinimumLength =EmailMinLength,ErrorMessage =EmailValidationMessage)]
         public string Email { get; set; } = string.Empty;
 
+       
         public InternetFormModel? InternetFormModel { get; set; }
 
         public IPTVFormModel? IPTVFormModel { get; set; }

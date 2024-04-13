@@ -36,7 +36,7 @@
                 <div asp-for="ActiveUntilDate" class="form-group">
                     <div class="input-group date" id="datetimepicker1">
                         <label asp-for="ActiveUntilDate">Платено до: </label>
-                        <input asp-for="@Model.ActiveUntilDate" type="datetime" class="form-control" value="@Model.ActiveUntilDate" placeholder="ActiveUntilDate" />
+                        <input asp-for="@Model.ActiveUntilDate" type="datetime" class="form-control" value="@Model.ActiveUntilDate.ToString("yyyy-MM-dd H:mm")" placeholder="ActiveUntilDate" />
                         <span asp-validation-for="ActiveUntilDate" class="small text-danger"></span>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                 <div class="form-group">
                     <div class="input-group datetime" id="datetimepicker1">
                         <label asp-for="ActiveUntilDate"></label>
-                        <input asp-for="ActiveUntilDate" type="date"  class="form-control" value="@DateTime.Now.ToString("dd/MM/yyyy")" />
+                        <input asp-for="ActiveUntilDate" type="date" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd H:mm")" />
                         <span asp-validation-for="ActiveUntilDate" class="text-danger"></span>
                     </div>
                 </div>

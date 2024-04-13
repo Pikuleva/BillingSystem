@@ -23,6 +23,7 @@ namespace BillingSystem.Core.Services
                 SerialNumber = model.SerialNumber,
                 ActiveUntilDate = model.ActiveUntilDate,
                 ProductId = model.ProductModelId
+               
             };
 
             await repository.AddAsync(iPTVFormModel);
@@ -92,20 +93,20 @@ namespace BillingSystem.Core.Services
         }
         public async Task<IPTVFormModel> GetIPTVFormModelByIdAsync(int id)
         {
-            var internet = await repository.AllReadOnly<IPTV>()
+            var iptv = await repository.AllReadOnly<IPTV>()
                 .Where(h => h.Id == id)
                 .Select(h => new IPTVFormModel()
                 {
-                    Id = h.Id,
+                   Id=id,
                     Name=h.Name,
                     ActiveUntilDate = h.ActiveUntilDate,
                     SerialNumber = h.SerialNumber,
                     ProductModelId = h.ProductId,
-                    ClientId = h.ClientId
+                    ClientId =h.ClientId
                 })
                 .FirstAsync();
 
-            return internet;
+            return iptv;
         }
         public async Task EditAsync(int iptvId, IPTVFormModel model)
         {

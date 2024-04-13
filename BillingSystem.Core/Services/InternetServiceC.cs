@@ -78,7 +78,8 @@ namespace BillingSystem.Core.Services
                     Name = c.InternetService.Name,
                     RouterMAC = c.InternetService.RouterMACAdress,
                     ActiveUntilDate = c.InternetService.ActiveUntilDate,
-                    Price = c.InternetService.Product.Price
+                    Price = c.InternetService.Product.Price,
+                    ClientId= clientId
                 })
                 .FirstAsync();
           

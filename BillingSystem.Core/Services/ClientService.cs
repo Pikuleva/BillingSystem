@@ -198,7 +198,7 @@ namespace BillingSystem.Core.Services
         {
             var client = await repository.GetByIdAsync<Client>(clientId);
             var model = await repository.GetByIdAsync<InternetService>(internetId);
-
+            model.ClientId=clientId;
             if (client != null && model != null)
             {
                 client.InternetService = model;
