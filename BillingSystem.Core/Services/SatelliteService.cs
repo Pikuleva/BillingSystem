@@ -14,7 +14,20 @@ namespace BillingSystem.Core.Services
             this.repository = repository;
         }
 
-    
+        public async Task EditAsync(int satId, SatelliteFormModel model)
+        {
+            var satelliteTV = await repository.GetByIdAsync<SatelliteTV>(satId);
+
+            if (satelliteTV != null)
+            {
+                satelliteTV.Id = satId;
+                satelliteTV.Name = model.Name;
+                satelliteTV.ActiveUntilDate = model.ActiveUntilDate;
+                satelliteTV.SerialNumber = model.SerialNumber;
+                satelliteTV.ProductId = model.ProductModelId;
+            }
+            await repository.SaveChangesAsync();
+        }
 
         public async Task<IEnumerable<ProductModel>> GetProductModelIdAsync()
         {
@@ -42,16 +55,17 @@ namespace BillingSystem.Core.Services
                 return null;
             }
 
-            var satTv = await repository.AllReadOnly<SatelliteTV>()
-                .Where(s => s.Id == service)
+            SatelliteDetails satTv = await repository.AllReadOnly<Client>()
+                .Where(s => s.Id == clientId)
                 .Select(s => new SatelliteDetails()
                 {
-                    Id = s.Id,
-                    DeviceName=s.Name,
-                    SerialNumber = s.SerialNumber,
-                    NameOfService = s.Product.Name,
-                    Price = s.Product.Price,
-                    UntilDate = DateTime.Now
+                    Id = s.SatelliteTV.Id,
+                    DeviceName=s.SatelliteTV.Name,
+                    SerialNumber = s.SatelliteTV.SerialNumber,
+                    NameOfService = s.SatelliteTV.Product.Name,
+                    Price = s.SatelliteTV.Product.Price,
+                    ActiveUntilDate=s.SatelliteTV.ActiveUntilDate,
+                    ClientId=s.Id
                 })
                 .FirstAsync();
             return satTv;
@@ -85,7 +99,27 @@ namespace BillingSystem.Core.Services
                 })
                 .ToListAsync();
         }
+        public async Task<SatelliteFormModel> GetSatelliteFormModelAsync(int id)
+        {
+            var sat = await repository.AllReadOnly<SatelliteTV>()
+                .Where(h => h.Id == id)
+                .Select(h => new SatelliteFormModel()
+                {
+                    Id = id,
+                    Name = h.Name,
+                    ActiveUntilDate = h.ActiveUntilDate,
+                    SerialNumber = h.SerialNumber,
+                    ProductModelId = h.ProductId,
+                    ClientId = h.ClientId
+                })
+                .FirstAsync();
 
-       
+            return sat;
+        }
+        public async Task<bool> ExistAsync(int id)
+        {
+            return await repository.AllReadOnly<SatelliteTV>()
+                .AnyAsync(h => h.Id == id);
+        }
     }
 }
