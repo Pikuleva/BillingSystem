@@ -113,11 +113,7 @@ namespace BillingSystem.Controllers
                 }
 
             }
-            if (await clientService.ExistAsync(model.Id) == false)
-            {
-                ModelState.AddModelError(nameof(model.CivilNumber), CivilNotValid);
-                return View(model);
-            }
+
 
             return View(modelNew);
         }
