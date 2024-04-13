@@ -1,5 +1,6 @@
 ﻿using BillingSystem.Core.Contracts;
 using BillingSystem.Core.ViewModels;
+using BillingSystem.Infrastructure.DataModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BillingSystem.Controllers
@@ -99,14 +100,19 @@ namespace BillingSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, IPTVFormModel model)
         {
-
+            if (id==0)
+            {
+                id = model.Id;
+            }
             if (await IPTVService.ExistAsync(id) == false)
             {
                 return BadRequest();
             }
 
             await IPTVService.EditAsync(id, model);
-            return RedirectToAction(nameof(Details), new { model.ClientId, model });
+            IPTVDetails modelNew = new IPTVDetails();
+            modelNew = await IPTVService.IPTVServiceDetailsAsync(model.ClientId);
+            return RedirectToAction(nameof(Details), modelNew);
         }
     }
 }

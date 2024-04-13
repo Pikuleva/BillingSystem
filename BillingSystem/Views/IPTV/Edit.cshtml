@@ -33,21 +33,15 @@
                     <span asp-validation-for="ProductModelId" class="small text-danger"></span>
                 </div>
 
-                <div asp-for="ActiveUntilDate" class="form-group">
-                    <div class="input-group date" id="datetimepicker1">
-                        <label asp-for="ActiveUntilDate">Платено до: </label>
-                        <input asp-for="@Model.ActiveUntilDate" type="datetime" class="form-control" value="@Model.ActiveUntilDate.ToString("yyyy-MM-dd H:mm")" placeholder="ActiveUntilDate" />
-                        <span asp-validation-for="ActiveUntilDate" class="small text-danger"></span>
-                    </div>
-                </div>
+
+                <p class="mb-0 text-start">Активна услуга до : @Model.ActiveUntilDate</p>
 
 
-                <div class="form-group">
-                    <div class="input-group datetime" id="datetimepicker1">
-                        <label asp-for="ActiveUntilDate"></label>
-                        <input asp-for="ActiveUntilDate" type="date" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd H:mm")" />
-                        <span asp-validation-for="ActiveUntilDate" class="text-danger"></span>
-                    </div>
+
+                <div class="mb-3">
+                    <label asp-for="@Model.ActiveUntilDate" class="form-label-add-edit">Плащане до:</label>
+                    <input asp-for="@Model.ActiveUntilDate" class="form-control" aria-required="true" value="@Model.ActiveUntilDate.ToString("yyyy-MM-dd H:mm")" />
+                    <span asp-validation-for="@Model.ActiveUntilDate" class="text-danger"></span>
                 </div>
 
                 <div class="text-center">

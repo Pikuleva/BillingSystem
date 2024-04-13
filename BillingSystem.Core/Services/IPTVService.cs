@@ -119,6 +119,7 @@ namespace BillingSystem.Core.Services
                 iptv.ActiveUntilDate = model.ActiveUntilDate;
                 iptv.SerialNumber = model.SerialNumber;
                 iptv.ProductId = model.ProductModelId;
+                model.ClientId = iptv.ClientId;
             }
             await repository.SaveChangesAsync();
         }

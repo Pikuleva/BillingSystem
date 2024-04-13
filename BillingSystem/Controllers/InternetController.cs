@@ -57,10 +57,23 @@ namespace BillingSystem.Controllers
         }
         public async Task<IActionResult> Details(int id,InternetDetails model)
         {
-            if (id==0)
+            if(id != 0 && model.ClientId != 0)
+            {
+                var modelNe = new InternetDetails();
+                modelNe = await internetService.InternetServiceDetailsAsync(model.ClientId);
+                return View(modelNe);
+            }
+            if (id != 0 && model.ClientId == 0)
+            {
+                var modelNe = new InternetDetails();
+                modelNe = await internetService.InternetServiceDetailsAsync(id);
+                return View(modelNe);
+            }
+            if (id == 0)
             {
                 id = model.ClientId;
             }
+
             var modelNew = new InternetDetails();
             try
             {
@@ -100,7 +113,9 @@ namespace BillingSystem.Controllers
             }
 
             await internetService.EditAsync(id, model);
-            return RedirectToAction(nameof(Details), new {model.ClientId, model});
+            InternetDetails modelNew = new InternetDetails();
+            modelNew = await internetService.InternetServiceDetailsAsync(model.ClientId);
+            return RedirectToAction(nameof(Details),  modelNew);
         }
 
     }

@@ -22,7 +22,8 @@ namespace BillingSystem.Core.Services
                 Name = model.Name.ToString(),
                 ActiveUntilDate = model.ActiveUntilDate,
                 ProductId = model.ProductModelId,
-                RouterMACAdress = model.RouterMACAdress
+                RouterMACAdress = model.RouterMACAdress,
+             
 
             };
           
@@ -122,6 +123,7 @@ namespace BillingSystem.Core.Services
                 internet.ActiveUntilDate = model.ActiveUntilDate;
                 internet.RouterMACAdress = model.RouterMACAdress;
                 internet.ProductId = model.ProductModelId;
+                model.ClientId = internet.ClientId;
             }
             await repository.SaveChangesAsync();
         }
