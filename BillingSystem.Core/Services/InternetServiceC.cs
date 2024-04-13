@@ -70,20 +70,20 @@ namespace BillingSystem.Core.Services
                 return null;
             }
 
-            var client = await repository.AllReadOnly<Client>()
+            InternetDetails clientInternet = await repository.AllReadOnly<Client>()
                 .Where(c => c.Id == clientId)
                 .Select(c => new InternetDetails()
                 { 
                     Id=c.InternetService.Id,
                     Name = c.InternetService.Name,
                     RouterMAC = c.InternetService.RouterMACAdress,
-                    UntilDate = c.InternetService.ActiveUntilDate,
+                    ActiveUntilDate = c.InternetService.ActiveUntilDate,
                     Price = c.InternetService.Product.Price
                 })
                 .FirstAsync();
           
 
-            return client;
+            return clientInternet;
         }
 
         public async Task<bool> IsExistMACAddress(string macAddress)
@@ -105,7 +105,8 @@ namespace BillingSystem.Core.Services
                     Id = h.Id,
                     ActiveUntilDate = h.ActiveUntilDate,
                     RouterMACAdress = h.RouterMACAdress,
-                    ProductModelId=h.ProductId
+                    ProductModelId=h.ProductId,
+                    ClientId=h.ClientId
                 })
                 .FirstAsync();
 
@@ -120,7 +121,6 @@ namespace BillingSystem.Core.Services
                 internet.ActiveUntilDate = model.ActiveUntilDate;
                 internet.RouterMACAdress = model.RouterMACAdress;
                 internet.ProductId = model.ProductModelId;
-
             }
             await repository.SaveChangesAsync();
         }

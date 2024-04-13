@@ -1,5 +1,60 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model SatelliteFormModel
+
 @{
+    ViewBag.Title = "Редактиране";
 }
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.min.js"></script>
+<div class="wrapper">
+    <form asp-action="Edit" method="post">
+        <div id="wizard">
+            <section>
+                <div asp-for="@Model.Name" class="form-row">
+                    <input asp-for="@Model.Name" type="text" class="form-control" placeholder="@Model.Name">
+                </div>
+                <span asp-validation-for="@Model.Name" class="small text-danger"></span>
+                <div asp-for="SerialNumber" class="form-row">
+                    <input asp-for="@Model.SerialNumber" type="text" class="form-control" placeholder="SerialNumber">
+                </div>
+                <span asp-validation-for="SerialNumber" class="small text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="ProductModelId"></label>
+                    <select asp-for="ProductModelId" class="form-control">
+                        @foreach (var product in Model.Product)
+
+                        {
+                            <option value="@product.Id">@product.Name - @product.Price лв</option>
+                        }
+                    </select>
+                    <span asp-validation-for="ProductModelId" class="small text-danger"></span>
+                </div>
+
+                <div asp-for="ActiveUntilDate" class="form-group">
+                    <div class="input-group date" id="datetimepicker1">
+                        <label asp-for="ActiveUntilDate">Платено до: </label>
+                        <input asp-for="@Model.ActiveUntilDate" type="datetime" class="form-control" value="@Model.ActiveUntilDate" placeholder="ActiveUntilDate" />
+                        <span asp-validation-for="ActiveUntilDate" class="small text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="input-group datetime" id="datetimepicker1">
+                        <label asp-for="ActiveUntilDate"></label>
+                        <input asp-for="ActiveUntilDate" type="date" class="form-control" value="@DateTime.Now.ToString("dd/MM/yyyy")" />
+                        <span asp-validation-for="ActiveUntilDate" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="text-center">
+
+                    <input class="btn btn-primary mt-3" type="submit" value="Save" />
+                </div>
+            </section>
+        </div>
+    </form>
+</div>

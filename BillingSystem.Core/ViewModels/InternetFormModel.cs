@@ -10,8 +10,6 @@ namespace BillingSystem.Core.ViewModels
     {
         public int Id { get; set; }
 
-      
-        public DateTime UntilDate {  get; set; }
         [Required]
         [Display(Name="MAC адрес")]
         public string RouterMACAdress { get; set; } = string.Empty;

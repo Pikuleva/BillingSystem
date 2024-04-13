@@ -75,7 +75,7 @@ namespace BillingSystem.Core.Services
                     Id = c.IPTV.Id,
                     NameOfService=c.IPTV.Product.Name,
                     DeviceName=c.IPTV.Name,
-                    UntilDate=c.IPTV.ActiveUntilDate,
+                    ActiveUntilDate=c.IPTV.ActiveUntilDate,
                     Price=c.IPTV.Product.Price,
                     SerialNumber=c.IPTV.SerialNumber
 
@@ -84,6 +84,42 @@ namespace BillingSystem.Core.Services
 
 
             return iptvModel;
+        }
+        public async Task<bool> ExistAsync(int id)
+        {
+            return await repository.AllReadOnly<IPTV>()
+                .AnyAsync(h => h.Id == id);
+        }
+        public async Task<IPTVFormModel> GetIPTVFormModelByIdAsync(int id)
+        {
+            var internet = await repository.AllReadOnly<IPTV>()
+                .Where(h => h.Id == id)
+                .Select(h => new IPTVFormModel()
+                {
+                    Id = h.Id,
+                    Name=h.Name,
+                    ActiveUntilDate = h.ActiveUntilDate,
+                    SerialNumber = h.SerialNumber,
+                    ProductModelId = h.ProductId,
+                    ClientId = h.ClientId
+                })
+                .FirstAsync();
+
+            return internet;
+        }
+        public async Task EditAsync(int iptvId, IPTVFormModel model)
+        {
+            var iptv = await repository.GetByIdAsync<IPTV>(iptvId);
+
+            if (iptv != null)
+            {
+                iptv.Id = iptvId;
+                iptv.Name = model.Name;
+                iptv.ActiveUntilDate = model.ActiveUntilDate;
+                iptv.SerialNumber = model.SerialNumber;
+                iptv.ProductId = model.ProductModelId;
+            }
+            await repository.SaveChangesAsync();
         }
     }
 }

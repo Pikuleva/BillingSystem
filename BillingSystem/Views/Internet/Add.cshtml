@@ -48,7 +48,7 @@
             <div class="form-group">
                 <div class="input-group date" id="datetimepicker1">
                     <label asp-for="ActiveUntilDate"></label>
-                    <input asp-for="ActiveUntilDate" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd H:mm")" />
+                    <input asp-for="ActiveUntilDate" class="form-control" value="@DateTime.UtcNow.ToString("yyyy-MM-dd")" />
                     <span asp-validation-for="ActiveUntilDate" class="small text-danger"></span>
                 </div>
                 </div>
