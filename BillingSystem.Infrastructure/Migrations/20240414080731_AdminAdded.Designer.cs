@@ -4,6 +4,7 @@ using BillingSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BillingSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(BillingSystemDbContext))]
-    partial class BillingSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240414080731_AdminAdded")]
+    partial class AdminAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,7 +184,7 @@ namespace BillingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            ActiveUntilDate = new DateTime(2024, 5, 14, 11, 10, 17, 735, DateTimeKind.Local).AddTicks(81),
+                            ActiveUntilDate = new DateTime(2024, 5, 14, 11, 7, 30, 973, DateTimeKind.Local).AddTicks(5153),
                             ClientId = 9999,
                             IsActive = true,
                             Name = "InternetProduct75Mbps",
@@ -237,7 +239,7 @@ namespace BillingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            ActiveUntilDate = new DateTime(2024, 5, 14, 11, 10, 17, 739, DateTimeKind.Local).AddTicks(2492),
+                            ActiveUntilDate = new DateTime(2024, 5, 14, 11, 7, 30, 977, DateTimeKind.Local).AddTicks(7961),
                             ClientId = 9999,
                             IsActive = true,
                             Name = "WinMat",
@@ -438,7 +440,7 @@ namespace BillingSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            ActiveUntilDate = new DateTime(2024, 5, 14, 11, 10, 17, 743, DateTimeKind.Local).AddTicks(4678),
+                            ActiveUntilDate = new DateTime(2024, 5, 14, 11, 7, 30, 982, DateTimeKind.Local).AddTicks(341),
                             ClientId = 9999,
                             IsActive = true,
                             Name = "PomSat",
@@ -657,15 +659,15 @@ namespace BillingSystem.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d826-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ae90d36f-d362-4a37-bf97-bf4c4f6f78ee",
+                            ConcurrencyStamp = "3d52d9b2-58f4-4f50-b8e7-376208ceeba3",
                             Email = "cashier@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "cashier@mail.com",
                             NormalizedUserName = "cashier@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKCZFOT5a7FfVh1hqkcDyAA1/ublPbheo6H12jXYz8q+XbcEhV9HLwXXXBEuE7VZnA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHm/Cr21dFFpM/mCSqrBMvukSSnlK4fWmrGY6GwpJV0fzE7/xpZCDCqKVkSQNopB6g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3e7a2a9e-acbe-49bb-9de4-51c7716bc1ab",
+                            SecurityStamp = "543b86bb-f62e-46f1-86a8-61b45582c0ae",
                             TwoFactorEnabled = false,
                             UserName = "cashier@mail.com"
                         },
@@ -673,15 +675,15 @@ namespace BillingSystem.Infrastructure.Migrations
                         {
                             Id = "6d5610ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "509081e4-4f4b-4347-9518-42380789d1df",
+                            ConcurrencyStamp = "2874ab46-ae06-4ae3-a556-e89fdfbfe342",
                             Email = "support@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "support@mail.com",
                             NormalizedUserName = "support@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPsSyH3z/cbB/GQ0za/ZGIyOavPHGyGs7JJ/1I9tf7eQCNF1/04f7p+JKlPh+ug3ng==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDEwWXLRBBHBRVLyRKPPuWwTIeQFBGIYxpiXkijFkagzY6iErV1U4/6RMp7P41FZug==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f2e793fe-5626-47db-bd61-2c4487643171",
+                            SecurityStamp = "9ca5b778-d0e9-4e07-a79b-7fad0f08720c",
                             TwoFactorEnabled = false,
                             UserName = "support@mail.com"
                         },
@@ -689,33 +691,17 @@ namespace BillingSystem.Infrastructure.Migrations
                         {
                             Id = "dea12896-c198-4129-b3f3-b893d8395082",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6a5416b8-9503-4298-ad49-79319ebedcc2",
+                            ConcurrencyStamp = "0ebfde98-8483-4c6d-abe4-cb39ea11681e",
                             Email = "client@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "client@mail.com",
                             NormalizedUserName = "client@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEETGqT7hP59FcXNbEEzMjbDGEr0RgFpU+JKUbDMR4vRYPkykywXzsmEOK33CFRJEEg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEtkk4ncQGJKR78TvA/nET8YiqbiV1Cc/WZRBQV5JI1sjlIxeTVDRrhxcW6EgPTJAQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6613ddd9-04bf-4af7-b592-d618c099c254",
+                            SecurityStamp = "de72cda8-6179-4d47-be0c-5d879f3e726b",
                             TwoFactorEnabled = false,
                             UserName = "client@mail.com"
-                        },
-                        new
-                        {
-                            Id = "6d5610ce-d726-4fc8-83d8-d6b3ac1f591e",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "c935e0f0-2801-44a8-aa50-4a6af7de5a13",
-                            Email = "admin@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "admin@mail.com",
-                            NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGzAW+ec7xYgArNw88NYrO0x5PDRr9bfBWlg72MefzRVQm1Q39M+LxwAldxH2Paskg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "9a920844-0900-4469-b429-45fe4c465c59",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@mail.com"
                         });
                 });
 

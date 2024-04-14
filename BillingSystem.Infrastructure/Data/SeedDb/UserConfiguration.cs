@@ -9,7 +9,7 @@ namespace BillingSystem.Infrastructure.Data.SeedDb
         public void Configure(EntityTypeBuilder<IdentityUser> builder)
         {
             var data = new SeedData();
-            builder.HasData(new IdentityUser[] { data.CashierUser, data.SupportUser,data.ClientUser });
+            builder.HasData(new IdentityUser[] { data.CashierUser, data.SupportUser,data.ClientUser,data.AdminUser});
         }
     }
 }

@@ -7,6 +7,7 @@ namespace BillingSystem.Infrastructure.Data.SeedDb
     public class SeedData
     {
         public IdentityUser ClientUser { get; set; }
+        public IdentityUser AdminUser { get; set; }
         public IdentityUser CashierUser { get; set; }
         public IdentityUser SupportUser { get; set; }
         public Product InternetProduct25Mbps { get; set; }
@@ -116,6 +117,16 @@ namespace BillingSystem.Infrastructure.Data.SeedDb
                     NormalizedEmail = "support@mail.com"
                 };
                 SupportUser.PasswordHash = hasher.HashPassword(SupportUser, "support123");
+
+                AdminUser = new IdentityUser()
+                {
+                    Id = "6d5610ce-d726-4fc8-83d8-d6b3ac1f591e",
+                    UserName = "admin@mail.com",
+                    NormalizedUserName = "admin@mail.com",
+                    Email = "admin@mail.com",
+                    NormalizedEmail = "admin@mail.com"
+                };
+                AdminUser.PasswordHash = hasher.HashPassword(AdminUser, "admin123");
             }
         }
         private void SeedTypeOfService()
