@@ -2,6 +2,7 @@
 using BillingSystem.Core.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using static BillingSystem.Core.Constants.MessageConstants;
 
 namespace BillingSystem.Controllers
@@ -31,7 +32,14 @@ namespace BillingSystem.Controllers
             {
                 return View(model);
             }
-
+            if (User.IsCashier() == false)
+            {
+                return Unauthorized();
+            }
+            if (User.IsAdmin() == false)
+            {
+                return Unauthorized();
+            }
             if (await clientService.ExistByCivilNumberAsync(model.CivilNumber))
             {
                 ModelState.AddModelError(nameof(model.CivilNumber), CivilExist);
@@ -123,10 +131,25 @@ namespace BillingSystem.Controllers
             {
                 return BadRequest();
             }
+            if (User.IsCashier() == true)
+            {
+                var model = await clientService.GetClientFormModelByIdAsync(id);
+                return View(model);
+            }
+            if (User.IsAdmin())
+            {
+                var model = await clientService.GetClientFormModelByIdAsync(id);
 
-            var model = await clientService.GetClientFormModelByIdAsync(id);
+                return View(model);
+            }
+            if (User.IsSupport())
+            {
+                var model = await clientService.GetClientFormModelByIdAsync(id);
 
-            return View(model);
+                return View(model);
+            }
+
+            return Unauthorized();
         }
 
         [HttpPost]

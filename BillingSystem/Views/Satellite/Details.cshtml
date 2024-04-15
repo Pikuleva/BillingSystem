@@ -11,9 +11,12 @@
     <p class="mb-0 text-start">Активан услуга до : @Model.ActiveUntilDate</p>
     <p class="mb-0 text-start">Сериен номер на устройството: @Model.SerialNumber</p>
     <p class="mb-0 text-start">Име на устройстовто: @Model.DeviceName</p>
-
-    <form method="get">
-        <a href="/Satellite/Edit/@Model.Id" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Редактиране</a>
-    </form>
+    @if (this.User.Identity.IsAuthenticated && (User.IsAdmin() == true || User.IsCashier() == true))
+    {
+        <form method="get">
+            <a href="/Satellite/Edit/@Model.Id" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Редактиране</a>
+        </form>
+    }
+   
 
 </div>
