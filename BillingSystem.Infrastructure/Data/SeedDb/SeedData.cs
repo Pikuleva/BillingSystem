@@ -96,7 +96,7 @@ namespace BillingSystem.Infrastructure.Data.SeedDb
                     Email = "client@mail.com",
                     NormalizedEmail = "client@mail.com"
                 };
-                ClientUser.PasswordHash = hasher.HashPassword(ClientUser, "clent123");
+                ClientUser.PasswordHash = hasher.HashPassword(ClientUser, "client123");
 
                 CashierUser = new IdentityUser()
                 {

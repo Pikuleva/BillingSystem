@@ -2,9 +2,9 @@
 {
     public class RoleConstants
     {
-        public const string AdminRole = "ADMINISTRATOR";
-        public const string CashierRole = "CASHIER";
-        public const string SupportRole = "SUPPORT";
-        public const string ClientRole = "CLIENT";
+        public const string AdminRole = "Administrator";
+        public const string CashierRole = "Cashier";
+        public const string SupportRole = "Support";
+        public const string ClientRole = "Client";
     }
 }

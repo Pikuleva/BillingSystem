@@ -10,11 +10,10 @@ using Moq;
 
 namespace BillingSystem.Tests
 {
-    [TestFixture]
-    public class IPTVServiceTest
+    public class InternetServiceTest
     {
         private IRepository repository;
-        private IIPTVService iptvService;
+        private IInternetService internetService;
         private IClientService clientService;
         private BillingSystemDbContext context;
         private ILogger logger;
@@ -31,47 +30,44 @@ namespace BillingSystem.Tests
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
         }
-   
-       
-            [Test]
-            public async Task TestCreateAsync()
+        [Test]
+        public async Task TestCreateAsync()
+        {
+            var loggerMock = new Mock<ILogger<ClientService>>();
+            logger = loggerMock.Object;
+            var repo = new Repository(context);
+            internetService = new InternetServiceC(repo);
+
+            await internetService.CreateAsync(new InternetFormModel()
             {
-                var loggerMock = new Mock<ILogger<IPTVService>>();
-                logger = loggerMock.Object;
-                var repo = new Repository(context);
-                iptvService = new IPTVService(repo);
+                Id = 2,
+                RouterMACAdress = "5F:7F:81:98:98:12"
+            });
+            await repo.SaveChangesAsync();
 
-                await iptvService.CreateAsync(new IPTVFormModel()
-                {
-                    Id = 2,
-                   SerialNumber=3222222
-                });
-                await repo.SaveChangesAsync();
+            var internet = await repo.GetByIdAsync<InternetService>(2);
 
-                var iptv = await repo.GetByIdAsync<IPTV>(2);
-
-                Assert.That(iptv.SerialNumber, Is.EqualTo(3222222));
-            }
+            Assert.That(internet.RouterMACAdress, Is.EqualTo("5F:7F:81:98:98:12"));
+        }
         [Test]
         public async Task ExistAsync()
         {
-            var loggerMock = new Mock<ILogger<IPTVService>>();
+            var loggerMock = new Mock<ILogger<InternetServiceC>>();
             logger = loggerMock.Object;
             var repo = new Repository(context);
-            iptvService = new IPTVService(repo);
+            internetService = new InternetServiceC(repo);
 
-            await iptvService.CreateAsync(new IPTVFormModel()
+            await internetService.CreateAsync(new InternetFormModel()
             {
                 Id = 2,
-                SerialNumber = 3222211
+                RouterMACAdress = "5F:7F:80:98:98:12"
 
             });
             await repo.SaveChangesAsync();
 
-            var satTv = await iptvService.ExistAsync(2);
+            var satTv = await internetService.ExistAsync(2);
 
             Assert.That(satTv, Is.EqualTo(true));
         }
     }
 }
-

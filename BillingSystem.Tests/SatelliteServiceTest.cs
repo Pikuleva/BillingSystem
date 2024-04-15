@@ -10,11 +10,11 @@ using Moq;
 
 namespace BillingSystem.Tests
 {
-    [TestFixture]
-    public class IPTVServiceTest
+    public class SatelliteServiceTest
     {
+
         private IRepository repository;
-        private IIPTVService iptvService;
+        private ISatellieteService satelliteService;
         private IClientService clientService;
         private BillingSystemDbContext context;
         private ILogger logger;
@@ -31,47 +31,46 @@ namespace BillingSystem.Tests
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
         }
-   
-       
-            [Test]
-            public async Task TestCreateAsync()
-            {
-                var loggerMock = new Mock<ILogger<IPTVService>>();
-                logger = loggerMock.Object;
-                var repo = new Repository(context);
-                iptvService = new IPTVService(repo);
-
-                await iptvService.CreateAsync(new IPTVFormModel()
-                {
-                    Id = 2,
-                   SerialNumber=3222222
-                });
-                await repo.SaveChangesAsync();
-
-                var iptv = await repo.GetByIdAsync<IPTV>(2);
-
-                Assert.That(iptv.SerialNumber, Is.EqualTo(3222222));
-            }
         [Test]
-        public async Task ExistAsync()
+        public async Task GetSatelliteFormModelAsync()
         {
-            var loggerMock = new Mock<ILogger<IPTVService>>();
+            var loggerMock = new Mock<ILogger<SatelliteService>>();
             logger = loggerMock.Object;
             var repo = new Repository(context);
-            iptvService = new IPTVService(repo);
+            satelliteService = new SatelliteService(repo);
 
-            await iptvService.CreateAsync(new IPTVFormModel()
+            await satelliteService.CreateAsync(new SatelliteFormModel()
             {
                 Id = 2,
-                SerialNumber = 3222211
-
+                SerialNumber = 3222222,
+                Name="TestGetSat"
             });
             await repo.SaveChangesAsync();
 
-            var satTv = await iptvService.ExistAsync(2);
+            var satTv = await satelliteService.GetSatelliteFormModelAsync(2);
+
+            Assert.That(satTv.Name, Is.EqualTo("TestGetSat"));
+        }
+        [Test]
+        public async Task ExistAsync()
+        {
+            var loggerMock = new Mock<ILogger<SatelliteService>>();
+            logger = loggerMock.Object;
+            var repo = new Repository(context);
+            satelliteService = new SatelliteService(repo);
+
+            await satelliteService.CreateAsync(new SatelliteFormModel()
+            {
+                Id = 2,
+                SerialNumber = 3222233
+            
+            });
+            await repo.SaveChangesAsync();
+
+            var satTv = await satelliteService.ExistAsync(2);
 
             Assert.That(satTv, Is.EqualTo(true));
-        }
+        }  
+      
     }
 }
-

@@ -32,7 +32,7 @@
     </div class="form-inline>  
 
     <div class="mb-4 col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6 ">
-        @if (this.User.Identity.IsAuthenticated && (User.IsAdmin() == true || User.IsCashier()== true) )
+        @if (User.IsInRole(AdminRole) == true || User.IsInRole(CashierRole)== true)
         {
             if (Model.InternetServiceId == 0)
             {
@@ -45,14 +45,16 @@
             if (Model.IPTVId == 0)
             {
                  <a href="/IPTV/Add/@Model.Id" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Добавяне на интерактивна телевизия</a>
-            }
-            
-            if(this.User.Identity.IsAuthenticated && (User.IsInRole(AdminRole) == true || User.IsInRole(CashierRole)==true || User.IsInRole(SupportRole)==true))
-            {
-       
-            <a href="/Client/Edit/@Model.Id" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Редактиране</a>
-            }
+            }           
         }
+         @if(User.IsClient() != true)
+            {
+             
+       
+                     <a href="/Client/Edit/@Model.Id" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Редактиране</a>
+                  
+            }
+
     </div class="form-inline>               
             
 </div>

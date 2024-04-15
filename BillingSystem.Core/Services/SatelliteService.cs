@@ -56,17 +56,17 @@ namespace BillingSystem.Core.Services
                 return null;
             }
 
-            SatelliteDetails satTv = await repository.AllReadOnly<Client>()
-                .Where(s => s.Id == clientId)
+            SatelliteDetails satTv = await repository.AllReadOnly<SatelliteTV>()
+                .Where(s => s.Id == service)
                 .Select(s => new SatelliteDetails()
                 {
-                    Id = s.SatelliteTV.Id,
-                    DeviceName=s.SatelliteTV.Name,
-                    SerialNumber = s.SatelliteTV.SerialNumber,
-                    NameOfService = s.SatelliteTV.Product.Name,
-                    Price = s.SatelliteTV.Product.Price,
-                    ActiveUntilDate=s.SatelliteTV.ActiveUntilDate,
-                    ClientId=s.Id
+                    Id = s.Id,
+                    DeviceName=s.Name,
+                    SerialNumber = s.SerialNumber,
+                    NameOfService = s.Product.Name,
+                    Price = s.Product.Price,
+                    ActiveUntilDate=s.ActiveUntilDate,
+                    ClientId=clientId
                 })
                 .FirstAsync();
             return satTv;
