@@ -38,7 +38,7 @@ namespace Microsoft.AspNetCore.Builder
             }
             if (userManager != null && roleManager != null && await roleManager.RoleExistsAsync(CashierRole) == false)
             {
-                var role = new IdentityRole(AdminRole);
+                var role = new IdentityRole(CashierRole);
                 await roleManager.CreateAsync(role);
 
                 var cashier = await userManager.FindByEmailAsync("cashier@mail.com");
@@ -50,7 +50,7 @@ namespace Microsoft.AspNetCore.Builder
             }
             if (userManager != null && roleManager != null && await roleManager.RoleExistsAsync(ClientRole) == false)
             {
-                var role = new IdentityRole(AdminRole);
+                var role = new IdentityRole(ClientRole);
                 await roleManager.CreateAsync(role);
 
                 var client = await userManager.FindByEmailAsync("client@mail.com");
