@@ -9,7 +9,7 @@ namespace BillingSystem.Infrastructure.DataModels
     /// <summary>
     /// Сателитна телевизия
     /// </summary>
-    [Comment("Satellite televiision")]
+    [Comment("Satellite television")]
     public class SatelliteTV
     {
         /// <summary>

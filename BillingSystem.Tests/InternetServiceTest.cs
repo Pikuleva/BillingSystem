@@ -89,5 +89,21 @@ namespace BillingSystem.Tests
 
             Assert.That(net.RouterMACAdress, Is.EqualTo("8A:9C:0E:7A:00:F1"));
         }
+        [Test]
+        public async Task IsValidMAC()
+        {
+
+            var loggerMock = new Mock<ILogger<InternetService>>();
+            logger = loggerMock.Object;
+            var repo = new Repository(context);
+            internetService = new InternetServiceC(repo);
+
+
+            var valid = await internetService.IsValidMacAddressAsync("8F:9D:80:2A:7B:6B");
+            var NotValid = await internetService.IsValidMacAddressAsync("8F:9D:80:2A:7M:6B");
+
+            Assert.That(valid, Is.EqualTo(true));
+            Assert.That(NotValid, Is.EqualTo(false));
+        }
     }
 }

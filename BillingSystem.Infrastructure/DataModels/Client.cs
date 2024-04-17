@@ -125,9 +125,6 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
         [Comment("Satellite TV")]
         [ForeignKey(nameof(SatelliteTvId))]
-        public SatelliteTV? SatelliteTV { get; set; }
-
-        public IEnumerable<Ticket> Tickets { get; set; } = new List<Ticket>();
-       
+        public SatelliteTV? SatelliteTV { get; set; }      
     }
 }

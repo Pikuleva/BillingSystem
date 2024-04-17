@@ -1,6 +1,5 @@
 ﻿using BillingSystem.Infrastructure.DataModels;
 using Microsoft.AspNetCore.Identity;
-using NuGet.Packaging.Signing;
 
 namespace BillingSystem.Infrastructure.Data.SeedDb
 {
@@ -43,8 +42,7 @@ namespace BillingSystem.Infrastructure.Data.SeedDb
             SeedSatelliteTV();
             SeedInternetService();
             SeedIPTV();           
-        }
-      
+        }    
         private void SeedSatelliteTV()
         {
             SatelliteTV = new SatelliteTV()
@@ -262,7 +260,6 @@ namespace BillingSystem.Infrastructure.Data.SeedDb
                 Price = 7.99m
             };
         }
-
         private void SeedClient()
         {
             Client = new Client()

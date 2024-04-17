@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using static BillingSystem.Core.Constants.MessageConstants;
+using static BillingSystem.Core.Constants.RoleConstants;
 
 namespace BillingSystem.Controllers
 {
@@ -32,14 +33,11 @@ namespace BillingSystem.Controllers
             {
                 return View(model);
             }
-            if (User.IsCashier() == false)
+            if (User.IsInRole(ClientRole) == true)
             {
                 return Unauthorized();
             }
-            if (User.IsAdmin() == false)
-            {
-                return Unauthorized();
-            }
+           
             if (await clientService.ExistByCivilNumberAsync(model.CivilNumber))
             {
                 ModelState.AddModelError(nameof(model.CivilNumber), CivilExist);
@@ -132,38 +130,36 @@ namespace BillingSystem.Controllers
             {
                 return BadRequest();
             }
-            if (User.IsCashier() == true)
+            if (User.IsClient() == true)
             {
-                var model = await clientService.GetClientFormModelByIdAsync(id);
-                return View(model);
+                return Unauthorized();
             }
-            if (User.IsAdmin())
-            {
+          
                 var model = await clientService.GetClientFormModelByIdAsync(id);
 
                 return View(model);
-            }
-            if (User.IsSupport())
-            {
-                var model = await clientService.GetClientFormModelByIdAsync(id);
-
-                return View(model);
-            }
-
-            return Unauthorized();
+            
+            
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(int id, ClientFormModel model)
         {
+
             if (await clientService.ExistAsync(id) == false)
             {
                 return BadRequest();
             }
+            if (await clientService.IsValidEmail(model.Email) == false)
+            {
+
+                ModelState.AddModelError(nameof(model.Email), EmailValidationMessage);
+                return View(model);
+            }
+      
 
             await clientService.EditAsync(id, model);
             return RedirectToAction(nameof(Details), new { id });
-        }
-    
+        }  
     }
 }

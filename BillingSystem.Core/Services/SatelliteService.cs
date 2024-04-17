@@ -111,12 +111,15 @@ namespace BillingSystem.Core.Services
                     ActiveUntilDate = h.ActiveUntilDate,
                     SerialNumber = h.SerialNumber,
                     ProductModelId = h.ProductId,
-                    ClientId = h.ClientId
+                    ClientId = h.ClientId,
+                    TypeOfServiceId = h.Product.TypeId
+
                 })
                 .FirstAsync();
 
             return sat;
         }
+
         public async Task<bool> ExistAsync(int id)
         {
             return await repository.AllReadOnly<SatelliteTV>()

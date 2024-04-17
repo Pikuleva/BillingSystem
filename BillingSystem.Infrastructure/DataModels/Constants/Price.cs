@@ -1,11 +1,4 @@
-﻿using NuGet.Packaging.Signing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BillingSystem.Infrastructure.DataModels.Constants
+﻿namespace BillingSystem.Infrastructure.DataModels.Constants
 {
     /// <summary>
     /// Цени на предлаганите услуги

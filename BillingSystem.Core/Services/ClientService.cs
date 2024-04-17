@@ -52,6 +52,11 @@ namespace BillingSystem.Core.Services
 
             if (client != null)
             {
+                client.Id= clientId;
+                client.FirstName = client.FirstName;
+                client.LastName = client.LastName;
+                client.MiddleName= client.MiddleName;
+                client.CivilNumber = client.CivilNumber;
                 client.StreetNumber = model.StreetNumber;
                 client.City = model.City;
                 client.Email=model.Email;
@@ -159,13 +164,16 @@ namespace BillingSystem.Core.Services
                 .Select(h => new ClientFormModel()
                 {
                     Id = h.Id,
+                    FirstName = h.FirstName,
+                    MiddleName = h.MiddleName,
+                    LastName = h.LastName,
+                    CivilNumber = h.CivilNumber,
                     StreetName = h.StreetName,
                     StreetNumber = h.StreetNumber,
                     City = h.City,
                     PhoneNumber= h.PhoneNumber,
                     Email = h.Email,
                    
-
                 })
                 .FirstAsync();
            

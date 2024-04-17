@@ -3,7 +3,8 @@
     public static class MessageConstants
     {
         public const string RequiredMessage = "Полето е задължително";
-
+        public const string NameOfDevice = "Полето трябва да бъде между {2} и {1} символа";
+        public const string SerialNumberSatellite = "Сериийния номер трябва да бъде между 5000000 и 5999999";
         public const string StringLengthMessage = "Полето трябва да бъде между {2} и {1} символа";
 
         public const string CivilExist = "Клиент с това ЕГН вече съществува в системата";

@@ -54,14 +54,7 @@
             public const int IPTVNameMinLength = 2;
             public const int IPTVNameMaxLength = 15;
         }
-        public class TicketConst
-        {
-            public const int DescriptionMinLength = 5;
-            public const int DescriptionMaxLength = 1500;
-
-            public const int CityMinLength = 2;
-            public const int CityMaxLength = 20;
-        }
+    
     }
 }
 

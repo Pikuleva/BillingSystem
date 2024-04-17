@@ -22,7 +22,7 @@ namespace BillingSystem.Controllers
             
             var model = new InternetFormModel()
             {
-
+                ActiveUntilDate= DateTime.UtcNow.AddMonths(1),
                 Product = await internetService.GetProductModelIdAsync(),
                 TypeOfServiceModels = await internetService.GetTypeModel()
             };

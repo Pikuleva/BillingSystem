@@ -38,8 +38,6 @@ namespace BillingSystem.Core.ViewModels
         [Display(Name = "Пакет ТВ услуга")]
         public int ProductModelId { get; set; }
 
-
-
         public IEnumerable<ProductModel> Product { get; set; } = new List<ProductModel>();
 
         public IEnumerable<TypeOfServiceModel> TypeOfServiceModels { get; set; } = new List<TypeOfServiceModel>();

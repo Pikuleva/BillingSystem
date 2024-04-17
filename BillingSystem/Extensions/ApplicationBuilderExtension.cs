@@ -22,6 +22,7 @@ namespace Microsoft.AspNetCore.Builder
                 if (admin != null)
                 {
                     await userManager.AddToRoleAsync(admin, role.Name);
+              
                 }
             }
             if (userManager != null && roleManager != null && await roleManager.RoleExistsAsync(SupportRole) == false)

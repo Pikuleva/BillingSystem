@@ -30,6 +30,7 @@ namespace BillingSystem.Core.ViewModels
         [StringLength(StreetNameMaxLength,MinimumLength =StreetNameMinLength, ErrorMessage = StringLengthMessage)]
         public string StreetName { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = RequiredMessage)]
         [StringLength(StreetNumberMaxLength,MinimumLength =StreetNumberMinLength,ErrorMessage =StringLengthMessage)]
         public string StreetNumber { get; set; } = string.Empty;
 
@@ -38,7 +39,7 @@ namespace BillingSystem.Core.ViewModels
         [RegexStringValidator(RegexValidationPhoneNumber)]
         public string PhoneNumber { get; set; } = string.Empty;
 
-        [RegexStringValidator(RegexValidationEmail)]
+        [RegularExpression(RegexValidationEmail, ErrorMessage = EmailValidationMessage)]
         [StringLength(EmailMaxLength,MinimumLength =EmailMinLength,ErrorMessage =EmailValidationMessage)]
         public string Email { get; set; } = string.Empty;
 

@@ -22,6 +22,7 @@ namespace BillingSystem.Controllers
         {
             var model = new IPTVFormModel()
             {
+                ActiveUntilDate = DateTime.UtcNow.AddMonths(1),
                 Product = await IPTVService.GetProductModelIdAsync(),
                 TypeOfServiceModels = await IPTVService.GetTypeModel()
             };

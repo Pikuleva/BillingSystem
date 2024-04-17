@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.IPTVConst;
 
 namespace BillingSystem.Infrastructure.DataModels
 {
@@ -37,6 +38,7 @@ namespace BillingSystem.Infrastructure.DataModels
         /// </summary>
         [Required]
         [Comment("Device model name")]
+        [MaxLength(IPTVNameMaxLength)]
         public string Name { get; set; } = string.Empty;
 
         /// <summary>

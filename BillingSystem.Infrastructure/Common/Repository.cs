@@ -9,7 +9,6 @@ namespace BillingSystem.Infrastructure.Common
         public Repository(BillingSystemDbContext _context)
         {
             context = _context;
-
         }
 
         private DbSet<T> DbSet<T>() where T : class
