@@ -12,5 +12,6 @@ namespace BillingSystem.Core.Contracts
         Task<bool> IsExistMACAddress(string macAddress);
         Task<int> CreateAsync(InternetFormModel model);
         Task<IEnumerable<TypeOfServiceModel>> GetTypeModel();
+        Task<bool> IsValidMacAddressAsync(string MACAddress);
     }
 }

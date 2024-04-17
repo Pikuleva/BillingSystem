@@ -11,8 +11,5 @@ namespace BillingSystem.Core.Contracts
         Task EditAsync(int satId, SatelliteFormModel model);
         Task<int> CreateAsync(SatelliteFormModel model);
         Task<IEnumerable<TypeOfServiceModel>> GetTypeModel();
-       
-
-
     }
 }

@@ -1,5 +1,4 @@
-﻿using BillingSystem.Infrastructure.DataModels;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BillingSystem.Core.ViewModels
 {

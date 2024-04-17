@@ -9,7 +9,6 @@
         public DateTime ActiveUntilDate { get; set; }
         public decimal Price { get; set; }
         public int SerialNumber { get; set; }
-        public string CivilNumber { get; set; }
         public int ClientId { get; set; }
     }
 }

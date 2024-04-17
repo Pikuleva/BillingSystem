@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ServiceConst;
-using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ClientContract;
 
 namespace BillingSystem.Core.ViewModels
 {

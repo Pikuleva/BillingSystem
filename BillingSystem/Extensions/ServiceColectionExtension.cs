@@ -2,14 +2,13 @@
 using BillingSystem.Core.Services;
 using BillingSystem.Data;
 using BillingSystem.Infrastructure.Common;
-using BillingSystem.Infrastructure.DataModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Microsoft.Extensions.DependencyInjection
 
 
-{ 
+{
     public static class ServiceColectionExtension
     {
         public static IServiceCollection AddApplicatoionServices(this IServiceCollection services)
@@ -18,7 +17,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IInternetService, InternetServiceC>();
             services.AddScoped<ISatellieteService, SatelliteService>();
             services.AddScoped<IIPTVService, IPTVService>();
-            services.AddScoped<ITicketService, TicketService>();
             services.AddScoped<IServiceService, ServiceService>();
 
             return services;

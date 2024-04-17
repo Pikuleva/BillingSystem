@@ -38,6 +38,13 @@ namespace BillingSystem.Controllers
                 model.TypeOfServiceModels = await internetService.GetTypeModel();
                 return View(model);
             }
+            if (await internetService.IsValidMacAddressAsync(model.RouterMACAdress) == false)
+            {
+                ModelState.AddModelError(nameof(model.RouterMACAdress), InvaliMACAddress);
+                model.Product = await internetService.GetProductModelIdAsync();
+                model.TypeOfServiceModels = await internetService.GetTypeModel();
+                return View(model);
+            }
 
             if (await internetService.IsExistMACAddress(model.RouterMACAdress))
             {
@@ -98,6 +105,7 @@ namespace BillingSystem.Controllers
                 return BadRequest();
             }
 
+
             var model = await internetService.GetInternetFormModelByIdAsync(id);
             model.Product = await internetService.GetProductModelIdAsync();
             return View(model);
@@ -111,7 +119,21 @@ namespace BillingSystem.Controllers
             {
                 return BadRequest();
             }
+            if (await internetService.IsValidMacAddressAsync(model.RouterMACAdress) == false)
+            {
+                ModelState.AddModelError(nameof(model.RouterMACAdress), InvaliMACAddress);
+                model.Product = await internetService.GetProductModelIdAsync();
+                model.TypeOfServiceModels = await internetService.GetTypeModel();
+                return View(model);
+            }
 
+            if (await internetService.IsExistMACAddress(model.RouterMACAdress))
+            {
+                ModelState.AddModelError(nameof(model.RouterMACAdress), MACAddressExist);
+                model.Product = await internetService.GetProductModelIdAsync();
+                model.TypeOfServiceModels = await internetService.GetTypeModel();
+                return View(model);
+            }
             await internetService.EditAsync(id, model);
             InternetDetails modelNew = new InternetDetails();
             modelNew = await internetService.InternetServiceDetailsAsync(model.ClientId);

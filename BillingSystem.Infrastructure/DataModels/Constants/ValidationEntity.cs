@@ -39,6 +39,7 @@
             public const string RegexValidationPhoneNumber = "^[0 - 9]{10}$";
 
             public const string RegexCivilNumber = "^[0-9][0-9][0-1][0-9][0-3][0-9][0-9][0-9][0-9][0-9]$";
+            public const string RegexMACAddress = "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$";
 
         }
         public static class ServiceConst

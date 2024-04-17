@@ -4,6 +4,8 @@ using BillingSystem.Infrastructure.Common;
 using BillingSystem.Infrastructure.DataModels;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
+using static BillingSystem.Infrastructure.DataModels.Constants.ValidationEntity.ClientContract;
 
 namespace BillingSystem.Core.Services
 {
@@ -126,6 +128,18 @@ namespace BillingSystem.Core.Services
                 model.ClientId = internet.ClientId;
             }
             await repository.SaveChangesAsync();
+        }
+        public async Task<bool> IsValidMacAddressAsync(string MACAddress)
+        {
+            string regex = RegexMACAddress;
+
+            Match match = Regex.Match(MACAddress, regex, RegexOptions.IgnoreCase);
+
+            if (MACAddress != string.Empty && match.Success)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

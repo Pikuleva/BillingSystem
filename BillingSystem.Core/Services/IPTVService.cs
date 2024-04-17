@@ -57,7 +57,7 @@ namespace BillingSystem.Core.Services
                .ToListAsync();
         }
 
-            public async Task<IPTVDetails> IPTVServiceDetailsAsync(int clientId)
+        public async Task<IPTVDetails> IPTVServiceDetailsAsync(int clientId)
         {
             var service = await repository.AllReadOnly<Client>()
                 .Where(c => c.Id == clientId)
