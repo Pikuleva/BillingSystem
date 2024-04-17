@@ -40,7 +40,7 @@
 
                 <div class="mb-3">
                     <label asp-for="@Model.ActiveUntilDate" class="form-label-add-edit">Плащане до:</label>
-                    <input asp-for="@Model.ActiveUntilDate" class="form-control" aria-required="true" value="@Model.ActiveUntilDate.ToString("yyyy-MM-dd H:mm")" />
+                    <input asp-for="@Model.ActiveUntilDate" class="form-control" aria-required="true" value="@Model.ActiveUntilDate.AddMonths(1).ToString("yyyy-MM-dd H:mm")" />
                     <span asp-validation-for="@Model.ActiveUntilDate" class="text-danger"></span>
                 </div>
 

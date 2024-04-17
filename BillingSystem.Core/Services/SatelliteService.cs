@@ -17,7 +17,7 @@ namespace BillingSystem.Core.Services
         public async Task EditAsync(int satId, SatelliteFormModel model)
         {
             var satelliteTV = await repository.GetByIdAsync<SatelliteTV>(satId);
-
+    
             if (satelliteTV != null)
             {
                 satelliteTV.Id = satId;
