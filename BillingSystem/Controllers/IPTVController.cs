@@ -1,4 +1,5 @@
 ﻿using BillingSystem.Core.Contracts;
+using BillingSystem.Core.Services;
 using BillingSystem.Core.ViewModels;
 using BillingSystem.Infrastructure.DataModels;
 using Microsoft.AspNetCore.Mvc;
@@ -108,6 +109,18 @@ namespace BillingSystem.Controllers
             if (await IPTVService.ExistAsync(id) == false)
             {
                 return BadRequest();
+            }
+            if (model.SerialNumber < 3000000 || model.SerialNumber > 3999999)
+            {
+                ModelState.AddModelError(nameof(model.SerialNumber), "Невалиден сериен номер");
+                model.Product = await IPTVService.GetProductModelIdAsync();
+                return View(model);
+            }
+            if (model.Name.Length<5 ||model.Name.Length>40)
+            {
+                ModelState.AddModelError(nameof(model.SerialNumber), "Невалидно име на устройството");
+                model.Product = await IPTVService.GetProductModelIdAsync();
+                return View(model);
             }
 
             await IPTVService.EditAsync(id, model);

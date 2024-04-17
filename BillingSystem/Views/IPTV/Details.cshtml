@@ -11,7 +11,8 @@
     <p class="mb-0 text-start">Активан услуга до : @Model.ActiveUntilDate</p>
     <p class="mb-0 text-start">Сериен номер на устройството: @Model.SerialNumber</p>
     <p class="mb-0 text-start">Име на устройстовто: @Model.DeviceName</p>
-    @if (this.User.Identity.IsAuthenticated && (User.IsInRole(AdminRole) == true || User.IsInRole(CashierRole) == true))
+    @if (this.User.Identity.IsAuthenticated && User.IsClient() != true)
+    
     {
         <form method="get">
             <a href="/IPTV/Edit/@Model.Id" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Редактиране</a>

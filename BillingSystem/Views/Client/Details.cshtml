@@ -47,14 +47,14 @@
                  <a href="/IPTV/Add/@Model.Id" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Добавяне на интерактивна телевизия</a>
             }           
         }
-         @if(User.IsClient() != true)
+            @if(User.IsClient() != true && User.IsSupport()!=true)
             {
              
        
                      <a href="/Client/Edit/@Model.Id" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Редактиране</a>
                   
             }
-
+           
     </div class="form-inline>               
             
 </div>

@@ -10,7 +10,7 @@
     <p class="mb-0 text-start">Цена @Model.Price</p>
     <p class="mb-0 text-start">Активна услуга до : @Model.ActiveUntilDate</p>
     <p class="mb-0 text-start">MAC @Model.RouterMAC</p>
-    @if (this.User.Identity.IsAuthenticated && (User.IsAdmin() == true || User.IsCashier() == true))
+    @if (this.User.Identity.IsAuthenticated && User.IsClient() != true)
     {
         <form method="get">
             <a href="/Internet/Edit/@Model.Id" class="btn btn-primary " tabindex="-1" role="button" aria-disabled="true">Редактиране</a>
