@@ -69,5 +69,25 @@ namespace BillingSystem.Tests
 
             Assert.That(satTv, Is.EqualTo(true));
         }
+        [Test]
+        public async Task GetInternetFormModelByIdAsync()
+        {
+            var loggerMock = new Mock<ILogger<InternetServiceC>>();
+            logger = loggerMock.Object;
+            var repo = new Repository(context);
+            internetService = new InternetServiceC(repo);
+
+            await internetService.CreateAsync(new InternetFormModel()
+            {
+                Id = 2,
+                RouterMACAdress = "8A:9C:0E:7A:00:F1"
+                
+            });
+            await repo.SaveChangesAsync();
+
+            var net = await internetService.GetInternetFormModelByIdAsync(2);
+
+            Assert.That(net.RouterMACAdress, Is.EqualTo("8A:9C:0E:7A:00:F1"));
+        }
     }
 }

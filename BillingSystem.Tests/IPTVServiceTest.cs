@@ -72,6 +72,26 @@ namespace BillingSystem.Tests
 
             Assert.That(satTv, Is.EqualTo(true));
         }
+        [Test]
+        public async Task GetIPTVFormModelAsync()
+        {
+            var loggerMock = new Mock<ILogger<IPTVService>>();
+            logger = loggerMock.Object;
+            var repo = new Repository(context);
+            iptvService = new IPTVService(repo);
+
+            await iptvService.CreateAsync(new IPTVFormModel()
+            {
+                Id = 2,
+                SerialNumber = 5666666,
+                Name = "TestGetIPTV"
+            });
+            await repo.SaveChangesAsync();
+
+            var iptv = await iptvService.GetIPTVFormModelByIdAsync(2);
+
+            Assert.That(iptv.Name, Is.EqualTo("TestGetIPTV"));
+        }
     }
 }
 

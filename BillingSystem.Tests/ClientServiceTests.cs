@@ -328,5 +328,65 @@ namespace BillingSystem.Tests
             var client = await repo.GetByIdAsync<Client>(1);
             Assert.That(client.SatelliteTvId, Is.EqualTo(2));
         }
+        [Test]
+        public async Task GetClientFormModelByIdAsync()
+        {
+            var loggerMock = new Mock<ILogger<Client>>();
+            logger = loggerMock.Object;
+            var repo = new Repository(context);
+            clientService = new ClientService(repo);
+
+            await clientService.CreateAsync(new ClientFormModel()
+            {
+                Id = 2,
+                Email = "test@gmail.com"
+                
+            });
+            await repo.SaveChangesAsync();
+
+            var client = await clientService.GetClientFormModelByIdAsync(2);
+
+            Assert.That(client.Email, Is.EqualTo("test@gmail.com"));
+        }
+        [Test]
+        public async Task IsValidCivilNumber()
+        {
+
+            var loggerMock = new Mock<ILogger<Client>>();
+            logger = loggerMock.Object;
+            var repo = new Repository(context);
+            clientService = new ClientService(repo);
+
+
+            var valid = await clientService.IsValidCivilNumber("8801290232");
+            var NotValid = await clientService.IsValidCivilNumber("8841290232");
+
+            Assert.That(valid, Is.EqualTo(true));
+            Assert.That(NotValid, Is.EqualTo(false));
+        }
+        [Test]
+        public async Task PhoneExist()
+        {
+
+            var loggerMock = new Mock<ILogger<Client>>();
+            logger = loggerMock.Object;
+            var repo = new Repository(context);
+            clientService = new ClientService(repo);
+
+            await clientService.CreateAsync(new ClientFormModel()
+            {
+                Id = 2,
+                Email = "test@gmail.com",
+                PhoneNumber="0889667733"
+
+            });
+            await repo.SaveChangesAsync();
+
+            var valid = await clientService.PhoneExist("0889667733");
+            var NotValid = await clientService.PhoneExist("0889667730");
+
+            Assert.That(valid, Is.EqualTo(true));
+            Assert.That(NotValid, Is.EqualTo(false));
+        }
     }
 }
