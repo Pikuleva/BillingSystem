@@ -388,5 +388,30 @@ namespace BillingSystem.Tests
             Assert.That(valid, Is.EqualTo(true));
             Assert.That(NotValid, Is.EqualTo(false));
         }
+
+        [Test]
+        public async Task ExistAsync()
+        {
+
+            var loggerMock = new Mock<ILogger<Client>>();
+            logger = loggerMock.Object;
+            var repo = new Repository(context);
+            clientService = new ClientService(repo);
+
+            await clientService.CreateAsync(new ClientFormModel()
+            {
+                Id = 2,
+                Email = "test@gmail.com",
+                PhoneNumber = "0889667733"
+
+            });
+            await repo.SaveChangesAsync();
+
+            var valid = await clientService.ExistAsync(2);
+            var NotValid = await clientService.ExistAsync(3);
+
+            Assert.That(valid, Is.EqualTo(true));
+            Assert.That(NotValid, Is.EqualTo(false));
+        }
     }
 }
